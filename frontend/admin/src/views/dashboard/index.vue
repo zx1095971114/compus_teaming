@@ -41,7 +41,7 @@
             <svg-icon icon-class="education" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
-            <div class="card-panel-text">试卷总数</div>
+            <div class="card-panel-text">招募总数</div>
             <count-to
               :start-val="0"
               :end-val="examPaperCount"
@@ -58,7 +58,7 @@
             <svg-icon icon-class="edit" class-name="card-panel-icon" />
           </div>
           <div class="card-panel-description">
-            <div class="card-panel-text">答卷总数</div>
+            <div class="card-panel-text">团队总数</div>
             <count-to
               :start-val="0"
               :end-val="doExamCount"
@@ -96,7 +96,7 @@ export default {
 
       option = {
         title: {
-          text: "班级人数分布图",
+          text: "分布图",
           left: "center",
         },
         tooltip: {
@@ -108,7 +108,7 @@ export default {
         },
         series: [
           {
-            name: "班级人数",
+            name: "人数",
             type: "pie",
             radius: ["40%", "70%"],
             avoidLabelOverlap: false,
@@ -146,7 +146,7 @@ export default {
 
       option = {
         title: {
-          text: "班级试卷分布图",
+          text: "分布图",
           left: "center",
         },
         tooltip: {
@@ -158,7 +158,7 @@ export default {
         },
         series: [
           {
-            name: "班级试卷",
+            name: "xx",
             type: "pie",
             radius: "50%",
             data: [

@@ -123,19 +123,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.loading = true;
-          var that=this;
-          setTimeout(function(){
-            that.loading=false;
-          },20000)
-          this.apis.login
-            .login(this.loginForm.username, this.loginForm.password)
-            .then((res) => {
-              this.loading = false;
-              if (res.status === 200) {
-                this.$router.push({ name: "Dashboard" });
-              }
-            });
+           this.$router.push({ name: "Dashboard" });
         } else {
           return false;
         }

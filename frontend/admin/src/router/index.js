@@ -81,7 +81,7 @@ export const constantRoutes = [
     redirect: '/class/list',
     name: 'class',
     meta: {
-      title: '班级管理',
+      title: '团队管理',
       icon: 'tree',
     },
     children: [{
@@ -89,7 +89,7 @@ export const constantRoutes = [
       name: 'classList',
       component: () => import('@/views/class/list/index'),
       meta: {
-        title: '班级列表',
+        title: '团队列表',
         noCache: true
       }
     }, {
@@ -97,7 +97,7 @@ export const constantRoutes = [
       name: 'classCreate',
       component: () => import('@/views/class/create/index'),
       meta: {
-        title: '班级创建',
+        title: '团队创建',
         noCache: true
       },
     }, {
@@ -105,160 +105,11 @@ export const constantRoutes = [
       name: "classEdit",
       component: () => import('@/views/class/edit/index'),
       meta: {
-        title: '班级编辑',
+        title: '团队编辑',
         noCache: true
       },
       hidden: true
     }]
-  },
-  {
-    path: '/exam',
-    component: Layout,
-    redirect: '/exam/list',
-    name: 'exam',
-    meta: {
-      title: '试卷管理',
-      icon: 'form',
-    },
-    children: [{
-      path: 'list',
-      name: 'examList',
-      component: () => import('@/views/exam/list/index'),
-      meta: {
-        title: '试卷列表',
-        noCache: true
-      }
-    }, {
-      path: 'create',
-      name: 'examCreate',
-      component: () => import('@/views/exam/create/index'),
-      meta: {
-        title: '试卷创编',
-        noCache: true
-      }
-    }, {
-      path: 'analyze',
-      name: 'analyze',
-      component: () => import('@/views/exam/analyze/index'),
-      hidden: true,
-      meta: {
-        title: '试卷分析',
-        noCache: true
-      }
-    }]
-  },
-  {
-    path: '/question',
-    component: Layout,
-    redirect: '/question/list',
-    name: 'question',
-    meta: {
-      title: '题库管理',
-      icon: 'exam'
-    },
-    children: [{
-        path: 'list',
-        component: () => import('@/views/question/list/index'),
-        name: 'questionList',
-        meta: {
-          title: '题目列表',
-          noCache: true
-        },
-      },
-      {
-        path: 'singleChoice',
-        name: 'singleChoice',
-        component: () => import("@/views/question/singleChoice/index"),
-        name: 'singleChoice',
-        meta: {
-          title: '单选题创编',
-          noCache: true
-        },
-      },
-      {
-        path: 'multipleChoice',
-        name: 'multipleChoice',
-        component: () => import("@/views/question/multipleChoice/index"),
-        meta: {
-          title: '多选题创编',
-          noCache: true
-        },
-      },
-      {
-        path: 'trueFalse',
-        name: 'trueFalse',
-        component: () => import("@/views/question/trueFalse"),
-        meta: {
-          title: '判断题创编',
-          noCache: true
-        },
-      }, {
-        path: 'shortAnswer',
-        name: 'shortAnswer',
-        component: () => import("@/views/question/shortAnswer"),
-        meta: {
-          title: '简答题创编',
-          noCache: true
-        }
-      }, {
-        path: 'sort',
-        name: 'sort',
-        component: () => import("@/views/question/sort"),
-        meta: {
-          title: '排序题创编',
-          noCache: true
-        }
-      },
-
-    ]
-
-  },
-  {
-    path: '/answerpaper',
-    component: Layout,
-    redirect: '/answerpaper/examCorrect',
-    name: 'answerpaper',
-    meta: {
-      title: '答卷管理',
-      icon: 'edit'
-    },
-    children: [{
-        path: 'screenShot',
-        name: 'screenShot',
-        component: () => import("@/views/answerpaper/screenShot/"),
-        hidden: true,
-        meta: {
-          title: '考试抓拍',
-          noCache: true
-        }
-      },
-      {
-        path: 'examCorrect',
-        name: 'examCorrect',
-        component: () => import("@/views/answerpaper/examCorrect/list"),
-        meta: {
-          title: '批改列表',
-          noCache: true
-        }
-      }, {
-        path: 'resultList',
-        name: 'resultList',
-        component: () => import("@/views/answerpaper/resultList/list"),
-        meta: {
-          title: '试卷完成',
-          noCache: true
-        }
-      }, {
-        path: 'check',
-        name: 'check',
-        hidden: true,
-        component: () => import("@/views/answerpaper/check"),
-        meta: {
-          title: '试卷审阅',
-          noCache: true,
-        }
-      }
-    ]
   },
   // {
   //   path: '/example',
