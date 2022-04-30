@@ -271,12 +271,15 @@ export default {
   color: #ff7675;
 }
 .r-wrapper {
+  position: relative;
   width: 35%;
   height: 100%;
   box-sizing: border-box;
   padding: 0 0 0 40px;
 }
 .info {
+  position: sticky;
+  top: 40px;
   margin-top: 30px;
   margin-bottom: 20px;
   box-sizing: border-box;
