@@ -5,8 +5,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       redirect: '/welcome/sign'
     },
@@ -26,5 +25,16 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/homepage',
+      name: 'homepage',
+      redirect: '/homepage/recruitList',
+      component: () => import('@/views/homepage/index.vue'),
+      children: [{
+        path: 'recruitList',
+        name: 'recruitList',
+        component: () => import("@/views//recruitList/index.vue")
+      }]
+    }
   ]
 })

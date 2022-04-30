@@ -88,20 +88,20 @@ export default {
   },
   methods: {
     submitLogin() {
-      this.apis.welcome.login(this.username, this.password).then((res) => {
-        if (res.data.status === 200) {
-          if (this.rememberme) {
-            localStorage.setItem("username", this.username);
-            localStorage.setItem("password", this.password);
-            sessionStorage.setItem("username",this.username);
-          } else {
-            localStorage.removeItem("username");
-            localStorage.removeItem("password");
-            sessionStorage.setItem("username",this.username);
-          }
+      // this.apis.welcome.login(this.username, this.password).then((res) => {
+      //   if (res.data.status === 200) {
+      //     if (this.rememberme) {
+      //       localStorage.setItem("username", this.username);
+      //       localStorage.setItem("password", this.password);
+      //       sessionStorage.setItem("username",this.username);
+      //     } else {
+      //       localStorage.removeItem("username");
+      //       localStorage.removeItem("password");
+      //       sessionStorage.setItem("username",this.username);
+      //     }
           this.$router.push({name: 'homepage'})
-        }
-      });
+      //   }
+      // });
     },
     clearInput() {
       this.username = "";
