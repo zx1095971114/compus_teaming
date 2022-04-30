@@ -144,12 +144,10 @@
           </div>
         </div>
         <div class="create" @click="create">
-          <strong>+&nbsp;&nbsp;发起话题</strong>
+          <strong>+&nbsp;&nbsp;组队招募</strong>
         </div>
         <div class="backup" @click="backup">
-          <strong
-            ><i class="fas fa-arrow-alt-left"></i>&nbsp;&nbsp;返回列表</strong
-          >
+          <img width="90%" src="../../../static/images/homepage/bg.png" />
         </div>
       </div>
       <div class="filter">
@@ -194,7 +192,7 @@ export default {
   name: "recruitList",
   data() {
     return {
-      hotsort:false,
+      hotsort: false,
       searchTxt: ``,
       teacherRepply: false,
       topics: [
@@ -215,7 +213,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `lll`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -253,7 +251,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `噶`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -272,7 +270,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `lll`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -310,7 +308,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `噶`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -329,7 +327,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `lll`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -367,7 +365,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `噶`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -386,7 +384,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `lll`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -424,7 +422,7 @@ export default {
           reply: false,
           num: 900,
           questioner: `噶`,
-          avatar: `https://gitee.com/Langwenchong/figure-bed/raw/master/author.jpeg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
       ],
     };
@@ -436,8 +434,8 @@ export default {
       });
     },
     choose(i) {
-      if(i===1)this.hotsort=true;
-      else this.hotsort=false;
+      if (i === 1) this.hotsort = true;
+      else this.hotsort = false;
       var items = document.getElementsByClassName("item");
       for (let i = 0; i < items.length; i++) {
         items[i].style.background = `var(--background1)`;
@@ -464,11 +462,11 @@ export default {
           }
         }
       }
-      if(this.hotsort===true){
+      if (this.hotsort === true) {
         //按热度排序
         ans.sort(function (next, current) {
-          if (next.subscribe<current.subscribe) return 1;
-          else if (next.subscribe===current.subscribe) return 0;
+          if (next.subscribe < current.subscribe) return 1;
+          else if (next.subscribe === current.subscribe) return 0;
           else return -1;
         });
       }
@@ -515,6 +513,7 @@ export default {
   margin-bottom: 7px;
 }
 #l-main .topicBox h3 {
+  font-family: "Courgette";
   margin: 0;
   transition: 0.4s;
 }
@@ -659,6 +658,7 @@ export default {
   height: 100%;
 }
 #r-nav .menu .create {
+  z-index: 5;
   margin-top: 10px;
   width: 100%;
   border: 1px solid rgba(0, 102, 255, 0.5);
@@ -678,8 +678,6 @@ export default {
 #r-nav .menu .backup {
   margin-top: 10px;
   width: 100%;
-  border: 1px solid #00875a;
-  color: #00b894;
   border-radius: 4px;
   height: 40px;
   font-size: 14px;
@@ -687,10 +685,6 @@ export default {
   align-items: center;
   justify-content: center;
   transition: 0.5s;
-}
-#r-nav .menu .backup:hover {
-  color: #fff;
-  background: #00b894;
 }
 #r-nav .filter {
   margin-top: 10px;

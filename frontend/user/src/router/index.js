@@ -31,10 +31,28 @@ export default new Router({
       redirect: '/homepage/recruitList',
       component: () => import('@/views/homepage/index.vue'),
       children: [{
-        path: 'recruitList',
-        name: 'recruitList',
-        component: () => import("@/views//recruitList/index.vue")
-      }]
-    }
+          path: 'recruitList',
+          name: 'recruitList',
+          component: () => import("@/views/recruitList/index.vue")
+        }, {
+          path: 'account',
+          name: 'myaccount',
+          component: () => import("@/views/account/index.vue")
+        }, {
+          path: 'message',
+          name: 'message',
+          component: () => import("@/views/message/index.vue")
+        }, {
+          path: 'recruitEdit',
+          name: 'recruitEdit',
+          component: () => import("@/views/recruitEdit/index.vue")
+        },
+        {
+          path: 'session',
+          name: 'session',
+          component: () => import("@/views/session/index.vue"),
+        }
+      ]
+    },
   ]
 })

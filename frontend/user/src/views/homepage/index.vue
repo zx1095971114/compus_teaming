@@ -26,21 +26,21 @@
           <input type="text" placeholder="Search..." />
           <span class="tooltip">搜索</span>
         </li>
-        <li @click="transmit(3)">
+        <li @click="transmit(1)">
           <a href="#">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">论坛主页</span>
           </a>
           <span class="tooltip">主页</span>
         </li>
-        <li @click="transmit(1)">
+        <li @click="transmit(2)">
           <a href="#">
             <i class="bx bx-user"></i>
             <span class="links_name">个人账号</span>
           </a>
           <span class="tooltip">账号</span>
         </li>
-        <li @click="transmit(2)">
+        <li @click="transmit(3)">
           <a href="#">
             <i class="bx bx-chat"></i>
             <span class="links_name">我的消息</span>
@@ -61,21 +61,21 @@
           </a>
           <span class="tooltip">组队</span>
         </li>
-        <li @click="transmit(5)">
+        <li @click="transmit(6)">
           <a href="#">
             <i class="bx bx-comment-dots"></i>
             <span class="links_name">团队会议</span>
           </a>
           <span class="tooltip">会议</span>
         </li>
-        <li @click="transmit(5)">
+        <li @click="transmit(7)">
           <a href="#">
             <i class="bx bx-pen"></i>
             <span class="links_name">个人日志</span>
           </a>
           <span class="tooltip">日志</span>
         </li>
-        <li @click="transmit(6)">
+        <li @click="transmit(8)">
           <a href="#">
             <i class="bx bx-cog"></i>
             <span class="links_name">系统设置</span>
@@ -155,22 +155,27 @@ export default {
   },
   methods: {
     logout() {
-      this.$router.push("/Container/login");
+      this.$router.push({name: 'sign'});
       location.reload();
     },
-    // transmit(i) {
-    //   if (i === 1) {
-    //     this.$router.push("/homepage/account");
-    //   } else if (i === 2) {
-    //     this.$router.push("/homepage/messages/conmmunication");
-    //   } else if (i === 3) {
-    //     this.$router.push("/homepage/dashBoard/settings");
-    //   }
-    // },
+    transmit(i) {
+      if (i === 1) {
+        this.$router.push({ name: "homepage" });
+      } else if (i === 2) {
+        this.$router.push({ name: "myaccount" });
+      } else if (i === 3) {
+        this.$router.push({name: 'message'});
+      }else if (i === 5) {
+        this.$router.push({name: 'recruitEdit'});
+      }else if (i === 6) {
+        this.$router.push({name: 'session'});
+      }
+    },
   },
 };
 </script>
 
+<style scoped src="../../assets/css/bootstrap.min.css"></style>
 <style scoped>
 .sidebar > * {
   margin: 0;
@@ -353,7 +358,7 @@ export default {
   opacity: 0;
   transition: all 0.4s ease;
 }
-.sidebar.active  .profile .profile_details {
+.sidebar.active .profile .profile_details {
   opacity: 1;
   pointer-events: auto;
 }
@@ -419,6 +424,7 @@ export default {
   width: calc(100% - 78px);
   margin-left: 78px;
   min-height: 300px;
+  /* background: #f4f4f4; */
   /* background:#000; */
 }
 </style>
