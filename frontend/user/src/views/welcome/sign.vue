@@ -34,11 +34,11 @@
     </div>
     <!-- 背景盒子 -->
     <div class="leftbox">
-      <h2 class="title"><span>A12赛道题目</span><br />教考分离系统</h2>
+      <h2 class="title"><span>“北洋有约”</span><br />校园互拼平台</h2>
       <p class="desc">天津大学<span>高级CV攻城狮团队</span></p>
       <img
         class="picture smaller"
-        src="../../../static/images/welcome/logo.jpg"
+        src="../../../static/images/welcome/tjulogo.jpg"
         alt=""
       />
       <p class="account">已拥有账号？</p>
@@ -46,11 +46,11 @@
     </div>
 
     <div class="rightbox">
-      <h2 class="title"><span>A12赛道题目</span><br />教考分离系统</h2>
+      <h2 class="title"><span>“北洋有约”</span><br />校园互拼平台</h2>
       <p class="desc">天津大学<span>高级CV攻城狮团队</span></p>
       <img
         class="picture"
-        src="../../../static/images/welcome/logo.jpg"
+        src="../../../static/images/welcome/tjulogo.jpg"
         alt=""
       />
       <p class="account">还未拥有账号?</p>
@@ -151,7 +151,7 @@ export default {
   position: absolute;
   top: -10%;
   left: 5%;
-  background: #ff6b6b;
+  background: #74b9ff;
   width: 320px;
   height: 500px;
   border-radius: 5px;
@@ -207,7 +207,7 @@ p {
   text-align: center;
 }
 span {
-  color: #ea8685;
+  color: #0984e3;
 }
 .picture {
   position: absolute;
@@ -227,7 +227,7 @@ span {
 }
 
 .button:hover {
-  background: #ff6b6b;
+  background: #74b9ff;
   color: #fff;
   transition: background-color 0.2s ease-out;
 }
@@ -235,7 +235,7 @@ span {
   margin-top: 3%;
   background: #fff;
   color: #706e6e;
-  border: solid 1px #ff6b6b;
+  border: solid 1px #74b9ff;
   padding: 12px;
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
@@ -265,7 +265,7 @@ form {
 .submit {
   margin-top: 25px;
   padding: 12px;
-  border-color: #ff6b6b;
+  border-color: #0984e3;
 }
 .submit:hover {
   /* background: #cbc0d3; */
@@ -273,7 +273,7 @@ form {
 }
 input {
   transition: 0.3s;
-  background-color: #ff6b6b;
+  background-color: #74b9ff;
   width: 65%;
   color: rgb(240, 239, 239);
   border: none;
@@ -312,7 +312,7 @@ label {
 }
 input[type="checkbox"] {
   width: 15px;
-  background: #ff6b6b;
+  background: #0984e3;
 }
 .signup,
 .signin {
