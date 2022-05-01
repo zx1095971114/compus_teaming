@@ -55,7 +55,13 @@ export default new Router({
           path: 'history',
           name: 'history',
           component: () => import("@/views/history/index.vue"),
+        },
+        {
+          path: 'recruitContent',
+          name: 'recruitContent',
+          component: () => import("@/views/recruitContent/index.vue"),
         }
+
       ]
     },
   ]

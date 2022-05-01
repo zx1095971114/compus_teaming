@@ -16,6 +16,11 @@
             </el-checkbox-group>
           </div>
         </div>
+        <h3>———————— 快速操作 ————————</h3>
+        <el-row>
+          <el-button type="primary" @click="mytags=tags">全部选取</el-button>
+          <el-button type="warning" @click="mytags=[]">全部取消</el-button></el-row
+        >
       </div>
     </el-drawer>
     <div id="l-main">
@@ -43,20 +48,13 @@
               />&nbsp;{{ topic.questioner }}
             </div>
             <div class="box">
-              <i class="fad fa-comment-alt-smile"></i>&nbsp;{{
-                topic.subscribe
-              }}次浏览
+              <i class="fas fa-eye"></i>&nbsp;{{ topic.subscribe }}次浏览
             </div>
             <div class="box">
               <i class="fad fa-clock"></i>&nbsp;{{ topic.time }}
             </div>
             <div class="box">
-              <div
-                class="tag"
-                v-for="(topicTag, k) in topic.tags"
-                :key="k"
-                v-if="k < 2"
-              >
+              <div class="tag" v-for="(topicTag, k) in topic.tags" :key="k">
                 <i class="fad fa-tag"></i>&nbsp;{{ topicTag }}
               </div>
             </div>
@@ -222,6 +220,85 @@
 <script>
 export default {
   name: "recruitList",
+  methods: {
+    backup() {
+      this.$router.push({
+        name: "CourseList",
+      });
+    },
+    choose(i) {
+      if (i === 1) this.hotsort = true;
+      else this.hotsort = false;
+      var items = document.getElementsByClassName("item");
+      for (let i = 0; i < items.length; i++) {
+        items[i].style.background = `var(--background1)`;
+        items[i].style.color = `var(--text1)`;
+      }
+      items[i].style.background = `#f1c40f`;
+      items[i].style.color = `#fff`;
+    },
+    create() {
+      this.$router.push({ name: "TopicEditor" });
+    },
+    hasTag(topic) {
+      var v = false;
+      for (let i = 0; i < this.mytags.length; i++) {
+        if (topic.tags.indexOf(this.mytags[i]) != -1) {
+          v = true;
+          break;
+        }
+      }
+      return v;
+    },
+  },
+  computed: {
+    filterTopics() {
+      var data = this.topics;
+      var arr = [];
+      for (let i = 0; i < data.length; i++) {
+        var flag = true;
+        if (data[i].class != this.value && this.value != "全部板块") {
+          flag = false;
+        }
+        if (!this.hasTag(data[i])) {
+          flag = false;
+        }
+        if (flag) {
+          arr.push(data[i]);
+        }
+      }
+      // 标签与分类筛选
+      var ans = arr.concat();
+      // 关键字搜索
+      if (this.searchTxt != ``) {
+        ans = [];
+        //按照搜索框内容搜索
+        for (let i = 0; i < arr.length; i++) {
+          let sen = arr[i].title + arr[i].discription + arr[i].questioner;
+          if (sen.search(this.searchTxt) != -1) {
+            ans.push(arr[i]);
+          }
+        }
+      }
+      if (this.hotsort === true) {
+        //按热度排序
+        ans.sort(function (next, current) {
+          if (next.subscribe < current.subscribe) return 1;
+          else if (next.subscribe === current.subscribe) return 0;
+          else return -1;
+        });
+      }
+      if (this.teacherRepply === true) {
+        //优先显示老师回复
+        ans.sort(function (next, current) {
+          if (next.reply === true && current.reply === false) return -1;
+          else if (next.reply === true && current.reply === true) return 0;
+          else return 1;
+        });
+      }
+      return ans;
+    },
+  },
   data() {
     return {
       mytags: [
@@ -326,11 +403,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 809,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-12`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -346,13 +423,13 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 890,
-          tags: ["1111", "2222", "3333"],
+          class: "生活板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-13`,
           img: ``,
           reply: true,
-          num: 900,
           questioner: `sd`,
-          avatar: `https://pengpenglang.cn/img/avatar.jpg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -366,11 +443,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 200,
-          tags: ["1111", "2222", "3333"],
+          class: "其他板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-14`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -386,11 +463,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 8,
-          tags: ["1111", "2222", "3333"],
+          class: "其他板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-15`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -406,13 +483,13 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 90,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-16`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: true,
-          num: 900,
           questioner: `sd`,
-          avatar: `https://pengpenglang.cn/img/avatar.jpg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -426,11 +503,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 27,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-17`,
           img: ``,
           reply: false,
-          num: 900,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -446,11 +523,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 88,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-18`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -466,13 +543,13 @@ export default {
             不建议直接看已经多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 80,
-          tags: ["1111", "2222", "3333"],
+          class: "生活板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-19`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: true,
-          num: 900,
           questioner: `sd`,
-          avatar: `https://pengpenglang.cn/img/avatar.jpg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -486,11 +563,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-20`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -506,11 +583,11 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 69,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-21`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
@@ -526,13 +603,13 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 803,
-          tags: ["1111", "2222", "3333"],
+          class: "学习板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-22`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: true,
-          num: 900,
           questioner: `sd`,
-          avatar: `https://pengpenglang.cn/img/avatar.jpg`,
+          avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -546,70 +623,16 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
-          tags: ["1111", "2222", "3333"],
+          class: "生活板块",
+          tags: ["三国杀", "2222", "3333"],
           time: `2021-01-23`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
-          num: 900,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
         },
       ],
     };
-  },
-  methods: {
-    backup() {
-      this.$router.push({
-        name: "CourseList",
-      });
-    },
-    choose(i) {
-      if (i === 1) this.hotsort = true;
-      else this.hotsort = false;
-      var items = document.getElementsByClassName("item");
-      for (let i = 0; i < items.length; i++) {
-        items[i].style.background = `var(--background1)`;
-        items[i].style.color = `var(--text1)`;
-      }
-      items[i].style.background = `#f1c40f`;
-      items[i].style.color = `#fff`;
-    },
-    create() {
-      this.$router.push({ name: "TopicEditor" });
-    },
-  },
-  computed: {
-    filterTopics() {
-      var arr = this.topics;
-      var ans = arr.concat();
-      if (this.searchTxt != ``) {
-        ans = [];
-        //按照搜索框内容搜索
-        for (let i = 0; i < arr.length; i++) {
-          let sen = arr[i].title + arr[i].discription + arr[i].questioner;
-          if (sen.search(this.searchTxt) != -1) {
-            ans.push(arr[i]);
-          }
-        }
-      }
-      if (this.hotsort === true) {
-        //按热度排序
-        ans.sort(function (next, current) {
-          if (next.subscribe < current.subscribe) return 1;
-          else if (next.subscribe === current.subscribe) return 0;
-          else return -1;
-        });
-      }
-      if (this.teacherRepply === true) {
-        //优先显示老师回复
-        ans.sort(function (next, current) {
-          if (next.reply === true && current.reply === false) return -1;
-          else if (next.reply === true && current.reply === true) return 0;
-          else return 1;
-        });
-      }
-      return ans;
-    },
   },
 };
 </script>

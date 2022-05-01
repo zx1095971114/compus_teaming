@@ -1,5 +1,23 @@
 <template>
   <div id="recruitEdit">
+    <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
+      <div class="drawer-wrapper">
+        <h3>———————— 标签选择 ————————</h3>
+        <div class="tags">
+          <div>
+            <el-checkbox-group v-model="mytags">
+              <el-checkbox-button
+                border
+                v-for="tag in tags"
+                :label="tag"
+                :key="tag"
+                >{{ tag }}</el-checkbox-button
+              >
+            </el-checkbox-group>
+          </div>
+        </div>
+      </div>
+    </el-drawer>
     <el-dialog
       title="提示"
       :visible.sync="centerDialogVisible"
@@ -41,7 +59,7 @@
         >
       </div>
       <div class="box">
-        <strong>话题标题(必填)</strong>
+        <strong>招募标题(必填)</strong>
         <el-input
           type="textarea"
           :autosize="{ minRows: 1, maxRows: 4 }"
@@ -51,7 +69,7 @@
         </el-input>
       </div>
       <div class="box">
-        <strong>话题简介(必填)</strong>
+        <strong>招募简介(必填)</strong>
         <el-input
           type="textarea"
           :autosize="{ minRows: 6, maxRows: 8 }"
@@ -61,7 +79,7 @@
         </el-input>
       </div>
       <div class="box">
-        <strong>话题封面(选填)</strong>
+        <strong>招募帖封面(选填)</strong>
         <el-upload
           class="upload"
           :show-file-list="true"
@@ -81,8 +99,25 @@
           </div>
         </el-upload>
       </div>
+      <div class="box">
+        <strong>展示板块(必选)</strong>
+        <el-select v-model="value" placeholder="请选择">
+          <template slot="prefix">展示板块:</template>
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <strong>招募标签(必选)</strong>
+        <div class="button" @click="drawer = true">
+          ★&nbsp;&nbsp;&nbsp;绑定标签
+        </div>
+      </div>
       <div class="submit" @click="submit">
-        <strong><i class="fad fa-paper-plane"></i>&nbsp;&nbsp;发布话题</strong>
+        <strong><i class="fad fa-paper-plane"></i>&nbsp;&nbsp;发布招募</strong>
       </div>
     </div>
   </div>
@@ -132,6 +167,58 @@ export default {
     ];
 
     return {
+      mytags: [],
+      tags: [
+        "大作业组队",
+        "大创组队",
+        "毕设讨论",
+        "实验室招募",
+        "研友寻找",
+        "竞赛组队",
+        "志愿者招募",
+        "学业辅导班",
+        "拼单购物",
+        "拼车出行",
+        "帮忙取外卖",
+        "帮忙取快递",
+        "帮砍互助",
+        "寻找女朋友",
+        "寻找男朋友",
+        "铁友寻找",
+        "开黑四缺一",
+        "ACM打铁",
+        "姐妹相约购物",
+        "狼人杀",
+        "三国杀",
+        "UNO桌游",
+        "斗地主",
+        "是兄弟一起打麻将",
+        "美食城探索",
+        "联名问政",
+        "出售物品",
+        "回收物品",
+        "兼职招募",
+      ],
+      drawer: false,
+      options: [
+        {
+          value: "学习板块",
+          label: "学习板块",
+        },
+        {
+          value: "生活板块",
+          label: "生活板块",
+        },
+        {
+          value: "娱乐板块",
+          label: "娱乐板块",
+        },
+        {
+          value: "其他板块",
+          label: "其他板块",
+        },
+      ],
+      value: "学习板块",
       coverImage: null,
       tid: ``,
       centerDialogVisible: false,
@@ -312,7 +399,6 @@ export default {
 }
 #recruitEdit #r-nav {
   box-sizing: border-box;
-  padding: 20px 0;
   color: var(--text2);
   display: flex;
   flex-direction: column;
@@ -349,8 +435,26 @@ export default {
   background: rgba(235, 47, 6, 0.8);
 }
 #recruitEdit #r-nav .box {
-  margin-top: 20px;
+  margin-top: 5px;
   width: 90%;
+}
+#r-nav .button {
+  z-index: 5;
+  margin-bottom: 15px;
+  width: 100%;
+  border: 1px solid #00875a;
+  color: #00b894;
+  border-radius: 4px;
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+#r-nav .button:hover {
+  color: #fff;
+  background: #00b894;
 }
 #recruitEdit #r-nav .box .upload {
   display: flex;
@@ -391,5 +495,18 @@ export default {
 }
 .editor /deep/ .ql-container {
   font-size: 18px !important;
+}
+#recruitEdit .drawer-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+#recruitEdit .drawer-wrapper h3 {
+  font-family: "SentyGoldenBell";
 }
 </style>
