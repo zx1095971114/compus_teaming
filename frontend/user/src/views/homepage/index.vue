@@ -63,7 +63,7 @@
         </li>
         <li @click="transmit(6)">
           <a href="#">
-            <i class='bx bx-history'></i>
+            <i class="bx bx-history"></i>
             <span class="links_name">个人日志</span>
           </a>
           <span class="tooltip">日志</span>
@@ -77,8 +77,8 @@
         </li>
         <li @click="transmit(8)">
           <a href="#">
-            <i class="bx bx-cog"></i>
-            <span class="links_name">系统设置</span>
+            <i class="bx bx-info-square"></i>
+            <span class="links_name">账号设置</span>
           </a>
           <span class="tooltip">设置</span>
         </li>
@@ -170,6 +170,8 @@ export default {
         this.$router.push({ name: "history" });
       } else if (i === 7) {
         this.$router.push({ name: "session" });
+      } else if (i === 8) {
+        this.$router.push({ name: "settings" });
       }
     },
   },

@@ -60,6 +60,11 @@ export default new Router({
           path: 'recruitContent',
           name: 'recruitContent',
           component: () => import("@/views/recruitContent/index.vue"),
+        },
+        {
+          path: 'settings',
+          name: 'settings',
+          component: () => import("@/views/settings/index.vue")
         }
 
       ]

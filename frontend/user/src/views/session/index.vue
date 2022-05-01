@@ -1,5 +1,8 @@
 <template>
   <div id="session">
+    <div id="darken">
+      <h1>Phase ii development...</h1>
+    </div>
     <div id="l-nav" class="animate__animated animate__fadeInLeft">
       <ul
         id="create"
@@ -96,22 +99,20 @@ export default {
   components: {
     communication,
   },
-  created(){
-    this.sonData=this.arr[0];
+  created() {
+    this.sonData = this.arr[0];
   },
   methods: {
     toggle() {
       this.showbutton = !this.showbutton;
     },
     goIn(i) {
-     this.sonData=this.arr[i];
+      this.sonData = this.arr[i];
     },
   },
   data() {
     return {
-      sonData:{
-
-      },
+      sonData: {},
       showbutton: false,
       arr: [
         {
@@ -288,6 +289,7 @@ export default {
   overflow-x: hidden;
   min-height: 300px;
   /* background:#000; */
+  position: relative;
 }
 #session #l-nav {
   position: relative;
@@ -465,5 +467,18 @@ export default {
   width: 78%;
   min-height: 200px;
   /* background:#000; */
+}
+#darken {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-family: "Dancing Script";
+  color: #fff;
+  letter-spacing: 5px;
 }
 </style>

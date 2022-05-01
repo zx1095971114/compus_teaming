@@ -53,10 +53,12 @@
       </div> -->
     </div>
     <div id="r-nav" class="animate__animated animate__fadeInRight">
-      <div class="backup" @click="centerDialogVisible = true">
-        <strong
-          ><i class="fas fa-arrow-alt-left"></i>&nbsp;&nbsp;退出编辑</strong
-        >
+      <div class="box">
+        <div class="backup" @click="centerDialogVisible = true">
+          <strong
+            ><i class="fas fa-arrow-alt-left"></i>&nbsp;&nbsp;退出编辑</strong
+          >
+        </div>
       </div>
       <div class="box">
         <strong>招募标题(必填)</strong>
@@ -77,6 +79,20 @@
           v-model="description"
         >
         </el-input>
+      </div>
+      <div class="box">
+        <strong>招募人数(必填)</strong>
+        <el-input-number
+          v-model="num"
+          :min="1"
+          :max="10"
+          label="描述文字"
+        ></el-input-number>
+      </div>
+      <div class="box">
+        <strong>截止时间(必填)</strong>
+        <el-date-picker v-model="endtime" type="datetime" placeholder="选择日期">
+        </el-date-picker>
       </div>
       <div class="box">
         <strong>招募帖封面(选填)</strong>
@@ -116,8 +132,12 @@
           ★&nbsp;&nbsp;&nbsp;绑定标签
         </div>
       </div>
-      <div class="submit" @click="submit">
-        <strong><i class="fad fa-paper-plane"></i>&nbsp;&nbsp;发布招募</strong>
+      <div class="box">
+        <div class="submit" @click="submit">
+          <strong
+            ><i class="fad fa-paper-plane"></i>&nbsp;&nbsp;发布招募</strong
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -167,6 +187,7 @@ export default {
     ];
 
     return {
+      endtime: ``,
       mytags: [],
       tags: [
         "大作业组队",
@@ -220,6 +241,7 @@ export default {
       ],
       value: "学习板块",
       coverImage: null,
+      num: 3,
       tid: ``,
       centerDialogVisible: false,
       title: ``,
@@ -398,6 +420,7 @@ export default {
   /* background: pink; */
 }
 #recruitEdit #r-nav {
+  padding: 20px 0;
   box-sizing: border-box;
   color: var(--text2);
   display: flex;
@@ -407,6 +430,7 @@ export default {
   right: 0;
   top: 0;
   height: 100%;
+  overflow: auto;
   width: 300px;
   position: fixed;
   /* background: pink; */
@@ -419,7 +443,7 @@ export default {
 }
 #recruitEdit #r-nav .backup {
   margin-top: 10px;
-  width: 90%;
+  width: 100%;
   border: 1px solid #e55039;
   color: #eb2f06;
   border-radius: 4px;
@@ -440,7 +464,6 @@ export default {
 }
 #r-nav .button {
   z-index: 5;
-  margin-bottom: 15px;
   width: 100%;
   border: 1px solid #00875a;
   color: #00b894;
@@ -472,7 +495,7 @@ export default {
 
 #recruitEdit #r-nav .submit {
   margin-top: 10px;
-  width: 90%;
+  width: 100%;
   border: 1px solid #6a89cc;
   color: #4a69bd;
   border-radius: 4px;

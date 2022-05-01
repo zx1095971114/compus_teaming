@@ -15,16 +15,16 @@
   src: url(https://cdn.jsdelivr.net/gh/Langwenchong/cdn/font/hytmr55.woff) format('woff');
 }
 
-.el-collapse-item__header {
+#message .el-collapse-item__header {
   padding: 5px;
   height: 58px;
 }
 
-.el-collapse-item__content {
+#message .el-collapse-item__content {
   padding: 5px;
 }
 
-#homepage .el-input__prefix {
+#homepage .el-select .el-input__prefix {
   top: 10px;
 }
 
@@ -32,12 +32,12 @@
   padding-left: 70px;
 }
 
-.el-checkbox-button,
-.el-checkbox-button__inner {
+.drawer-wrapper .el-checkbox-button,
+.drawer-wrapper .el-checkbox-button__inner {
   margin-top: 10px;
 }
 
-.el-checkbox-button.is-checked .el-checkbox-button__inner {
+.drawer-wrapper .el-checkbox-button.is-checked .el-checkbox-button__inner {
   color: #FFF;
 }
 
@@ -90,12 +90,24 @@
   margin: 5% 10%;
 }
 
-.el-timeline-item__node--large {
+#history .el-timeline-item__node--large {
   width: 26px;
   height: 26px;
   left: -8px;
   top: -5px;
 }
-.el-breadcrumb__inner a, .el-breadcrumb__inner.is-link{
-  color:#fff
+
+#recruitContent .el-breadcrumb__inner a,
+.el-breadcrumb__inner.is-link {
+  color: #fff
+}
+
+#recruitEdit .el-input-number {
+  width: 100%;
+}
+
+#recruitEdit .el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
+  ;
 }

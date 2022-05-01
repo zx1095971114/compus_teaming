@@ -56,18 +56,9 @@
       </div>
     </div>
     <div class="r-wrapper">
-      <div class="info">
-        为了方便进行个人人脸识别认证，请您在这里上传个人半身照，如下示例图所示:
-      </div>
-      <div class="ref" @mouseover="upload = true" @mouseout="upload = false">
-        <img
-          v-show="!upload"
-          src="../../../static/images/welcome/reference.png"
-          class="animate__animated animate__flipInX"
-          height="164px"
-          width="auto"
-        />
-        <div class="upload animate__animated animate__flipInX" v-show="upload">
+      <div class="info">请上传用户头像</div>
+      <div class="ref">
+        <div class="upload animate__animated animate__flipInX">
           <el-upload
             class="avatar-uploader"
             action="sb"
@@ -80,10 +71,6 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </div>
-        <ol>
-          <li>请不要佩戴口罩遮挡面部饰品</li>
-          <li>人像居中且背景图白底最佳</li>
-        </ol>
       </div>
     </div>
   </div>
@@ -302,6 +289,7 @@ export default {
   overflow: hidden;
   margin: 0 auto;
   display: flex;
+  border-radius: 8px;
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
@@ -309,8 +297,27 @@ export default {
   padding: 20px 10px;
   border: 1px #333 dashed;
 }
-ol {
-  margin: 0;
-  margin-top: 20px;
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>
