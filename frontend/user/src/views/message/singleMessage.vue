@@ -14,7 +14,7 @@
         <div class="content">
           <div>{{ mes.msg }}</div>
           <div v-if="mes.type == 'class'">
-            <el-button type="text">同意加入</el-button>
+            <!-- <el-button type="text">同意加入</el-button> -->
           </div>
           <div v-else-if="mes.type == 'test'">
             <el-button type="text">查看试卷</el-button>

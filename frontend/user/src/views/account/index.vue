@@ -22,10 +22,10 @@
           <div id="fourth" class="bar lila active" data-percent></div>
         </div>
       </div>
-      <div id="pin">
-        <h6>Pinned</h6>
-        <div id="pin-container">
-          <div class="pin-box animate__animated animate__flipInX" v-for="box in arr" :key="box.id">
+      <div id="pin-top">
+        <h6>我创建的（正在进行中）：</h6>
+        <div id="pin-container-top">
+          <div class="pin-box animate__animated animate__flipInX" v-for="box in arr1" :key="box.id">
             <div class="title">
               <span>
                 <i class="bx bxs-book-bookmark"></i><b>{{box.title}}</b>
@@ -35,7 +35,26 @@
             <p class="info">
                 {{box.subtitle}}
             </p>
-            <div id="status">
+            <div id="status-top">
+                <div class="point" v-state="box.class"></div><span>{{box.class}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="pin-bottom">
+        <h6>我参与的（正在进行中）：</h6>
+        <div id="pin-container-bottom">
+          <div class="pin-box animate__animated animate__flipInX" v-for="box in arr2" :key="box.id">
+            <div class="title">
+              <span>
+                <i class="bx bxs-book-bookmark"></i><b>{{box.title}}</b>
+              </span>
+              <i class="bx bx-dialpad"></i>
+            </div>
+            <p class="info">
+                {{box.subtitle}}
+            </p>
+            <div id="status-bottom">
                 <div class="point" v-state="box.class"></div><span>{{box.class}}</span>
             </div>
           </div>
@@ -45,38 +64,50 @@
     <div id="r-bar" class="animate__animated animate__fadeInRight">
       <div id="avatar">
         <div id="imgBx">
-          <img :src="avatar" />
+          <img :src="myinfo.avatar" />
           <div id="status">
-            <p id="icon" :title="status">👨‍🎓</p>
+            <p id="icon" :title="myinfo.status">👨‍🎓</p>
           </div>
         </div>
       </div>
       <div id="info">
         <div id="me">
-          <h2>{{name}}</h2>
-          <p id="subtitle">「 {{subtitle}} 」</p>
+          <h2>{{myinfo.name}}</h2>
+          <p id="subtitle">「 {{myinfo.subtitle}} 」</p>
           <div id="friends">
             <span class="tag">
               <i class="bx bx-group"></i>
-              <b>{{followers}}</b> followers
+              <b>{{myinfo.followers}}</b> followers
             </span>
             <span class="tag">
               <i class="bx bx-group"></i>
-              <b>{{following}}</b> following
+              <b>{{myinfo.following}}</b> following
             </span>
           </div>
           <div id="other-info">
             <span class="tag">
-              <i class="bx bx-building-house"></i>
-              {{address}}
+              <i class='fas fa-venus-mars'></i>
+              {{myinfo.sex}}
             </span>
             <span class="tag">
               <i class="bx bxs-graduation"></i>
-              {{grade}}
+              {{myinfo.grade}}
             </span>
             <span class="tag">
-              <i class="bx bx-link"></i>
-              <a :href="link">{{link}}</a>
+              <i class='fab fa-qq'></i>
+              {{myinfo.qq}}
+            </span>
+            <span class="tag">
+              <i class='fal fa-mobile'></i>
+              &nbsp;{{myinfo.phone}}
+            </span>
+            <span class="tag">
+              <i class="bx bx-building-house"></i>
+              {{myinfo.address}}
+            </span>
+            <span class="tag">
+              <i class='fal fa-envelope'></i>
+              {{myinfo.email}}
             </span>
           </div>
           <div id="highlight">
@@ -96,12 +127,14 @@ export default {
   name: 'account',
   directives: {
     state: function (el, binding) {
-      if (binding.value === '正在进行中') {
+      if (binding.value === '学习') {
         el.style.backgroundColor = '#f34b7d'
-      } else if (binding.value === '正在招募中') {
+      } else if (binding.value === '生活') {
         el.style.backgroundColor = '#41b883'
-      } else if (binding.value === '已结束') {
+      } else if (binding.value === '娱乐') {
         el.style.backgroundColor = '#f1e05a'
+      } else if(binding.value === '其他'){
+        el.style.backgroundColor = '#0984e3'
       }
     }
   },
@@ -572,64 +605,141 @@ export default {
   },
   data () {
     return {
-      arr: [
+      myinfo:{
+        email: '1625744287@qq.com',
+        grade: '2019级',
+        qq: '1625744287',
+        phone: '12345678910',
+        sex: '男',
+        address: '天津大学(北洋园校区)',
+        status: 'student',
+        followers: '2.3k',
+        following: '300',
+        name: 'Peng Peng Lang',
+        subtitle: '保持热爱，奔赴山海',
+        avatar: 'https://portrait.gitee.com/uploads/avatars/user/2517/7552702_Langwenchong_1644047602.png!avatar100'
+      },
+        
+      arr1: [
         {
           id: '1',
-          class: '正在进行中',
+          class: '学习',
           title: '大学GPA平均调查',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '2',
-          class: '正在进行中',
+          class: '学习',
           title: '大学平均月消费水平调查',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '3',
-          class: '正在招募中',
+          class: '生活',
           title: '天际单靴宿舍是否引入空调',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '4',
-          class: '已结束',
+          class: '娱乐',
           title: '形势与政策答题',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '5',
-          class: '正在进行中',
+          class: '学习',
           title: '大学自我颜值评价调查',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '6',
-          class: '已结束',
+          class: '娱乐',
           title: '心理健康测试',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '7',
-          class: '正在招募中',
+          class: '生活',
           title: '校园食堂菜价是够过高',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '8',
-          class: '正在进行中',
+          class: '学习',
           title: '大学学习状况自我评价调查',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '9',
-          class: '已结束',
+          class: '娱乐',
           title: '《青年大学习》课后题',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         },
         {
           id: '10',
-          class: '正在招募中',
+          class: '生活',
+          title: '军训服装样式选定',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        }
+      ],
+      arr2:[
+        {
+          id: '1',
+          class: '学习',
+          title: '大学GPA平均调查',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '2',
+          class: '学习',
+          title: '大学平均月消费水平调查',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '3',
+          class: '生活',
+          title: '天际单靴宿舍是否引入空调',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '4',
+          class: '娱乐',
+          title: '形势与政策答题',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '5',
+          class: '学习',
+          title: '大学自我颜值评价调查',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '6',
+          class: '娱乐',
+          title: '心理健康测试',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '7',
+          class: '生活',
+          title: '校园食堂菜价是够过高',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '8',
+          class: '学习',
+          title: '大学学习状况自我评价调查',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '9',
+          class: '娱乐',
+          title: '《青年大学习》课后题',
+          subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
+        },
+        {
+          id: '10',
+          class: '生活',
           title: '军训服装样式选定',
           subtitle: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.'
         }
@@ -639,15 +749,7 @@ export default {
         '../../../static/images/account/ach2.png',
         '../../../static/images/account/ach3.png'
       ],
-      link: 'https://coolchong.cn',
-      grade: '2019级',
-      address: '天津大学(北洋园校区)',
-      status: 'student',
-      followers: '2.3k',
-      following: '300',
-      name: 'Peng Peng Lang',
-      subtitle: '保持热爱，奔赴山海',
-      avatar: 'https://portrait.gitee.com/uploads/avatars/user/2517/7552702_Langwenchong_1644047602.png!avatar100'
+      
     }
   }
 }
@@ -698,17 +800,37 @@ export default {
   padding-left: 35px;
   margin-top: 20px;
 }
-#l-main #pin {
+#l-main #pin-top {
   margin: 20px auto;
   width: 95%;
 }
-#l-main #pin-container {
+#l-main #pin-bottom {
+  margin: 20px auto;
+  width: 95%;
+}
+#l-main #pin-container-top {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-#l-main #pin-container .pin-box {
+#l-main #pin-container-bottom {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#l-main #pin-container-top .pin-box {
+  width: 47%;
+  height: 130px;
+  /* background: pink; */
+  border-radius: 6px;
+  border: 1px solid #e1e4e8;
+  box-sizing: border-box;
+  padding: 16px;
+  margin-bottom:15px;
+}
+#l-main #pin-container-bottom .pin-box {
   width: 47%;
   height: 130px;
   /* background: pink; */
@@ -725,30 +847,56 @@ export default {
     border-radius: 50%;
     display:inline-block;
 }
-#l-main #pin-container .pin-box .title {
+#l-main #pin-container-top .pin-box .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-#l-main #pin-container .pin-box .title b{
+#l-main #pin-container-bottom .pin-box .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#l-main #pin-container-top .pin-box .title b{
     color:#0366d6;
     font-size:16px;
     line-height:20px;
     margin:0;
     padding:0;
 }
-#l-main #pin-container .pin-box .title i{
+#l-main #pin-container-bottom .pin-box .title b{
+    color:#0366d6;
+    font-size:16px;
+    line-height:20px;
+    margin:0;
+    padding:0;
+}
+#l-main #pin-container-top .pin-box .title i{
     margin-right:5px;
     color:#586069;
     font-size:18px;
 }
-#l-main #pin-container .pin-box .info{
+#l-main #pin-container-bottom .pin-box .title i{
+    margin-right:5px;
+    color:#586069;
+    font-size:18px;
+}
+#l-main #pin-container-top .pin-box .info{
     color:#586069;
     margin-top:8px;
     font-size:12px;
     margin-bottom: 5px;
 }
-#l-main #pin-container .pin-box .point span{
+#l-main #pin-container-bottom .pin-box .info{
+    color:#586069;
+    margin-top:8px;
+    font-size:12px;
+    margin-bottom: 5px;
+}
+#l-main #pin-container-top .pin-box .point span{
+    font-size:10px;
+}
+#l-main #pin-container-bottom .pin-box .point span{
     font-size:10px;
 }
 @keyframes barberpole {
