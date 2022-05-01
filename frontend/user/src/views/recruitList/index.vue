@@ -1,5 +1,23 @@
 <template>
   <div id="recruitList">
+    <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
+      <div class="drawer-wrapper">
+        <h3>———————— 标签筛选 ————————</h3>
+        <div class="tags">
+          <div>
+            <el-checkbox-group v-model="mytags">
+              <el-checkbox-button
+                border
+                v-for="tag in tags"
+                :label="tag"
+                :key="tag"
+                >{{ tag }}</el-checkbox-button
+              >
+            </el-checkbox-group>
+          </div>
+        </div>
+      </div>
+    </el-drawer>
     <div id="l-main">
       <transition-group appear>
         <div
@@ -16,23 +34,31 @@
           </div>
           <div id="tool">
             <div id="subscribe">
-              <i class="fas fa-hand-point-up"></i>&nbsp;&nbsp;好问题&nbsp;{{
-                topic.subscribe
-              }}
+              <i class="fas fa-users"></i>&nbsp;&nbsp;人员&nbsp;5 / 9
             </div>
             <div class="box">
-              <i class="fad fa-question-circle"></i>&nbsp;话题发起者：<img
+              <i class="fad fa-question-circle"></i>&nbsp;招募发起人：<img
                 :src="topic.avatar"
                 alt="avatar"
               />&nbsp;{{ topic.questioner }}
             </div>
             <div class="box">
               <i class="fad fa-comment-alt-smile"></i>&nbsp;{{
-                topic.num
-              }}条评论
+                topic.subscribe
+              }}次浏览
             </div>
             <div class="box">
               <i class="fad fa-clock"></i>&nbsp;{{ topic.time }}
+            </div>
+            <div class="box">
+              <div
+                class="tag"
+                v-for="(topicTag, k) in topic.tags"
+                :key="k"
+                v-if="k < 2"
+              >
+                <i class="fad fa-tag"></i>&nbsp;{{ topicTag }}
+              </div>
             </div>
             <div class="box reply" v-if="topic.reply === true">
               <svg
@@ -120,7 +146,7 @@
                   fill="#FFFFFF"
                   p-id="2493"
                 ></path></svg
-              >&nbsp;老师回复
+              >&nbsp;教师创建的招募
             </div>
           </div>
         </div>
@@ -131,9 +157,9 @@
         <p class="title"><i class="fad fa-map"></i>导航栏</p>
         <div class="info">
           <div class="l-box">
-            <strong>开启你的话题讨论</strong>
+            <strong>创建你的团队招募</strong>
             <p class="content">
-              有疑惑？有想法？创建自己的话题与同学畅言所想、所惑！
+              大作业组队？实验室招募？拼单购物？试试北洋有约寻找伙伴吧~
             </p>
           </div>
           <div class="r-box">
@@ -153,13 +179,13 @@
       <div class="filter">
         <p class="title"><i class="fad fa-search"></i>搜索栏</p>
         <div class="search">
-          <el-input placeholder="请输入要搜索的话题" v-model="searchTxt">
+          <el-input placeholder="请输入要搜索的招募帖内容" v-model="searchTxt">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
         <el-switch
           v-model="teacherRepply"
-          active-text="优先显示老师已答复话题"
+          active-text="优先显示教师创建的招募"
           inactive-text="默认排序"
         >
         </el-switch>
@@ -173,15 +199,21 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="regulation">
-        <b><i class="fad fa-bullhorn"></i>&nbsp;&nbsp;注意事项</b>
-        <ul>
-          <li>话题区请保持文明，禁止辱骂，争吵</li>
-          <li>被多次举报的话题与评论将进行删除</li>
-          <li>话题禁止含有任何淫秽信息</li>
-          <li>其他具体规定请查看《虚拟教研室话题事项规定》</li>
-        </ul>
+        <div class="classes">
+          <el-select v-model="value" placeholder="请选择">
+            <template slot="prefix">展示板块:</template>
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <div class="button" @click="drawer = true">
+            ★&nbsp;&nbsp;&nbsp;标签筛选
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -192,7 +224,93 @@ export default {
   name: "recruitList",
   data() {
     return {
+      mytags: [
+        "大作业组队",
+        "大创组队",
+        "毕设讨论",
+        "实验室招募",
+        "研友寻找",
+        "竞赛组队",
+        "志愿者招募",
+        "学业辅导班",
+        "拼单购物",
+        "拼车出行",
+        "帮忙取外卖",
+        "帮忙取快递",
+        "帮砍互助",
+        "寻找女朋友",
+        "寻找男朋友",
+        "铁友寻找",
+        "开黑四缺一",
+        "ACM打铁",
+        "姐妹相约购物",
+        "狼人杀",
+        "三国杀",
+        "UNO桌游",
+        "斗地主",
+        "是兄弟一起打麻将",
+        "美食城探索",
+        "联名问政",
+        "出售物品",
+        "回收物品",
+        "兼职招募",
+      ],
+      tags: [
+        "大作业组队",
+        "大创组队",
+        "毕设讨论",
+        "实验室招募",
+        "研友寻找",
+        "竞赛组队",
+        "志愿者招募",
+        "学业辅导班",
+        "拼单购物",
+        "拼车出行",
+        "帮忙取外卖",
+        "帮忙取快递",
+        "帮砍互助",
+        "寻找女朋友",
+        "寻找男朋友",
+        "铁友寻找",
+        "开黑四缺一",
+        "ACM打铁",
+        "姐妹相约购物",
+        "狼人杀",
+        "三国杀",
+        "UNO桌游",
+        "斗地主",
+        "是兄弟一起打麻将",
+        "美食城探索",
+        "联名问政",
+        "出售物品",
+        "回收物品",
+        "兼职招募",
+      ],
+      drawer: false,
       hotsort: false,
+      options: [
+        {
+          value: "全部板块",
+          label: "全部板块",
+        },
+        {
+          value: "学习板块",
+          label: "学习板块",
+        },
+        {
+          value: "生活板块",
+          label: "生活板块",
+        },
+        {
+          value: "娱乐板块",
+          label: "娱乐板块",
+        },
+        {
+          value: "其他板块",
+          label: "其他板块",
+        },
+      ],
+      value: "全部板块",
       searchTxt: ``,
       teacherRepply: false,
       topics: [
@@ -208,6 +326,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 809,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-12`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -227,6 +346,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 890,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-13`,
           img: ``,
           reply: true,
@@ -246,6 +366,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 200,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-14`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -265,6 +386,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 8,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-15`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -284,6 +406,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 90,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-16`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: true,
@@ -303,6 +426,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 27,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-17`,
           img: ``,
           reply: false,
@@ -322,6 +446,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 88,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-18`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -341,6 +466,7 @@ export default {
             不建议直接看已经多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 80,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-19`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: true,
@@ -360,6 +486,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-20`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -379,6 +506,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 69,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-21`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -398,6 +526,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 803,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-22`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: true,
@@ -417,6 +546,7 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
+          tags: ["1111", "2222", "3333"],
           time: `2021-01-23`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           reply: false,
@@ -441,7 +571,7 @@ export default {
         items[i].style.background = `var(--background1)`;
         items[i].style.color = `var(--text1)`;
       }
-      items[i].style.background = `#d1453c`;
+      items[i].style.background = `#f1c40f`;
       items[i].style.color = `#fff`;
     },
     create() {
@@ -478,7 +608,6 @@ export default {
           else return 1;
         });
       }
-      // console.log(`hhh`);
       return ans;
     },
   },
@@ -494,6 +623,19 @@ export default {
   /* background: pink; */
   display: flex;
   justify-content: space-between;
+}
+#recruitList .drawer-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+#recruitList .drawer-wrapper h3 {
+  font-family: "SentyGoldenBell";
 }
 #l-main {
   min-height: 300px;
@@ -586,6 +728,9 @@ export default {
   display: flex;
   font-size: 17px;
 }
+#l-main .topicBox #tool .box .tag {
+  margin-left: 5px;
+}
 #l-main .topicBox #tool .reply {
   font-size: 14px;
   color: var(--text5);
@@ -603,7 +748,7 @@ export default {
   position: fixed;
   right: 5px;
   width: 320px;
-  min-height: 400px;
+  height: 100%;
   /* box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important;
   background: var(--background2); */
   display: flex;
@@ -614,7 +759,7 @@ export default {
   width: 100%;
   box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important;
   background: var(--background3);
-  height: 280px;
+  height: 300px;
   box-sizing: border-box;
   padding: 15px 17px;
   display: flex;
@@ -691,12 +836,30 @@ export default {
   width: 100%;
   box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important;
   background: var(--background3);
-  height: 250px;
+  height: calc(100% - 330px);
   box-sizing: border-box;
   padding: 15px 17px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+#r-nav .filter .button {
+  z-index: 5;
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid #00875a;
+  color: #00b894;
+  border-radius: 4px;
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+#r-nav .filter .button:hover {
+  color: #fff;
+  background: #00b894;
 }
 #r-nav .filter .title {
   height: 32px;
@@ -713,6 +876,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#r-nav .filter .classes {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100px;
+  /* background: rgba(133, 144, 166, 0.05); */
 }
 .el-switch /deep/ span {
   color: var(--text1);
@@ -748,7 +919,7 @@ export default {
 }
 #r-nav .filter .category .classification .item:first-child {
   /* border: 1px solid black; */
-  background: #d1453c;
+  background: #f1c40f;
   color: #fff;
 }
 #r-nav .regulation {

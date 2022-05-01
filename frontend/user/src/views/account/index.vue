@@ -116,9 +116,6 @@ export default {
       var temp4 = document.getElementById('fourth')
       temp4.style.width = '53%'
     }, 100)
-    setTimeout(function () {
-      $('#account').css('overflow-x', 'visible')
-    }, 2000)
     let myChart = echarts.init(document.getElementById('calendar'))
     let option = {
       title: {

@@ -51,6 +51,10 @@ export default new Router({
           path: 'session',
           name: 'session',
           component: () => import("@/views/session/index.vue"),
+        }, {
+          path: 'history',
+          name: 'history',
+          component: () => import("@/views/history/index.vue"),
         }
       ]
     },

@@ -16,7 +16,7 @@
       <div class="logo_content">
         <div class="logo">
           <i class="bx bx-message-edit"></i>
-          <div class="logo_name">Vteam</div>
+          <div class="logo_name">北洋有约</div>
         </div>
         <i class="bx bx-menu" id="btn"></i>
       </div>
@@ -63,17 +63,17 @@
         </li>
         <li @click="transmit(6)">
           <a href="#">
+            <i class='bx bx-history'></i>
+            <span class="links_name">个人日志</span>
+          </a>
+          <span class="tooltip">日志</span>
+        </li>
+        <li @click="transmit(7)">
+          <a href="#">
             <i class="bx bx-comment-dots"></i>
             <span class="links_name">团队会议</span>
           </a>
           <span class="tooltip">会议</span>
-        </li>
-        <li @click="transmit(7)">
-          <a href="#">
-            <i class="bx bx-pen"></i>
-            <span class="links_name">个人日志</span>
-          </a>
-          <span class="tooltip">日志</span>
         </li>
         <li @click="transmit(8)">
           <a href="#">
@@ -143,7 +143,7 @@ export default {
       message: h(
         "b",
         { style: "color: #333" },
-        "您好pengpenglang同学，欢迎登陆Vteam系统，现在是北京时间" +
+        "您好Langwenchong同学，欢迎登陆「北洋有约」校内组队系统，现在是北京时间" +
           date.getHours() +
           ":" +
           date.getMinutes() +
@@ -155,8 +155,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$router.push({name: 'sign'});
-      location.reload();
+      this.$router.push({ name: "sign" });
     },
     transmit(i) {
       if (i === 1) {
@@ -164,11 +163,13 @@ export default {
       } else if (i === 2) {
         this.$router.push({ name: "myaccount" });
       } else if (i === 3) {
-        this.$router.push({name: 'message'});
-      }else if (i === 5) {
-        this.$router.push({name: 'recruitEdit'});
-      }else if (i === 6) {
-        this.$router.push({name: 'session'});
+        this.$router.push({ name: "message" });
+      } else if (i === 5) {
+        this.$router.push({ name: "recruitEdit" });
+      } else if (i === 6) {
+        this.$router.push({ name: "history" });
+      } else if (i === 7) {
+        this.$router.push({ name: "session" });
       }
     },
   },

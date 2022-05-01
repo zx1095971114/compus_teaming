@@ -54,6 +54,7 @@
             <el-menu-item-group>
               <el-menu-item
                 v-for="(item, i) in arr"
+                :index="i"
                 :key="i"
                 class="item"
                 @click="goIn(i)"
