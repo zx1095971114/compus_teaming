@@ -49,7 +49,7 @@
         </li>
         <li @click="transmit(4)">
           <a href="#">
-            <i class="bx bx-pie-chart-alt-2"></i>
+            <i class='bx bx-group'></i>
             <span class="links_name">团队管理</span>
           </a>
           <span class="tooltip">团队</span>
@@ -164,6 +164,8 @@ export default {
         this.$router.push({ name: "myaccount" });
       } else if (i === 3) {
         this.$router.push({ name: "message" });
+      } else if (i === 4) {
+        this.$router.push({ name: "teams" });
       } else if (i === 5) {
         this.$router.push({ name: "recruitEdit" });
       } else if (i === 6) {

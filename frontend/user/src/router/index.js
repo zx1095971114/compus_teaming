@@ -65,8 +65,15 @@ export default new Router({
           path: 'settings',
           name: 'settings',
           component: () => import("@/views/settings/index.vue")
+        },{
+          path: 'teams',
+          name: 'teams',
+          component: () => import("@/views/teams/index.vue")
+        },{
+          path: 'teamZone',
+          name: 'teamZone',
+          component: () => import("@/views/teamZone/index.vue")
         }
-
       ]
     },
   ]

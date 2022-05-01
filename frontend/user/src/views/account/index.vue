@@ -96,11 +96,11 @@
           </div>
           <div id="other-info">
             <span class="tag">
-              <i class="fas fa-venus-mars"></i>
+              <i class="fal fa-venus-mars"></i>
               {{ myinfo.sex }}
             </span>
             <span class="tag">
-              <i class="bx bxs-graduation"></i>
+              <i class="fal fa-user-graduate"></i>
               {{ myinfo.grade }}
             </span>
             <span class="tag">
@@ -108,7 +108,7 @@
               &nbsp;{{ myinfo.phone }}
             </span>
             <span class="tag">
-              <i class="bx bx-building-house"></i>
+              <i class="fal fa-house"></i>
               {{ myinfo.address }}
             </span>
             <span class="tag">

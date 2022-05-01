@@ -240,7 +240,7 @@ export default {
       items[i].style.color = `#fff`;
     },
     create() {
-      this.$router.push({ name: "TopicEditor" });
+      this.$router.push({ name: "recruitEdit" });
     },
     content() {
       this.$router.push({ name: "recruitContent" });

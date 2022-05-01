@@ -34,7 +34,7 @@ export default {
           timestamp: "2022-05-1 14:30",
           color: "#2ed573",
           size: "large",
-          icon: "far fa-sign-in-alt",
+          icon: "fad fa-sign-in-alt",
         },
         {
           title: "发起组队招募",
@@ -42,7 +42,7 @@ export default {
           timestamp: "2022-05-1 14:30",
           color: "#ff6b81",
           size: "large",
-          icon: "far fa-flag",
+          icon: "fad fa-flag",
         },
         {
           title: "参加组队",
@@ -50,7 +50,7 @@ export default {
           timestamp: "2022-05-1 14:30",
           color: "#9c88ff",
           size: "large",
-          icon: "far fa-handshake",
+          icon: "fad fa-handshake",
         },
         {
           title: "查看招募",
@@ -58,7 +58,7 @@ export default {
           timestamp: "2022-05-1 14:30",
           color: "#ff7f50",
           size: "large",
-          icon: "far fa-search",
+          icon: "fad fa-search",
         },
         {
           title: "linaiani",
@@ -66,7 +66,7 @@ export default {
           timestamp: "2022-05-1 14:30",
           color: "#2ed573",
           size: "large",
-          icon: "far fa-sign-in-alt",
+          icon: "fad fa-sign-in-alt",
         },
         {
           title: "修改个人信息",
@@ -74,7 +74,7 @@ export default {
           timestamp: "2022-05-1 14:30",
           color: "#00a8ff",
           size: "large",
-          icon: "far fa-edit",
+          icon: "fad fa-edit",
         },
       ],
     };
