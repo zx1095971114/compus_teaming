@@ -11,12 +11,16 @@
         <h2>
           期末大作业组队<span class="match-status $statusSmCls">招募中</span>
         </h2>
-        <p class="item">
-          招募时间范围： 至 
-        </p>
-        <p class="item">考试学科：{{ exam.subject }}</p>
-        <p class="item">考试时长：{{ exam.duration }}</p>
+        <p class="item">招募时间范围： 2022-04-05 至 2022-06-07</p>
+        <p class="item">招募发起人：郎文翀</p>
+        <p class="item"></p>
       </div>
+      <h2>欢迎加入团队，与我们一同合作完成任务！</h2>
+      <img
+        height="90%"
+        src="../../../static/images/recruitContent/team.png"
+        alt=""
+      />
     </div>
     <div id="body">
       <div class="menu">
@@ -29,21 +33,49 @@
         </div>
       </div>
       <div class="tips">
-        <h2>●官方系统提示：</h2>
-        <ol>
-          <li>
-            为了保证页面加载显示正常,请优先选择使用chrome、edge、firefrox浏览器进行考试
-          </li>
-          <li>
-            为了防止作弊，在考试前以及考试中会进行人脸识别认证，系统将会为您提供5min的时间进行验证，验证失败本次考试将会暂停，请确保您的浏览器可以正常使用摄像头进行人脸识别同时在考试途中请不要离开座位或者刷新页面
-          </li>
-          <li>
-            如果处于高峰期间进入考试后可能需要1-2min时间进行页面加载，请您见谅稍加等待，如长时间仍然没能进入请迅速联系管理员
-          </li>
-        </ol>
+        <h2>●招募内容：</h2>
+        <div class="ql-container ql-snow">
+          <div class="content ql-editor" v-html="content" />
+        </div>
       </div>
-      <div class="confirm">
-        <confirm></confirm>
+      <div class="footer">
+        <div class="person">
+          <h2>团队成员:</h2>
+          <div class="avatar">
+            <img
+              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
+              alt
+            />
+          </div>
+          <div class="avatar">
+            <img
+              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
+              alt
+            />
+          </div>
+          <div class="avatar">
+            <img
+              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
+              alt
+            />
+          </div>
+          <div class="avatar">
+            <img
+              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
+              alt
+            />
+          </div>
+          <div class="avatar">
+            <img
+              src="https://tse1-mm.cn.bing.net/th/id/OIP-C.StJ-mvGD2FVWW9WaleP5SQHaHZ?w=224&h=220&c=7&r=0&o=5&dpr=1.25&pid=1.7"
+              alt
+            />
+          </div>
+          <span class="more">+63 Teammates</span>
+        </div>
+        <div class="create" @click="create">
+          <strong>+&nbsp;&nbsp;加入团队</strong>
+        </div>
       </div>
     </div>
   </div>
@@ -52,16 +84,23 @@
 
 <script>
 import FlipCountdown from "vue2-flip-countdown";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 export default {
   name: "recruitContent",
   components: { FlipCountdown },
   methods: {
     backup() {
-      this.$router.push({ name: "exam" });
+      this.$router.push({ name: "recruitList" });
     },
   },
   data() {
     return {
+      content: `
+          <h1 class="ql-align-center"><span class="ql-font-serif" style="background-color: rgb(240, 102, 102); color: rgb(255, 255, 255);"> I am snow example! </span></h1><p><br></p><p><span class="ql-font-serif">W Can a man still be brave if he's afraid? That is the only time a man can be brave. </span></p><p><br></p><p><strong class="ql-font-serif ql-size-large">Courage and folly is </strong><strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0, 0);">always</strong><strong class="ql-font-serif ql-size-large"> just a fine line.</strong></p><p><br></p><p><u class="ql-font-serif">There is only one God, and his name is Death. And there is only one thing we say to Death: "Not today."</u></p><p><br></p><p><em class="ql-font-serif">Fear cuts deeper than swords.</em></p><p><br></p><pre class="ql-syntax" spellcheck="false"><span class="hljs-keyword">const</span> a = <span class="hljs-number">10</span>;
+         
+        `,
       exam: {
         id: 0,
         title: "精英班选拔考试",
@@ -118,8 +157,10 @@ export default {
   align-items: center;
 }
 .tips {
+  margin-top: 20px;
   background: #eee;
   width: 100%;
+  min-height: 200px;
   /* min-height: 200px; */
   border-radius: 4px;
   box-sizing: border-box;
@@ -136,16 +177,17 @@ export default {
 #head {
   width: 100%;
   height: 220px;
-  background-image: url("../../../static/images/recruitContent/bg.png");
+  /* background-image: url("../../../static/images/recruitContent/bg.png"); */
+  background: linear-gradient(-140deg, #1b1a1a 15%, #373737 70%, #2c3440 94%);
   background-color: rgb(7, 10, 15);
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: #fff;
 }
 .main {
-  width: 60%;
+  width: 40%;
   height: 80%;
   /* background: pink; */
 }
@@ -180,5 +222,61 @@ export default {
 .item {
   margin: 3px;
   font-size: 14px;
+}
+.person {
+  width: 100%;
+  height: 90px;
+  /* background: red; */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.person h2 {
+  font-family: "SentyGoldenBell";
+}
+.person .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-left: 10px;
+  border: 1px solid var(--text7);
+}
+.person .avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.person span {
+  color: #58a6ff;
+  font-weight: 400;
+}
+.more {
+  margin-left: 20px;
+  font-family: "Dancing Script";
+}
+.footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.create {
+  z-index: 5;
+  margin-top: 10px;
+  width: 40%;
+  border: 1px solid rgba(0, 102, 255, 0.5);
+  color: rgb(0, 102, 255);
+  border-radius: 4px;
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+.create:hover {
+  color: #fff;
+  background: rgba(0, 102, 255, 0.5);
 }
 </style>

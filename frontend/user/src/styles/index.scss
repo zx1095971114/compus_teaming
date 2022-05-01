@@ -85,3 +85,17 @@
 .flip-clock {
   display: flex;
 }
+
+.el-timeline {
+  margin: 5% 10%;
+}
+
+.el-timeline-item__node--large {
+  width: 26px;
+  height: 26px;
+  left: -8px;
+  top: -5px;
+}
+.el-breadcrumb__inner a, .el-breadcrumb__inner.is-link{
+  color:#fff
+}

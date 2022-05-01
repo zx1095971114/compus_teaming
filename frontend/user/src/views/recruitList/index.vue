@@ -18,8 +18,10 @@
         </div>
         <h3>———————— 快速操作 ————————</h3>
         <el-row>
-          <el-button type="primary" @click="mytags=tags">全部选取</el-button>
-          <el-button type="warning" @click="mytags=[]">全部取消</el-button></el-row
+          <el-button type="primary" @click="mytags = tags">全部选取</el-button>
+          <el-button type="warning" @click="mytags = []"
+            >全部取消</el-button
+          ></el-row
         >
       </div>
     </el-drawer>
@@ -30,7 +32,7 @@
           v-for="topic in filterTopics"
           :key="topic.title + topic.discription"
         >
-          <h3>{{ topic.title }}</h3>
+          <h3 @click="content">{{ topic.title }}</h3>
           <div class="main">
             <p class="content">
               {{ topic.discription }}
@@ -239,6 +241,9 @@ export default {
     },
     create() {
       this.$router.push({ name: "TopicEditor" });
+    },
+    content() {
+      this.$router.push({ name: "recruitContent" });
     },
     hasTag(topic) {
       var v = false;
