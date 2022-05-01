@@ -779,21 +779,15 @@ export default {
 
 <style scoped>
 #account {
-  /* min-height: 1000px; */
-  /* background:pink; */
   width: 100%;
   display: flex;
-  /* overflow: hidden; */
 }
 #r-bar {
   width: 30%;
-  /* min-height: 300px; */
-  /* background:yellow; */
   display: flex;
   flex-direction: column;
 }
 #l-main {
-  /* background: #2188ff; */
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -816,7 +810,6 @@ export default {
 #l-main #progress {
   width: 100%;
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-around;
   flex-wrap: wrap;
   padding-left: 35px;
@@ -845,7 +838,6 @@ export default {
 #l-main #pin-container-top .pin-box {
   width: 47%;
   height: 130px;
-  /* background: pink; */
   border-radius: 6px;
   border: 1px solid #e1e4e8;
   box-sizing: border-box;
@@ -855,7 +847,6 @@ export default {
 #l-main #pin-container-bottom .pin-box {
   width: 47%;
   height: 130px;
-  /* background: pink; */
   border-radius: 6px;
   border: 1px solid #e1e4e8;
   box-sizing: border-box;
@@ -936,7 +927,6 @@ export default {
   align-items: center;
 }
 .box p {
-  /* font-size:16px; */
   margin: 0;
   padding: 0;
 }
@@ -947,7 +937,6 @@ export default {
   position: relative;
   margin: 0.5rem 0;
   border-radius: 8px;
-  /* min-width: 0 !important; */
   margin-left: 10px;
 }
 .bar.mint {
@@ -1045,7 +1034,6 @@ export default {
   background: #fff;
   border-radius: 50%;
   border: 1px solid #e1e4e8;
-  /* overflow: hidden; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1088,13 +1076,10 @@ export default {
   display: flex;
   width: 100%;
   flex-direction: column;
-  /* background:red; */
   align-items: center;
 }
 #me {
   width: 280px;
-  /* height:100px; */
-  /* background:pink; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1113,7 +1098,6 @@ export default {
 #me #friends {
   width: 100%;
   height: 38px;
-  /* background: green; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -1132,11 +1116,8 @@ export default {
   margin-top: 10px;
   padding-bottom: 8px;
   width: 100%;
-  /* height: 58px; */
-  /* background: green; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: space-between;
   border-bottom: 1px solid #e1e4e8;
 }
@@ -1164,7 +1145,6 @@ a {
   margin-top: 10px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between */
 }
 #me #highlight #ach img {
   width: 40px;
