@@ -13,12 +13,6 @@
         </template>
         <div class="content">
           <div>{{ mes.msg }}</div>
-          <div v-if="mes.type == 'class'">
-            <!-- <el-button type="text">同意加入</el-button> -->
-          </div>
-          <div v-else-if="mes.type == 'test'">
-            <el-button type="text">查看试卷</el-button>
-          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -91,8 +85,8 @@ export default {
 #singleMessage {
   width: 90%;
   overflow: hidden;
-    margin-bottom: 10px;
-    border-radius: 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
 }
 .title {
   width: 90%;

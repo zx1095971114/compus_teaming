@@ -69,3 +69,12 @@
   border-color: #e74c3c;
   box-shadow: -1px 0 0 0 #8cc5ff;
 }
+.el-timeline {
+  margin: 5% 10%;
+}
+.el-timeline-item__node--large{
+  width: 26px;
+  height: 26px;
+  left: -8px;
+  top: -5px;
+}
