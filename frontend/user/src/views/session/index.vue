@@ -51,7 +51,6 @@
         >
           <el-submenu index="1">
             <template slot="title">
-              <!-- <i class='bx bx-message'></i> -->
               <span>更早</span>
             </template>
             <el-menu-item-group>
@@ -80,7 +79,6 @@
                   </div>
                 </div>
               </el-menu-item>
-              <!-- <el-menu-item index="2">选项2</el-menu-item> -->
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -288,7 +286,7 @@ export default {
   display: flex;
   overflow-x: hidden;
   min-height: 300px;
-  /* background:#000; */
+
   position: relative;
 }
 #session #l-nav {
@@ -329,7 +327,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background:#fff; */
+
   transition: 0.5s;
 }
 #session #l-nav #create .box i {
@@ -341,13 +339,12 @@ export default {
 #session #l-nav #top-nav {
   width: 100%;
   height: 55px;
-  /* background: pink; */
+
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 #session #l-nav #top-nav #note {
-  /* background: green; */
   width: 75%;
   display: flex;
   justify-content: space-around;
@@ -360,7 +357,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* font-weight: 300; */
+
   font-size: 24px;
   color: #595b5a;
   transition: 0.5s;
@@ -385,17 +382,16 @@ export default {
   align-items: center;
   justify-content: space-around;
   height: 80px;
-  /* background:pink; */
 }
 #session #l-nav #list .item .avatar {
   width: 42px;
   height: 42px;
-  /* background:red; */
+
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  /* color:yellow; */
+
   border: 1px solid #3370ff;
 }
 #session #l-nav #list .item .avatar img {
@@ -404,7 +400,7 @@ export default {
 #session #l-nav #list .item .info {
   width: calc(95% - 42px);
   height: 100%;
-  /* background:green; */
+
   display: flex;
   flex-direction: column;
 }
@@ -412,8 +408,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 55%;
-  /* margin-top:15px; */
-  /* background:#3370ff; */
+
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -422,18 +417,17 @@ export default {
 #session #l-nav #list .item .info .box-header .name {
   width: 70%;
   height: 100%;
-  /* background:red; */
+
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
 }
 #session #l-nav #list .item .info .box-header .name .status {
   box-sizing: border-box;
   margin-left: 5px;
   height: 20px;
-  /* width:30px; */
+
   line-height: 20px;
-  /* overflow: hidden; */
+
   font-size: 6px;
   color: #3370ff;
   background-color: #e1eaff;
@@ -445,28 +439,22 @@ export default {
   font-size: 12px;
   width: 50px;
   margin-right: 10px;
-  /* height:100%; */
-  /* background:grey; */
+
   color: #8f959e;
 }
 #session #l-nav #list .item .info .box-info p {
   overflow: hidden;
   text-overflow: ellipsis !important;
   line-height: 16px;
-  /* text-align: start; */
 }
 #session #l-nav #list .item .info .box-info {
   width: 100%;
   height: 45%;
-  /* margin-bottom:50px; */
-  /* background:yellow; */
-  /* text-overflow: ellipsis */
 }
 #session #r-main {
   margin-left: calc(22%);
   width: 78%;
   min-height: 200px;
-  /* background:#000; */
 }
 #darken {
   width: 100%;

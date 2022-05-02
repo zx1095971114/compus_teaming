@@ -648,7 +648,7 @@ export default {
   box-sizing: border-box;
   padding: 10px 15px 0 15px;
   min-height: 100vh;
-  /* background: pink; */
+
   display: flex;
   justify-content: space-between;
 }
@@ -667,15 +667,11 @@ export default {
 }
 #l-main {
   min-height: 300px;
-  /* padding: 0 20px;
-  box-sizing: border-box; */
-  /* background: var(--background2); */
   width: calc(100% - 320px);
-  /* box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important; */
 }
 #l-main .topicBox {
   width: 100%;
-  /* min-height: 200px; */
+
   box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important;
   background: var(--background3);
   padding: 20px;
@@ -696,23 +692,19 @@ export default {
   display: flex;
   align-items: center;
   margin-top: 6px;
-  /* background: #00875a; */
 }
 #l-main .topicBox:nth-child(odd) .main {
   flex-direction: row-reverse;
 }
 #l-main .topicBox .main .content {
-  /* background: rgba(133, 144, 166, 0.1); */
   box-sizing: border-box;
-  /* padding: 10px 15px; */
+
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   width: auto;
-  /* max-height: 100px; */
-  /* min-height: 20px; */
 }
 #l-main .topicBox .main img {
   margin-left: 20px;
@@ -730,7 +722,6 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-  /* background: #00875a; */
 }
 #l-main .topicBox #tool #subscribe {
   transition: 0.4s;
@@ -777,8 +768,7 @@ export default {
   right: 5px;
   width: 320px;
   height: 100%;
-  /* box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important;
-  background: var(--background2); */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -816,7 +806,7 @@ export default {
 }
 #r-nav .menu .info .l-box {
   width: 68%;
-  /* background: yellow; */
+
   height: 70px;
 }
 #r-nav .menu .info .l-box .content {
@@ -911,7 +901,6 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100px;
-  /* background: rgba(133, 144, 166, 0.05); */
 }
 .el-switch /deep/ span {
   color: var(--text1);
@@ -920,7 +909,7 @@ export default {
   width: 100%;
   display: flex;
   height: 78px;
-  /* background: pink; */
+
   align-items: center;
   justify-content: space-around;
 }
@@ -946,7 +935,6 @@ export default {
   z-index: 0;
 }
 #r-nav .filter .category .classification .item:first-child {
-  /* border: 1px solid black; */
   background: #f1c40f;
   color: #fff;
 }
@@ -955,7 +943,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 5px;
-  /* box-shadow: 0 1px 2px 0px rgb(0 0 0 / 20%) !important; */
+
   color: var(--text2);
 }
 #r-nav .regulation ul,

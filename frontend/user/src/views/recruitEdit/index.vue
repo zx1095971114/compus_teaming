@@ -91,7 +91,11 @@
       </div>
       <div class="box">
         <strong>截止时间(必填)</strong>
-        <el-date-picker v-model="endtime" type="datetime" placeholder="选择日期">
+        <el-date-picker
+          v-model="endtime"
+          type="datetime"
+          placeholder="选择日期"
+        >
         </el-date-picker>
       </div>
       <div class="box">
@@ -150,7 +154,6 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import hljs from "highlight.js";
 
-// highlight.js style
 import "highlight.js/styles/github-dark.css";
 import { quillEditor } from "vue-quill-editor";
 
@@ -347,7 +350,6 @@ export default {
         fd.append("topicId", this.tid);
         fd.append("description", this.description);
         if (this.coverImage != null) {
-          // console.log(`hhhh`)
           fd.append("coverImage", this.coverImage);
         }
         fetch(addurl, {
@@ -357,7 +359,6 @@ export default {
         })
           .then((res) => res.text())
           .then((data) => {
-            // console.log(data);
             if (data === `success`) {
               this.$notify({
                 title: "发布成功",
@@ -417,7 +418,6 @@ export default {
 #recruitEdit {
   width: 100%;
   min-height: 100vh;
-  /* background: pink; */
 }
 #recruitEdit #r-nav {
   padding: 20px 0;
@@ -426,15 +426,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-around; */
+
   right: 0;
   top: 0;
   height: 100%;
   overflow: auto;
   width: 300px;
   position: fixed;
-  /* background: pink; */
-  /* border: 1px solid var(--background2); */
 }
 #recruitEdit #r-nav /deep/ .el-textarea__inner {
   margin-top: 10px;
@@ -482,7 +480,7 @@ export default {
 #recruitEdit #r-nav .box .upload {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
+
   flex-direction: column;
 }
 #recruitEdit #r-nav .box /deep/ .el-upload {

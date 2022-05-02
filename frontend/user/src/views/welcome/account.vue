@@ -1,7 +1,7 @@
 <template>
   <div id="account">
     <div class="tip">
-      欢迎加入本教考系统,初次创建账户您还需要完善以下个人信息！
+      欢迎加入“北洋有约”,初次创建账户您还需要完善以下个人信息！
     </div>
     <div class="l-wrapper">
       <el-form
@@ -136,7 +136,6 @@ export default {
           this.apis.welcome
             .register(this.ruleForm, this.avatar, username, email, password)
             .then((res) => {
-              // console.log(res);
               if (res.data.status === 200) {
                 this.$notify({
                   title: "成功",
@@ -209,11 +208,11 @@ export default {
 .l-wrapper {
   width: 65%;
   height: 100%;
-  /* background: green; */
+
   box-sizing: border-box;
   padding: 60px 40px 0 0;
   display: flex;
-  /* justify-content: stretch; */
+
   align-items: center;
   flex-direction: column;
 }

@@ -8,8 +8,13 @@
               <div class="imgBx">
                 <img :src="$route.query.logo" />
               </div>
-              <h5>{{$route.query.title}}</h5>
-              <el-tooltip class="item" effect="dark" content="修改群名称" placement="right">
+              <h5>{{ $route.query.title }}</h5>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="修改群名称"
+                placement="right"
+              >
                 <el-button>
                   <i class="bx bx-edit big"></i>
                 </el-button>
@@ -27,7 +32,10 @@
             </el-form-item>
             <el-form-item label="群管理员">
               <el-select v-model="form.region" placeholder="请选择群聊成员">
-                <el-option label="pengpenglang" value="pengpenglang"></el-option>
+                <el-option
+                  label="pengpenglang"
+                  value="pengpenglang"
+                ></el-option>
                 <el-option label="许周样" value="xuzhouyang"></el-option>
                 <el-option label="夏天学长" value="summer"></el-option>
               </el-select>
@@ -38,12 +46,16 @@
                   type="date"
                   placeholder="选择日期"
                   v-model="form.date1"
-                  style="width: 100%;"
+                  style="width: 100%"
                 ></el-date-picker>
               </el-col>
               <el-col class="line" :span="2">-</el-col>
               <el-col :span="11">
-                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                <el-time-picker
+                  placeholder="选择时间"
+                  v-model="form.date2"
+                  style="width: 100%"
+                ></el-time-picker>
               </el-col>
             </el-form-item>
             <el-form-item label="会话置顶">
@@ -83,22 +95,37 @@
               <img :src="$route.query.logo" />
             </div>
             <div class="info">
-              <b>{{$route.query.title}}</b>
-              <div class="status">{{$route.query.status}}</div>
+              <b>{{ $route.query.title }}</b>
+              <div class="status">{{ $route.query.status }}</div>
             </div>
           </div>
           <div id="h-nav">
-            <el-tooltip class="item" effect="dark" content="视频会议" placement="bottom">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="视频会议"
+              placement="bottom"
+            >
               <el-button>
                 <i class="bx bx-camera-movie"></i>
               </el-button>
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="添加群成员" placement="bottom">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="添加群成员"
+              placement="bottom"
+            >
               <el-button>
                 <i class="bx bx-user-plus"></i>
               </el-button>
             </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="退出该群" placement="bottom">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="退出该群"
+              placement="bottom"
+            >
               <el-button>
                 <i class="bx bx-log-out-circle"></i>
               </el-button>
@@ -107,15 +134,15 @@
         </div>
         <div id="talk">
           <div class="t-main">
-            <div class="t-box" v-for="(el,i) in arr" :key="i">
+            <div class="t-box" v-for="(el, i) in arr" :key="i">
               <div class="person">
                 <div class="avatar">
                   <img :src="el.avatar" />
                 </div>
-                <span class="name">{{el.name}}</span>
-                <div class="status">{{el.status}}</div>
+                <span class="name">{{ el.name }}</span>
+                <div class="status">{{ el.status }}</div>
               </div>
-              <p class="message">{{el.message}}</p>
+              <p class="message">{{ el.message }}</p>
             </div>
           </div>
         </div>
@@ -152,13 +179,10 @@ import { MarkdownPro } from "vue-meditor";
 import { MarkdownPreview } from "vue-meditor";
 export default {
   name: "conmmunication",
-  props:{
-    sonData:Object
+  props: {
+    sonData: Object,
   },
-  // beforeUpdate() {
-  //   this.arr = this.$route.query.mesData;
-  //   this.form.name = this.$route.query.info;
-  // },
+
   data() {
     return {
       form: {
@@ -170,38 +194,15 @@ export default {
         delivery: false,
         type: [],
         resource: "",
-        desc: ""
+        desc: "",
       },
-      arr: this.sonData.mesData
+      arr: this.sonData.mesData,
     };
   },
   components: {
-    Markdown
+    Markdown,
   },
-  methods: {
-    // onSubmit() {
-    //   this.settings();
-    //   const h = this.$createElement;
-
-    //   this.$notify({
-    //     title: "修改已成功保存✔️",
-    //     message: h(
-    //       "span",
-    //       { style: "color: #222" },
-    //       "修改已经保存成功,如果您不是管理员/群主，请等待修改审核通过~"
-    //     )
-    //   });
-    // },
-    // settings() {
-    //   if (!$("#conmmunication #l-main #menu").hasClass("active")) {
-    //     console.log("hello");
-    //     $("#conmmunication #l-main #menu").addClass("active");
-    //   } else {
-    //     $("#conmmunication #l-main #menu").removeClass("active");
-    //     console.log("bye");
-    //   }
-    // }
-  }
+  methods: {},
 };
 </script>
 
@@ -209,7 +210,6 @@ export default {
 #conmmunication {
   width: 100%;
   min-height: 100px;
-  /* background: #000; */
 }
 #conmmunication #r-nav {
   position: fixed;
@@ -237,9 +237,8 @@ export default {
   width: calc(100% - 48px);
 }
 #conmmunication #l-main #menu {
-  /* z-index:2; */
   position: absolute;
-  /* width: calc(100% - 17px); */
+
   width: 0px;
   height: 100%;
   right: 0;
@@ -247,8 +246,7 @@ export default {
   background: #fff;
   transition: 0.3s;
   overflow: hidden;
-  /* display: none; */
-  /* overflow-y: auto; */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -257,7 +255,7 @@ export default {
   width: 100%;
   padding: 20px 15%;
   height: calc(100% - 150px);
-  /* background: #222; */
+
   overflow-y: auto;
 }
 #conmmunication #l-main #menu #head {
@@ -274,7 +272,7 @@ export default {
 #conmmunication #l-main #menu #head #top {
   height: 60%;
   width: 70%;
-  /* background: #222; */
+
   padding-top: 30px;
   align-items: center;
   display: flex;
@@ -319,11 +317,10 @@ export default {
   width: 70%;
   display: flex;
   align-items: flex-end;
-  /* background: red; */
 }
 #conmmunication #l-main #menu #head #bottom #nav {
   margin-left: 5px;
-  /* text-align: center; */
+
   justify-content: center;
   width: 80px;
   font-size: 16px;
@@ -333,7 +330,6 @@ export default {
   color: #3370ff;
   padding-bottom: 6px;
   border-bottom: #3370ff 3px solid;
-  /* border-radius: 10px; */
 }
 #conmmunication #l-main #menu.active {
   width: calc(100% - 17px) !important;
@@ -342,7 +338,7 @@ export default {
   padding-left: 16px;
   width: 100%;
   min-height: 300px;
-  /* background: blue; */
+
   display: flex;
   flex-direction: column;
 }
@@ -357,12 +353,11 @@ export default {
 }
 #conmmunication #l-main .main #head #name {
   margin-left: 20px;
-  /* width: 180px; */
+
   height: 100%;
-  /* background: pink; */
+
   display: flex;
   align-items: center;
-  /* justify-content: space-around; */
 }
 #conmmunication #l-main .main #head #name .imgBx {
   border-radius: 50%;
@@ -380,10 +375,9 @@ export default {
 #conmmunication #l-main .main #head #name .info {
   padding-left: 5px;
   height: 60%;
-  /* width: calc(100% - 50px); */
-  /* background: pink; */
+
   display: flex;
-  /* align-items: center; */
+
   flex-direction: column;
 }
 #conmmunication #l-main .main #head #name .info .status {
@@ -398,13 +392,12 @@ export default {
   color: #3370ff;
   background-color: #e1eaff;
   margin-left: 5px;
-  /* text-align: center; */
 }
 #conmmunication #l-main .main #head #h-nav {
   margin-right: 45px;
   width: 120px;
   height: 100%;
-  /* background: green; */
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -426,20 +419,16 @@ export default {
 }
 #conmmunication #l-main .main #talk .t-main {
   width: 100%;
-  /* height: 1000px; */
-  /* background:yellow; */
 }
 #conmmunication #l-main .main #talk .t-main .t-box {
   margin-top: 20px;
   width: 90%;
   margin-left: 20px;
-  /* height: 200px; */
-  /* background:#3370ff; */
 }
 #conmmunication #l-main .main #talk .t-main .t-box .person {
   width: 50%;
   height: 60px;
-  /* background: green; */
+
   display: flex;
   align-items: center;
 }
@@ -450,7 +439,6 @@ export default {
   margin-left: 5px;
 }
 #conmmunication #l-main .main #talk .t-main .t-box .person .status {
-  /* width: 20px; */
   height: 26px;
   line-height: 12px;
   font-size: 12px;
@@ -499,6 +487,5 @@ export default {
 #conmmunication #l-main .main #mk .markdown-toolbars {
   position: fixed !important;
   bottom: 160px !important;
-  /* top:0px; */
 }
 </style>

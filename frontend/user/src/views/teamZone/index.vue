@@ -5,14 +5,18 @@
         <img src="../../../static/images/teamZone/bg1.png" alt="" />
         <h1 id="title"><span>互助</span> 齐心</h1>
         <p class="subtitle">让我们相互帮助，齐心协力完成任务</p>
-          <img src="../../../static/images/teamZone/bg2.png" alt="" />
+        <img src="../../../static/images/teamZone/bg2.png" alt="" />
       </div>
     </div>
     <div class="container">
       <div class="header">
         <strong>Members:</strong>
       </div>
-      <div class="item animate__animated animate__fadeIn" v-for="(item, i) in arr" :key="i">
+      <div
+        class="item animate__animated animate__fadeIn"
+        v-for="(item, i) in arr"
+        :key="i"
+      >
         <div class="person">
           <div class="avatar">
             <img :src="item.avatar" alt />
@@ -104,7 +108,6 @@ export default {
   min-height: 100vh;
   box-sizing: border-box;
   padding-top: 60px;
-  /* background: pink; */
 }
 #bg {
   position: absolute;
@@ -114,7 +117,7 @@ export default {
   overflow: hidden;
   width: 100%;
   height: 250px;
-  /* background: linear-gradient(-140deg, #222222 15%, #373737 70%, #3c4859 94%); */
+
   display: flex;
   justify-content: center;
 }
@@ -124,7 +127,7 @@ export default {
 .bg-main {
   margin-top: 20px;
   display: flex;
-  /* flex-direction: column; */
+
   align-items: center;
   width: 80%;
   min-height: 200px;
@@ -158,8 +161,6 @@ export default {
   border-radius: 8px;
   width: 90%;
   margin: 0px auto;
-  /* min-height: 600px; */
-  /* background: yellow; */
 }
 .header {
   height: 60px;
@@ -176,14 +177,14 @@ export default {
 .item {
   border-top: 1px solid #d0d7de;
   height: 90px;
-  /* background: pink; */
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .person {
   margin-left: 30px;
-  /* background: red; */
+
   box-sizing: border-box;
   display: flex;
   align-items: center;

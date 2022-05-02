@@ -99,7 +99,7 @@ export default {
       //       localStorage.removeItem("password");
       //       sessionStorage.setItem("username",this.username);
       //     }
-          this.$router.push({name: 'homepage'})
+      this.$router.push({ name: "homepage" });
       //   }
       // });
     },

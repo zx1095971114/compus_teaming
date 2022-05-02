@@ -35,10 +35,10 @@ export default {
   props: {
     el: Object,
   },
-  methods:{
-    toZone(){
-      this.$router.push({name: 'teamZone'})
-    }
+  methods: {
+    toZone() {
+      this.$router.push({ name: "teamZone" });
+    },
   },
   directives: {
     state: function (el, binding) {
@@ -95,12 +95,12 @@ export default {
 }
 #item .tags {
   margin-left: 30px;
-  /* width: auto; */
+
   display: flex;
 }
 .person {
   margin-left: 30px;
-  /* background: red; */
+
   box-sizing: border-box;
   display: flex;
   align-items: center;

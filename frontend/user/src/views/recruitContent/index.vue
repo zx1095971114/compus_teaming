@@ -118,14 +118,12 @@ export default {
 #recruitContent {
   width: 100%;
   min-height: 100vh;
-  /* background: #000; */
   position: relative;
   background: #fff;
   box-shadow: 0px 1px 2px rgb(33 40 53 / 10%), 0px 2px 8px rgba(33 40 53 / 8%);
 }
 #body {
   width: 100%;
-  /* background: pink; */
   box-sizing: border-box;
   padding: 10px 20px;
 }
@@ -161,7 +159,6 @@ export default {
   background: #eee;
   width: 100%;
   min-height: 200px;
-  /* min-height: 200px; */
   border-radius: 4px;
   box-sizing: border-box;
   padding: 15px 20px;
@@ -177,7 +174,6 @@ export default {
 #head {
   width: 100%;
   height: 220px;
-  /* background-image: url("../../../static/images/recruitContent/bg.png"); */
   background: linear-gradient(-140deg, #1b1a1a 15%, #373737 70%, #2c3440 94%);
   background-color: rgb(7, 10, 15);
   box-sizing: border-box;
@@ -189,7 +185,6 @@ export default {
 .main {
   width: 40%;
   height: 80%;
-  /* background: pink; */
 }
 #head h2 {
   font-family: "SentyGoldenBell";
@@ -226,7 +221,6 @@ export default {
 .person {
   width: 100%;
   height: 90px;
-  /* background: red; */
   box-sizing: border-box;
   display: flex;
   align-items: center;

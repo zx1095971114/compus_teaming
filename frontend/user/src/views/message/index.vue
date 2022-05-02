@@ -139,7 +139,6 @@ export default {
   width: 100%;
   min-height: calc(100vh - 10px);
   border-radius: 4px;
-  /* box-shadow: 0 0 1px rgba(0, 0, 0, 0.3); */
   overflow: hidden;
 }
 .wrapper {
@@ -182,7 +181,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: pink; */
   color: grey;
   font-family: SentyGoldenBell;
 }

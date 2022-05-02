@@ -63,7 +63,8 @@ export default {
             "../../../static/images/teams/avatar2.jpg",
             "../../../static/images/teams/avatar3.jpg",
           ],
-        },{
+        },
+        {
           id: "gafas1gas",
           title: "寻找伙伴",
           type: "我创建的",
@@ -74,7 +75,8 @@ export default {
             "../../../static/images/teams/avatar2.jpg",
             "../../../static/images/teams/avatar3.jpg",
           ],
-        },{
+        },
+        {
           id: "gafasg22as",
           title: "寻找伙伴",
           type: "我创建的",
@@ -95,10 +97,10 @@ export default {
 <style scoped>
 #teams {
   width: 100%;
-  /* background: pink; */
+
   box-sizing: border-box;
   position: relative;
-  /* padding-top: 10px; */
+
   box-sizing: border-box;
   padding-top: 380px;
 }
@@ -146,7 +148,6 @@ export default {
   position: relative;
   z-index: 5;
   width: 95%;
-  /* background: yellow; */
 }
 h3 {
   margin: 5px;
@@ -157,7 +158,7 @@ h3 {
   overflow: hidden;
   margin-top: 20px;
   margin-bottom: 40px;
-  /* min-height: 600px; */
+
   border-radius: 20px;
   background: #fafafa;
   box-shadow: 0 0 50px 0 rgb(0 0 0 / 15%);
