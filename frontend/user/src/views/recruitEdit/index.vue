@@ -5,7 +5,7 @@
         <h3>———————— 标签选择 ————————</h3>
         <div class="tags">
           <div>
-            <el-checkbox-group v-model="mytags">
+            <el-checkbox-group v-model="recruitInfo.ttags">
               <el-checkbox-button
                 border
                 v-for="tag in tags"
@@ -43,14 +43,11 @@
       </el-upload>
       <quill-editor
         class="editor"
-        v-model="content"
+        v-model="recruitInfo.content"
         ref="myQuillEditor"
         :options="editorOption"
         @change="onEditorChange($event)"
       />
-      <!-- <div class="output code" style="display: none">
-        <code class="hljs" v-html="contentCode"></code>
-      </div> -->
     </div>
     <div id="r-nav" class="animate__animated animate__fadeInRight">
       <div class="box">
@@ -66,7 +63,7 @@
           type="textarea"
           :autosize="{ minRows: 1, maxRows: 4 }"
           placeholder="请输入话题标题(大约在20左右)"
-          v-model="title"
+          v-model="recruitInfo.title"
         >
         </el-input>
       </div>
@@ -76,14 +73,14 @@
           type="textarea"
           :autosize="{ minRows: 6, maxRows: 8 }"
           placeholder="请输入话题简介内容(大约在100字左右)"
-          v-model="description"
+          v-model="recruitInfo.description"
         >
         </el-input>
       </div>
       <div class="box">
         <strong>招募人数(必填)</strong>
         <el-input-number
-          v-model="num"
+          v-model="recruitInfo.num"
           :min="1"
           :max="10"
           label="描述文字"
@@ -92,7 +89,7 @@
       <div class="box">
         <strong>截止时间(必填)</strong>
         <el-date-picker
-          v-model="endtime"
+          v-model="recruitInfo.endtime"
           type="datetime"
           placeholder="选择日期"
         >
@@ -121,7 +118,7 @@
       </div>
       <div class="box">
         <strong>展示板块(必选)</strong>
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="recruitInfo.class" placeholder="请选择">
           <template slot="prefix">展示板块:</template>
           <el-option
             v-for="item in options"
@@ -163,17 +160,7 @@ export default {
   },
   name: "recruitEdit",
   created() {
-    const url = `https://vclass.api.cheeseburgerim.space/topic/api/addTopicId?username=${sessionStorage.getItem(
-      "userName"
-    )}`;
-    fetch(url, {
-      method: "get",
-      credentials: "include",
-    })
-      .then((res) => res.text())
-      .then((data) => {
-        this.tid = data;
-      });
+    
   },
   data() {
     const toolbarOptions = [
@@ -190,8 +177,15 @@ export default {
     ];
 
     return {
-      endtime: ``,
-      mytags: [],
+      recruitInfo: {
+        endtime: "",
+        ttags: [],
+        num: 3,
+        title: "",
+        description: "",
+        class: "学习板块",
+        content: "", // 富文本里的内容
+      },
       tags: [
         "大作业组队",
         "大创组队",
@@ -242,14 +236,9 @@ export default {
           label: "其他板块",
         },
       ],
-      value: "学习板块",
       coverImage: null,
-      num: 3,
       tid: ``,
       centerDialogVisible: false,
-      title: ``,
-      description: ``,
-      content: "", // 富文本里的内容
       editorOption: {
         // 富文本编辑器的工具栏
         modules: {
@@ -278,7 +267,6 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      // console.log(file);
       this.coverImage = file;
     },
     backup() {
@@ -297,95 +285,8 @@ export default {
         this.$message.error("图片插入失败,请检查文件格式");
         return;
       }
-
-      const fileurl = `https://vclass.api.cheeseburgerim.space/topic/api/uploadTopicImage`;
-      let fd = new FormData();
-      fd.append("topicId", this.tid);
-      fd.append("username", sessionStorage.getItem("userName"));
-      fd.append("image", file);
-      fetch(fileurl, {
-        method: `post`,
-        credentials: "include",
-        body: fd,
-      })
-        .then((res) => res.text())
-        .then((data) => {
-          // this.urlList.push(response.url);
-          let quill = this.$refs.myQuillEditor.quill;
-          if (data != `fail`) {
-            //获取光标所在位置
-            let length = quill.getSelection().index;
-            //插入图片
-            quill.insertEmbed(
-              length,
-              "image",
-              "http://vclass.static.cheeseburgerim.space" + data
-            );
-            //移动光标到图片后
-            quill.setSelection(length + 1);
-          } else {
-            this.$notify.error({
-              title: "错误",
-              message: "图片上传失败！",
-            });
-          }
-        })
-        .catch((error) => {
-          this.$notify.error({
-            title: "错误",
-            message: "服务器崩溃了~后台小哥哥正在紧急修复中🛠️！",
-          });
-        });
     },
-    submit() {
-      this.$refs.coverImageUpload.submit();
-      const addurl = `https://vclass.api.cheeseburgerim.space/topic/api/add`;
-      if (this.content != `` && this.title != `` && this.description != ``) {
-        let fd = new FormData();
-        fd.append("username", sessionStorage.getItem("userName"));
-        fd.append("fid", sessionStorage.getItem("fid"));
-        fd.append("content", this.content);
-        fd.append("timestamp", this.currentTime());
-        fd.append("title", this.title);
-        fd.append("topicId", this.tid);
-        fd.append("description", this.description);
-        if (this.coverImage != null) {
-          fd.append("coverImage", this.coverImage);
-        }
-        fetch(addurl, {
-          method: "post",
-          credentials: "include",
-          body: fd,
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data === `success`) {
-              this.$notify({
-                title: "发布成功",
-                message: "您的话题已成功发布啦✅",
-                type: "success",
-              });
-              this.$router.push({ name: "TopicList" });
-            } else {
-              this.$notify.error({
-                title: "发布失败",
-                message: "话题发布失败请稍后尝试！",
-              });
-            }
-          })
-          .catch((error) => {
-            this.$notify.error({
-              title: "错误",
-              message: "服务器崩溃了~后台小哥哥正在紧急修复中🛠️！",
-            });
-          });
-      } else {
-        this.$notify.error({
-          title: "发布失败",
-          message: "请保证信息填写完整！",
-        });
-      }
-    },
+    //获取时间戳
     currentTime() {
       var now = new Date();
       var year = now.getFullYear(); //年

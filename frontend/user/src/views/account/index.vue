@@ -74,46 +74,46 @@
     <div id="r-bar" class="animate__animated animate__fadeInRight">
       <div id="avatar">
         <div id="imgBx">
-          <img :src="myinfo.avatar" />
+          <img :src="myInfo.avatar" />
           <div id="status">
-            <p id="icon" :title="myinfo.status">👨‍🎓</p>
+            <p id="icon" :title="myInfo.status">👨‍🎓</p>
           </div>
         </div>
       </div>
       <div id="info">
         <div id="me">
-          <h2>{{ myinfo.name }}</h2>
-          <p id="subtitle">「 {{ myinfo.subtitle }} 」</p>
+          <h2>{{ myInfo.name }}</h2>
+          <p id="subtitle">「 {{ myInfo.subtitle }} 」</p>
           <div id="friends">
             <span class="tag">
               <i class="bx bx-group"></i>
-              <b>{{ myinfo.followers }}</b> followers
+              <b>{{ myInfo.followers }}</b> followers
             </span>
             <span class="tag">
               <i class="bx bx-group"></i>
-              <b>{{ myinfo.following }}</b> following
+              <b>{{ myInfo.following }}</b> following
             </span>
           </div>
           <div id="other-info">
             <span class="tag">
               <i class="fal fa-venus-mars"></i>
-              {{ myinfo.sex }}
+              {{ myInfo.sex }}
             </span>
             <span class="tag">
               <i class="fal fa-user-graduate"></i>
-              {{ myinfo.grade }}
+              {{ myInfo.grade }}
             </span>
             <span class="tag">
               <i class="fal fa-mobile"></i>
-              &nbsp;{{ myinfo.phone }}
+              &nbsp;{{ myInfo.phone }}
             </span>
             <span class="tag">
               <i class="fal fa-house"></i>
-              {{ myinfo.address }}
+              {{ myInfo.address }}
             </span>
             <span class="tag">
               <i class="fal fa-envelope"></i>
-              {{ myinfo.email }}
+              {{ myInfo.email }}
             </span>
           </div>
           <div id="highlight">
@@ -608,7 +608,7 @@ export default {
   },
   data() {
     return {
-      myinfo: {
+      myInfo: {
         email: "1625744287@qq.com",
         grade: "2019级",
         phone: "12345678910",

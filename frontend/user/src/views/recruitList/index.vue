@@ -41,7 +41,7 @@
           </div>
           <div id="tool">
             <div id="subscribe">
-              <i class="fas fa-users"></i>&nbsp;&nbsp;人员&nbsp;5 / 9
+              <i class="fas fa-users"></i>&nbsp;&nbsp;人员&nbsp;{{topic.curnum}}/ {{topic.num}}
             </div>
             <div class="box">
               <i class="fad fa-question-circle"></i>&nbsp;招募发起人：<img
@@ -56,11 +56,11 @@
               <i class="fad fa-clock"></i>&nbsp;{{ topic.time }}
             </div>
             <div class="box">
-              <div class="tag" v-for="(topicTag, k) in topic.tags" :key="k">
+              <div class="tag" v-for="(topicTag, k) in topic.ttags" :key="k">
                 <i class="fad fa-tag"></i>&nbsp;{{ topicTag }}
               </div>
             </div>
-            <div class="box reply" v-if="topic.reply === true">
+            <div class="box reply" v-if="topic.byTeacher === true">
               <svg
                 t="1638775000906"
                 class="icon"
@@ -248,7 +248,7 @@ export default {
     hasTag(topic) {
       var v = false;
       for (let i = 0; i < this.mytags.length; i++) {
-        if (topic.tags.indexOf(this.mytags[i]) != -1) {
+        if (topic.ttags.indexOf(this.mytags[i]) != -1) {
           v = true;
           break;
         }
@@ -296,8 +296,8 @@ export default {
       if (this.teacherRepply === true) {
         //优先显示老师回复
         ans.sort(function (next, current) {
-          if (next.reply === true && current.reply === false) return -1;
-          else if (next.reply === true && current.reply === true) return 0;
+          if (next.byTeacher === true && current.byTeacher === false) return -1;
+          else if (next.byTeacher === true && current.byTeacher === true) return 0;
           else return 1;
         });
       }
@@ -409,12 +409,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 809,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-12`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:4
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -429,12 +431,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 890,
           class: "生活板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-13`,
           img: ``,
-          reply: true,
+          byTeacher: true,
           questioner: `sd`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -449,12 +453,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 200,
           class: "其他板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-14`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -469,12 +475,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 8,
           class: "其他板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-15`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -489,12 +497,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 90,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-16`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: true,
+          byTeacher: true,
           questioner: `sd`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -509,12 +519,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 27,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-17`,
           img: ``,
-          reply: false,
+          byTeacher: false,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -529,12 +541,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 88,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-18`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -549,12 +563,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 80,
           class: "生活板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-19`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: true,
+          byTeacher: true,
           questioner: `sd`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -569,12 +585,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-20`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -589,12 +607,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 69,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-21`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `lll`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -609,12 +629,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 803,
           class: "学习板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-22`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: true,
+          byTeacher: true,
           questioner: `sd`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
         {
           title: `一年内的前端看不懂前端框架源码怎么办？`,
@@ -629,12 +651,14 @@ export default {
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
           class: "生活板块",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           time: `2021-01-23`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
-          reply: false,
+          byTeacher: false,
           questioner: `噶`,
           avatar: `https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png`,
+          num:9,
+          curnum:5
         },
       ],
     };

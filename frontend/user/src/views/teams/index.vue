@@ -33,7 +33,7 @@ export default {
           title: "寻找伙伴",
           type: "我创建的",
           time: "2022-06-05 8:30",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           avatars: [
             "../../../static/images/teams/avatar1.png",
             "../../../static/images/teams/avatar2.jpg",
@@ -45,7 +45,7 @@ export default {
           title: "寻找伙伴",
           type: "我参与的",
           time: "2022-07-01 12:00",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           avatars: [
             "../../../static/images/teams/avatar1.png",
             "../../../static/images/teams/avatar2.jpg",
@@ -57,7 +57,7 @@ export default {
           title: "寻找伙伴",
           type: "我创建的",
           time: "2022-06-05 8:30",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           avatars: [
             "../../../static/images/teams/avatar1.png",
             "../../../static/images/teams/avatar2.jpg",
@@ -69,7 +69,7 @@ export default {
           title: "寻找伙伴",
           type: "我创建的",
           time: "2022-06-05 8:30",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           avatars: [
             "../../../static/images/teams/avatar1.png",
             "../../../static/images/teams/avatar2.jpg",
@@ -81,7 +81,7 @@ export default {
           title: "寻找伙伴",
           type: "我创建的",
           time: "2022-06-05 8:30",
-          tags: ["三国杀", "2222", "3333"],
+          ttags: ["三国杀", "2222", "3333"],
           avatars: [
             "../../../static/images/teams/avatar1.png",
             "../../../static/images/teams/avatar2.jpg",
