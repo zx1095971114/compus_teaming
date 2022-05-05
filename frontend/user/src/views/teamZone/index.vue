@@ -37,7 +37,7 @@
             <b><i class="fad fa-house"></i></b>{{ item.addr }}
           </p>
           <p>
-            <b><i class="fad fa-envelope"></i></b>{{ item.mail }}
+            <b><i class="fad fa-envelope"></i></b>{{ item.email }}
           </p>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
           phone: "15902256523",
           grade: "本科生三年级",
           addr: "天津大学北洋园校区",
-          mail: "1422257646@qq.com",
+          email: "1422257646@qq.com",
         },
         {
           avatar: "../../../static/images/teams/avatar2.jpg",
@@ -67,7 +67,7 @@ export default {
           phone: "15902256523",
           grade: "本科生三年级",
           addr: "天津大学北洋园校区",
-          mail: "1422257646@qq.com",
+          email: "1422257646@qq.com",
         },
         {
           avatar: "../../../static/images/teams/avatar3.jpg",
@@ -76,7 +76,7 @@ export default {
           phone: "15902256523",
           grade: "本科生三年级",
           addr: "天津大学北洋园校区",
-          mail: "1422257646@qq.com",
+          email: "1422257646@qq.com",
         },
         {
           avatar: "../../../static/images/teams/avatar4.png",
@@ -85,7 +85,7 @@ export default {
           phone: "15902256523",
           grade: "本科生三年级",
           addr: "天津大学北洋园校区",
-          mail: "1422257646@qq.com",
+          email: "1422257646@qq.com",
         },
         {
           avatar: "../../../static/images/teams/avatar1.png",
@@ -94,7 +94,7 @@ export default {
           phone: "15902256523",
           grade: "本科生三年级",
           addr: "天津大学北洋园校区",
-          mail: "1422257646@qq.com",
+          email: "1422257646@qq.com",
         },
       ],
     };
