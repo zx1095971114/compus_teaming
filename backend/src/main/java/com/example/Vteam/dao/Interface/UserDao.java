@@ -13,4 +13,5 @@ import com.example.Vteam.entity.VteamUser;
 public interface UserDao {
     int insertVteamUser(VteamUser vteamUser);
     int insertUserInfo(UserInfo userInfo);
+    VteamUser getVteamUser(String username);
 }

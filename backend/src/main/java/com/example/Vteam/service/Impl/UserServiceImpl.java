@@ -34,20 +34,20 @@ public class UserServiceImpl implements UserService {
         if (!directory.exists()) {
             directory.mkdirs();
         }
-        String avatarPath=directory.getAbsolutePath()+"/"+username+".png";
+        String avatarPath = "/userAvatar/" + username + ".png";
         try {
-            avatar.transferTo(new File(avatarPath));
-        }catch(IOException e){
+            avatar.transferTo(new File(new File(root).getAbsolutePath() + avatarPath));
+        } catch (IOException e) {
             e.printStackTrace();
             return -1;
         }
-        String registerTime= MyFunction.getTime();
+        String registerTime = MyFunction.getTime();
         UserInfo userInfo = new UserInfo(username, email, name, phoneNumber, school, grade, sex, avatarPath, registerTime);
         System.out.println(vteamUser.getUsername());
-        int suc1=userDao.insertVteamUser(vteamUser);
-        int suc2=userDao.insertUserInfo(userInfo);
-        System.out.println(suc1+""+suc2);
-        if(suc1==1&&suc2==1){
+        int suc1 = userDao.insertVteamUser(vteamUser);
+        int suc2 = userDao.insertUserInfo(userInfo);
+        System.out.println(suc1 + "" + suc2);
+        if (suc1 == 1 && suc2 == 1) {
             return 1;
         }
         return -1;
