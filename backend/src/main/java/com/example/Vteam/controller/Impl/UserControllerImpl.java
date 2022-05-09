@@ -17,6 +17,7 @@ public class UserControllerImpl implements UserController {
     @Autowired
     UserService userService;
 
+    @Override
     @RequestMapping(value = "/register")
     public MyJson register(@RequestParam("username") String username,
                            @RequestParam("password") String password,

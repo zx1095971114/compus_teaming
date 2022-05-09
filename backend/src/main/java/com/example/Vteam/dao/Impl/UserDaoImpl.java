@@ -42,4 +42,9 @@ public class UserDaoImpl implements UserDao {
             return -1;
         }
     }
+
+    @Override
+    public VteamUser getVteamUser(String username) {
+        return userRepository.getById(username);
+    }
 }
