@@ -2,6 +2,8 @@ package com.example.Vteam.dao.Interface;
 
 import com.example.Vteam.entity.VteamInfo;
 
+import java.util.List;
+
 /**
  * @Author Lang wenchong
  * @Date 2022/5/9 14:18
@@ -9,5 +11,13 @@ import com.example.Vteam.entity.VteamInfo;
  */
 public interface TeamDao {
     VteamInfo createTeamInfo();
+
     int insertTeamInfo(VteamInfo vteamInfo);
+
+    VteamInfo getVteamInfo(String tid);
+
+    int updateVteamInfo(VteamInfo vteaminfo);
+
+
+    List<VteamInfo> getMyAttendedTeam(String username);
 }

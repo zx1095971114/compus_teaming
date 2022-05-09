@@ -11,6 +11,10 @@ import com.example.Vteam.utils.MyFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import java.util.*;
 
 /**
@@ -30,6 +34,7 @@ public class RecruitDaoImpl implements RecruitDao {
     @Autowired
     UserInfoRepository userInfoRepository;
 
+
     @Override
     public RecruitInfo createRecruitInfo() {
         String rid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -44,26 +49,81 @@ public class RecruitDaoImpl implements RecruitDao {
         } else {
             return -1;
         }
+
     }
 
     @Override
+    public List<RecruitInfo> getValidRecruitInfo(){
+        //获取所有recruitInfo
+        List<RecruitInfo> allRecruitInfo = recruitInfoRepository.findAllOrderByStartTimeDesc();
+        List<RecruitInfo> validRecruitIfo = new ArrayList<>();
+
+        //去除isDestroyed为1的项
+        Iterator<RecruitInfo> iterator = allRecruitInfo.iterator();
+        while (iterator.hasNext()) {
+            RecruitInfo recruitInfo = iterator.next();
+            if(recruitInfo.getIsDestroy() == 0){
+                validRecruitIfo.add(recruitInfo);
+            }
+        }
+
+        //返回有效recruitInfo
+        return validRecruitIfo;
+    }
+
+    @Override
+    public UserInfo getUserInfoByUsername(String username){
+        return userInfoRepository.getById(username);
+    }
+
+    @Override
+    public VteamInfo getVteamInfoByTid(String tid){
+        return vteamInfoRepository.getById(tid);
+    }
+
+    @Override
+    public RecruitInfo getRecruitInfo(String rid) {
+        return recruitInfoRepository.getById(rid);
+    }
+
+    @Override
+    public int updateRecruitInfo(RecruitInfo recruitInfo) {
+        recruitInfoRepository.save(recruitInfo);
+        return 1;
+    }
+
+    @Override
+    public List<RecruitInfo> getMyCreatedRecruit(String username) {
+        return recruitInfoRepository.findRecruitInfoByUsernameAndIsDestroy(username);
+    }
+
+    @Override
+    public RecruitInfo getRecruitInfoByTid(String tid) {
+        List<RecruitInfo> list = recruitInfoRepository.findRecruitInfoByTid(tid);
+        for (RecruitInfo recruitInfo : list) {
+//            实际上只会有这一个，因此直接return
+            return recruitInfo;
+        }
+        return null;
+    }
+
     public Map getRecruitInfo(String username, String rid) {
-        Map<String,Object> mymap = new HashMap();
+        Map<String, Object> mymap = new HashMap();
         RecruitInfo recruitinfo = recruitInfoRepository.getById(rid);
-        mymap.put("rtitle",recruitinfo.getRtitle());
-        mymap.put("startTime",recruitinfo.getStartTime());
-        mymap.put("endTime",recruitinfo.getEndTime());
-        mymap.put("content",recruitinfo.getContent());
-        mymap.put("rclass",recruitinfo.getRclass());
-        mymap.put("creator",recruitinfo.getCreator());
+        mymap.put("rtitle", recruitinfo.getRtitle());
+        mymap.put("startTime", recruitinfo.getStartTime());
+        mymap.put("endTime", recruitinfo.getEndTime());
+        mymap.put("content", recruitinfo.getContent());
+        mymap.put("rclass", recruitinfo.getRclass());
+        mymap.put("creator", recruitinfo.getCreator());
         String mytid = recruitinfo.getTid();
         VteamInfo vteaminfo = vteamInfoRepository.getById(mytid);
         String[] myteammates = vteaminfo.getTeamMates().split("-");
         int flag = 0;
         boolean res = Arrays.asList(myteammates).contains(username);
-        if(res)
+        if (res)
             flag = 1;
-        mymap.put("flag",flag);
+        mymap.put("flag", flag);
 
         List myavator = new ArrayList<String>();
         for (String myteammate : myteammates) {
@@ -71,7 +131,10 @@ public class RecruitDaoImpl implements RecruitDao {
             myavator.add(userinfo.getAvatarPath());
         }
 
-        mymap.put("allAvatorPath",myavator);
+
+
+        mymap.put("avatorPath", myavator);
+
 
         return mymap;
     }

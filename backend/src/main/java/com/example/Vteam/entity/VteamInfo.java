@@ -27,7 +27,7 @@ public class VteamInfo {
     private int maxMates;
 
     @Column(name = "currentMates")
-    private int currentMats;
+    private int currentMates;
 
     @Column(name = "teamMates")
     private String teamMates;
@@ -42,10 +42,10 @@ public class VteamInfo {
     public VteamInfo() {
     }
 
-    public VteamInfo(String tid, int maxMates, int currentMats, String teamMates, String successTime, int isSuccess) {
+    public VteamInfo(String tid, int maxMates, int currentMates, String teamMates, String successTime, int isSuccess) {
         this.tid = tid;
         this.maxMates = maxMates;
-        this.currentMats = currentMats;
+        this.currentMates = currentMates;
         this.teamMates = teamMates;
         this.successTime = successTime;
         this.isSuccess = isSuccess;
@@ -55,44 +55,44 @@ public class VteamInfo {
         return tid;
     }
 
-    public int getMaxMates() {
-        return maxMates;
-    }
-
-    public int getCurrentMats() {
-        return currentMats;
-    }
-
-    public String getTeamMates() {
-        return teamMates;
-    }
-
-    public String getSuccessTime() {
-        return successTime;
-    }
-
-    public int getIsSuccess() {
-        return isSuccess;
-    }
-
     public void setTid(String tid) {
         this.tid = tid;
+    }
+
+    public int getMaxMates() {
+        return maxMates;
     }
 
     public void setMaxMates(int maxMates) {
         this.maxMates = maxMates;
     }
 
-    public void setCurrentMats(int currentMats) {
-        this.currentMats = currentMats;
+    public int getCurrentMates() {
+        return currentMates;
+    }
+
+    public void setCurrentMates(int currentMates) {
+        this.currentMates = currentMates;
+    }
+
+    public String getTeamMates() {
+        return teamMates;
     }
 
     public void setTeamMates(String teamMates) {
         this.teamMates = teamMates;
     }
 
+    public String getSuccessTime() {
+        return successTime;
+    }
+
     public void setSuccessTime(String successTime) {
         this.successTime = successTime;
+    }
+
+    public int getIsSuccess() {
+        return isSuccess;
     }
 
     public void setIsSuccess(int isSuccess) {

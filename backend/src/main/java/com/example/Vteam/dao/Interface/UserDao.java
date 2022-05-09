@@ -12,8 +12,14 @@ import com.example.Vteam.entity.VteamUser;
 
 public interface UserDao {
     int insertVteamUser(VteamUser vteamUser);
+
     int insertUserInfo(UserInfo userInfo);
+
     VteamUser getVteamUser(String username);
-    int editUserInfo(String username,String name,String sex,String email,String school);
-    int editUserPwd(String username,String oldPwd,String newPwd);
+
+    UserInfo getUserInfo(String username);
+
+    int editUserInfo(String username, String name, String sex, String email, String school);
+
+    int editUserPwd(String username, String oldPwd, String newPwd);
 }

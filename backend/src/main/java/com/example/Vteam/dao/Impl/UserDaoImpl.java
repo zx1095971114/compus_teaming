@@ -49,6 +49,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public UserInfo getUserInfo(String username){
+        return userInfoRepository.getById(username);
+    }
+
     public int editUserInfo(String username,String name, String sex, String email, String school) {
         UserInfo userinfo = userInfoRepository.getById(username);
         userinfo.setName(name);

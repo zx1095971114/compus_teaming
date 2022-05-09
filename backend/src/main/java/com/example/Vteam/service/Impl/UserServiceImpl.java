@@ -12,6 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
+
+import static com.example.Vteam.utils.MyFunction.findKeyByValue;
+import static com.example.Vteam.utils.Token.tokenMap;
 
 /**
  * @Author Lang wenchong
@@ -54,14 +58,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int editUserInfo(String username,String name, String sex, String email, String school) {
-        int suc = userDao.editUserInfo(username,name,sex,email,school);
+    public String login(String username, String password) {
+        VteamUser user = userDao.getVteamUser(username);
+        if (user == null || !user.getPassword().equals(password)) {
+            return "wrong";
+        }
+        String tmp = findKeyByValue(username, tokenMap);
+        String token = tmp == null ? UUID.randomUUID().toString().replaceAll("-", "") : tmp;
+        tokenMap.put(token, username);
+        return token;
+    }
+
+    public UserInfo getUserInfo(String username) {
+        return userDao.getUserInfo(username);
+    }
+
+    public int editUserInfo(String username, String name, String sex, String email, String school) {
+        int suc = userDao.editUserInfo(username, name, sex, email, school);
         return suc;
     }
 
     @Override
     public int editUserPwd(String username, String oldPwd, String newPwd) {
-        int suc = userDao.editUserPwd(username,oldPwd,newPwd);
+        int suc = userDao.editUserPwd(username, oldPwd, newPwd);
         return suc;
     }
 }
