@@ -187,6 +187,7 @@ public class RecruitServiceImpl implements RecruitService {
             usefulRecruitInfo.put("maxMates", maxMates);
             usefulRecruitInfo.put("currentMates", currentMates);
 
+            screenRecruitInfo.add(usefulRecruitInfo);
         }
 
         //返回处理好的该显示的List对象

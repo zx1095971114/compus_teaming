@@ -4,6 +4,7 @@ import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.entity.VteamInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Lang wenchong
@@ -14,4 +15,8 @@ public interface TeamService {
 
     List<VteamInfo> getMyAttendedTeam(String username);
     List<UserInfo> getTeamInfo(String tid);
+
+
+    //用户参加的所有已经组好队的队伍信息
+    List<Map<String,Object>> getUserTeamInfo(String username);
 }

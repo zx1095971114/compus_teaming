@@ -1,10 +1,14 @@
 package com.example.Vteam.dao.Impl;
 
 import com.example.Vteam.dao.Interface.TeamDao;
+import com.example.Vteam.entity.RecruitInfo;
 import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.entity.VteamInfo;
+import com.example.Vteam.entity.VteamUser;
+import com.example.Vteam.repository.RecruitInfoRepository;
 import com.example.Vteam.repository.UserInfoRepository;
 import com.example.Vteam.repository.VteamInfoRepository;
+import com.example.Vteam.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +29,12 @@ public class TeamDaoImpl implements TeamDao {
 
     @Autowired
     UserInfoRepository userInfoRepository;
+
+    @Autowired
+    UserRepository vteamUser;
+
+    @Autowired
+    RecruitInfoRepository recruitInfoRepository;
 
     @Override
     public VteamInfo createTeamInfo() {
@@ -69,5 +79,24 @@ public class TeamDaoImpl implements TeamDao {
         return mylist;
     }
 
+    @Override
+    public UserInfo getUserInfoByUsername(String username){
+        return userInfoRepository.getById(username);
+    }
+
+    @Override
+    public List<VteamInfo> getUserVteamInfo(String username){
+        return vteamInfoRepository.findVTeamInfoByUsernameAndIsSuccess(username);
+    }
+
+    @Override
+    public VteamUser getVteamUserByUsername(String username){
+        return vteamUser.getById(username);
+    }
+
+    @Override
+    public List<RecruitInfo> getRecruitInfoByTid(String tid){
+        return recruitInfoRepository.findRecruitInfoByTid(tid);
+    }
 
 }
