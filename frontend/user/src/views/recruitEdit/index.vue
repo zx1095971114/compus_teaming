@@ -134,7 +134,7 @@
         </div>
       </div>
       <div class="box">
-        <div class="submit" @click="submit">
+        <div class="submit">
           <strong
             ><i class="fad fa-paper-plane"></i>&nbsp;&nbsp;发布招募</strong
           >
