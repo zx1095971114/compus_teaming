@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import com.example.Vteam.entity.Settings;
+import org.springframework.stereotype.Component;
 
 /**
  * @projectName: project
@@ -18,11 +19,13 @@ import com.example.Vteam.entity.Settings;
  * @date: 2022/5/9 14:40
  * @version: 1.0
  */
+
+@Component
 public class SettingsDaoImpl implements SettingsDao {
     @Autowired
     SettingsRepository settingsRepository;
 
-    public List<Settings> getAllSettings(){
+    public List<Settings> getAllSettings() {
         return settingsRepository.findAll();
     }
 }

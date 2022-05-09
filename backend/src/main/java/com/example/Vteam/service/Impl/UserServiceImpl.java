@@ -71,15 +71,16 @@ public class UserServiceImpl implements UserService {
 
     public UserInfo getUserInfo(String username) {
         return userDao.getUserInfo(username);
+    }
 
-    public int editUserInfo(String username,String name, String sex, String email, String school) {
-        int suc = userDao.editUserInfo(username,name,sex,email,school);
+    public int editUserInfo(String username, String name, String sex, String email, String school) {
+        int suc = userDao.editUserInfo(username, name, sex, email, school);
         return suc;
     }
 
     @Override
     public int editUserPwd(String username, String oldPwd, String newPwd) {
-        int suc = userDao.editUserPwd(username,oldPwd,newPwd);
+        int suc = userDao.editUserPwd(username, oldPwd, newPwd);
         return suc;
     }
 }

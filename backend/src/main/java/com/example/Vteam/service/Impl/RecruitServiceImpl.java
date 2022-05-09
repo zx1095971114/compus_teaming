@@ -15,11 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.util.List;
-=======
 import java.util.Map;
->>>>>>> 3f3154d03e9a76d5a35bf6642fef7ccd1775d497
 import java.util.UUID;
 
 /**
@@ -97,7 +94,6 @@ public class RecruitServiceImpl implements RecruitService {
     }
 
     @Override
-<<<<<<< HEAD
     public int joinRecruit(String rid, String username) {
         RecruitInfo recruitInfo = recruitDao.getRecruitInfo(rid);
         if (recruitInfo == null) {
@@ -139,9 +135,9 @@ public class RecruitServiceImpl implements RecruitService {
     @Override
     public RecruitInfo getRecruitInfo(String tid) {
         return recruitDao.getRecruitInfoByTid(tid);
-=======
+    }
+
     public Map getRecruitInfo(String username, String rid) {
-        return recruitDao.getRecruitInfo(username,rid);
->>>>>>> 3f3154d03e9a76d5a35bf6642fef7ccd1775d497
+        return recruitDao.getRecruitInfo(username, rid);
     }
 }

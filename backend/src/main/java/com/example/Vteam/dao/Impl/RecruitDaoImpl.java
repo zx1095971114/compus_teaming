@@ -73,23 +73,25 @@ public class RecruitDaoImpl implements RecruitDao {
             return recruitInfo;
         }
         return null;
+    }
+
     public Map getRecruitInfo(String username, String rid) {
-        Map<String,Object> mymap = new HashMap();
+        Map<String, Object> mymap = new HashMap();
         RecruitInfo recruitinfo = recruitInfoRepository.getById(rid);
-        mymap.put("rtitle",recruitinfo.getRtitle());
-        mymap.put("startTime",recruitinfo.getStartTime());
-        mymap.put("endTime",recruitinfo.getEndTime());
-        mymap.put("content",recruitinfo.getContent());
-        mymap.put("rclass",recruitinfo.getRclass());
-        mymap.put("creator",recruitinfo.getCreator());
+        mymap.put("rtitle", recruitinfo.getRtitle());
+        mymap.put("startTime", recruitinfo.getStartTime());
+        mymap.put("endTime", recruitinfo.getEndTime());
+        mymap.put("content", recruitinfo.getContent());
+        mymap.put("rclass", recruitinfo.getRclass());
+        mymap.put("creator", recruitinfo.getCreator());
         String mytid = recruitinfo.getTid();
         VteamInfo vteaminfo = vteamInfoRepository.getById(mytid);
         String[] myteammates = vteaminfo.getTeamMates().split("-");
         int flag = 0;
         boolean res = Arrays.asList(myteammates).contains(username);
-        if(res)
+        if (res)
             flag = 1;
-        mymap.put("flag",flag);
+        mymap.put("flag", flag);
 
         List myavator = new ArrayList<String>();
         for (String myteammate : myteammates) {
@@ -97,7 +99,7 @@ public class RecruitDaoImpl implements RecruitDao {
             myavator.add(userinfo.getAvatarPath());
         }
 
-        mymap.put("avatorPath",myavator);
+        mymap.put("avatorPath", myavator);
 
         return mymap;
     }
