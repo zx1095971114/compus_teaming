@@ -49,7 +49,7 @@ public class TeamDaoImpl implements TeamDao {
 
     @Override
     public List<VteamInfo> getMyAttendedTeam(String username) {
-        return vteamInfoRepository.findVTeamInfoByUsernameAndIsSuccess(username);
+        return vteamInfoRepository.findVTeamInfoByUsernameAndIsNotSuccess(username);
     }
 
 

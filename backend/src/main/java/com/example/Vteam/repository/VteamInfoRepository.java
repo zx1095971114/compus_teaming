@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface VteamInfoRepository extends JpaRepository<VteamInfo, String> {
     @Query("select t from VteamInfo  t where t.teamMates like %?-1% and t.isSuccess=0")
-    List<VteamInfo> findVTeamInfoByUsernameAndIsSuccess(String username);
+    List<VteamInfo> findVTeamInfoByUsernameAndIsNotSuccess(String username);
 }

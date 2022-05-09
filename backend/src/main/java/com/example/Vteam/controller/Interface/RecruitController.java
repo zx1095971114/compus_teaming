@@ -37,8 +37,11 @@ public interface RecruitController {
 
     MyJson uploadImg(HttpServletRequest request,
                      @RequestParam("img") MultipartFile img);
+
     MyJson getRecruitInfo(HttpServletRequest request,
                           @RequestParam("username") String username,
                           @RequestParam("rid") String rid);
+
+    //获取首页招募信息列表
     MyJson getScreenRecruitInfo(HttpServletRequest request);
 }
