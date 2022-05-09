@@ -1,5 +1,6 @@
-package com.example.Vteam.controller;
+package com.example.Vteam.controller.Impl;
 
+import com.example.Vteam.controller.Interface.UserController;
 import com.example.Vteam.service.Interface.UserService;
 import com.example.Vteam.utils.MyJson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +12,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/user/api")
-public class UserController {
+public class UserControllerImpl implements UserController {
 
     @Autowired
     UserService userService;
 
     @RequestMapping(value = "/register")
-    private MyJson register(@RequestParam("username") String username,
-                            @RequestParam("password") String password,
-                            @RequestParam("name") String name,
-                            @RequestParam("email") String email,
-                            @RequestParam("phoneNumber") String phoneNumber,
-                            @RequestParam("school") String school,
-                            @RequestParam("grade") String grade,
-                            @RequestParam("sex") String sex,
-                            @RequestParam("avatar") MultipartFile avatar) {
+    public MyJson register(@RequestParam("username") String username,
+                           @RequestParam("password") String password,
+                           @RequestParam("name") String name,
+                           @RequestParam("email") String email,
+                           @RequestParam("phoneNumber") String phoneNumber,
+                           @RequestParam("school") String school,
+                           @RequestParam("grade") String grade,
+                           @RequestParam("sex") String sex,
+                           @RequestParam("avatar") MultipartFile avatar) {
         MyJson myJson = new MyJson();
         // 新建user存储在数据库中
         int suc = userService.register(username, password, name, email, phoneNumber, school, grade, sex, avatar);
