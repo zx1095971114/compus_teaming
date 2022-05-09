@@ -1,5 +1,6 @@
 package com.example.Vteam.dao.Interface;
 
+import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.entity.VteamInfo;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface TeamDao {
 
 
     List<VteamInfo> getMyAttendedTeam(String username);
+    List<UserInfo> getTeamInfo(String tid);
 }
