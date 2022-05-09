@@ -31,4 +31,5 @@ public interface RecruitService {
 
     RecruitInfo getRecruitInfo(String tid);
     Map getRecruitInfo(String username, String rid);
+    List<Map<String,Object>> getScreenRecruitInfo();
 }

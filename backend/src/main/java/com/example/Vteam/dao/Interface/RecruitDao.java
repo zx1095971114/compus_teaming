@@ -1,6 +1,8 @@
 package com.example.Vteam.dao.Interface;
 
 import com.example.Vteam.entity.RecruitInfo;
+import com.example.Vteam.entity.UserInfo;
+import com.example.Vteam.entity.VteamInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,4 +28,9 @@ public interface RecruitDao {
 
     RecruitInfo getRecruitInfoByTid(String tid);
     Map getRecruitInfo(String username, String rid);
+    List<RecruitInfo> getValidRecruitInfo();
+
+    UserInfo getUserInfoByUsername(String username);
+
+    VteamInfo getVteamInfoByTid(String tid);
 }

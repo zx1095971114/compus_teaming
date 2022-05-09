@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.*;
@@ -33,6 +34,7 @@ public class RecruitDaoImpl implements RecruitDao {
     @Autowired
     UserInfoRepository userInfoRepository;
 
+
     @Override
     public RecruitInfo createRecruitInfo() {
         String rid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -47,6 +49,36 @@ public class RecruitDaoImpl implements RecruitDao {
         } else {
             return -1;
         }
+
+    }
+
+    @Override
+    public List<RecruitInfo> getValidRecruitInfo(){
+        //获取所有recruitInfo
+        List<RecruitInfo> allRecruitInfo = recruitInfoRepository.findAllOrderByStartTimeDesc();
+        List<RecruitInfo> validRecruitIfo = new ArrayList<>();
+
+        //去除isDestroyed为1的项
+        Iterator<RecruitInfo> iterator = allRecruitInfo.iterator();
+        while (iterator.hasNext()) {
+            RecruitInfo recruitInfo = iterator.next();
+            if(recruitInfo.getIsDestroy() == 0){
+                validRecruitIfo.add(recruitInfo);
+            }
+        }
+
+        //返回有效recruitInfo
+        return validRecruitIfo;
+    }
+
+    @Override
+    public UserInfo getUserInfoByUsername(String username){
+        return userInfoRepository.getById(username);
+    }
+
+    @Override
+    public VteamInfo getVteamInfoByTid(String tid){
+        return vteamInfoRepository.getById(tid);
     }
 
     @Override

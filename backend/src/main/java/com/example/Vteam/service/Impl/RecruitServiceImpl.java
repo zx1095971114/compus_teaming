@@ -4,6 +4,7 @@ import com.example.Vteam.dao.Interface.RecruitDao;
 import com.example.Vteam.dao.Interface.TeamDao;
 import com.example.Vteam.dao.Interface.UserDao;
 import com.example.Vteam.entity.RecruitInfo;
+import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.entity.VteamInfo;
 import com.example.Vteam.entity.VteamUser;
 import com.example.Vteam.service.Interface.RecruitService;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.*;
 
 /**
  * @Author Lang wenchong
@@ -139,5 +141,48 @@ public class RecruitServiceImpl implements RecruitService {
 
     public Map getRecruitInfo(String username, String rid) {
         return recruitDao.getRecruitInfo(username, rid);
+    }
+
+    public List<Map<String, Object>> getScreenRecruitInfo() {
+        List<Map<String, Object>> screenRecruitInfo = new ArrayList<>();
+
+        //获取改装List对象，使其符合显示的要求
+        List<RecruitInfo> validRecruitInfo = recruitDao.getValidRecruitInfo();
+        Iterator<RecruitInfo> iterator = validRecruitInfo.iterator();
+        while (iterator.hasNext()) {
+            RecruitInfo recruitInfo = iterator.next();
+            Map<String, Object> usefulRecruitInfo = new HashMap<>();
+
+            usefulRecruitInfo.put("rtitle", recruitInfo.getRtitle());
+            usefulRecruitInfo.put("description", recruitInfo.getDescription());
+            usefulRecruitInfo.put("subscribe", recruitInfo.getSubscribe());
+            usefulRecruitInfo.put("rclass", recruitInfo.getRclass());
+            usefulRecruitInfo.put("rtags", recruitInfo.getRtags());
+            usefulRecruitInfo.put("startTime", recruitInfo.getStartTime());
+            usefulRecruitInfo.put("img", recruitInfo.getImg());
+            usefulRecruitInfo.put("byTeacher", recruitInfo.getByTeacher());
+
+            //获取avatorPath，name
+            String username = recruitInfo.getCreator();
+            UserInfo userInfo = recruitDao.getUserInfoByUsername(username);
+            String avatorPath = userInfo.getUsername();
+            String name = userInfo.getName();
+
+            usefulRecruitInfo.put("avatorPath", avatorPath);
+            usefulRecruitInfo.put("name", name);
+
+            //获取maxTeammates,currentTeammates
+            String tid = recruitInfo.getTid();
+            VteamInfo vteamInfo = recruitDao.getVteamInfoByTid(tid);
+            int maxMates = vteamInfo.getMaxMates();
+            int currentMates = vteamInfo.getCurrentMates();
+
+            usefulRecruitInfo.put("maxMates", maxMates);
+            usefulRecruitInfo.put("currentMates", currentMates);
+
+        }
+
+        //返回处理好的该显示的List对象
+        return screenRecruitInfo;
     }
 }

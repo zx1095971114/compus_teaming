@@ -40,4 +40,5 @@ public interface RecruitController {
     MyJson getRecruitInfo(HttpServletRequest request,
                           @RequestParam("username") String username,
                           @RequestParam("rid") String rid);
+    MyJson getScreenRecruitInfo(HttpServletRequest request);
 }

@@ -14,4 +14,7 @@ public interface RecruitInfoRepository extends JpaRepository<RecruitInfo, String
 
     @Query("select r from RecruitInfo  r where r.tid=?1")
     List<RecruitInfo> findRecruitInfoByTid(String tid);
+
+    @Query("select r from RecruitInfo r order by r.startTime desc")
+    List<RecruitInfo> findAllOrderByStartTimeDesc();
 }
