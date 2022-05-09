@@ -58,4 +58,17 @@ public class UserDaoImpl implements UserDao {
         userInfoRepository.save(userinfo);
         return 1;
     }
+
+    @Override
+    public int editUserPwd(String username, String oldPwd, String newPwd) {
+        VteamUser vteamuser = userRepository.getById(username);
+        String myOldPwd = vteamuser.getPassword();
+        if(oldPwd.equals(myOldPwd)){
+            vteamuser.setPassword(newPwd);
+            userRepository.save(vteamuser);
+            return 1;
+        }else{
+            return -1;
+        }
+    }
 }

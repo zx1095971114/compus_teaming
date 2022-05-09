@@ -58,4 +58,10 @@ public class UserServiceImpl implements UserService {
         int suc = userDao.editUserInfo(username,name,sex,email,school);
         return suc;
     }
+
+    @Override
+    public int editUserPwd(String username, String oldPwd, String newPwd) {
+        int suc = userDao.editUserPwd(username,oldPwd,newPwd);
+        return suc;
+    }
 }

@@ -27,4 +27,8 @@ public interface RecruitController {
 
     MyJson joinRecruit(HttpServletRequest request,
                        @RequestParam("username") String username);
+
+    MyJson getRecruitInfo(HttpServletRequest request,
+                          @RequestParam("username") String username,
+                          @RequestParam("rid") String rid);
 }

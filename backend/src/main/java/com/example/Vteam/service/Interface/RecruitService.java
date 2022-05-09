@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 /**
  * @Author Lang wenchong
  * @Date 2022/5/9 14:02
@@ -19,4 +21,5 @@ public interface RecruitService {
                       String content,
                       MultipartFile img,
                       String[] rtags);
+    Map getRecruitInfo(String username, String rid);
 }

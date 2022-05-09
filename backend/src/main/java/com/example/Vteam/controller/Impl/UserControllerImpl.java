@@ -63,4 +63,22 @@ public class UserControllerImpl implements UserController {
         }
     }
 
+    @Override
+    public MyJson editUserPwd(HttpServletRequest request,String username,String oldPwd, String newPwd) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403)
+            return myjson;
+        else{
+            int suc = userService.editUserPwd(username,oldPwd,newPwd);
+            if(suc == 1){
+                myjson.setStatus(200);
+                myjson.setMessage("修改成功！");
+            }else{
+                myjson.setStatus(500);
+                myjson.setMessage("修改失败！");
+            }
+            return myjson;
+        }
+    }
+
 }

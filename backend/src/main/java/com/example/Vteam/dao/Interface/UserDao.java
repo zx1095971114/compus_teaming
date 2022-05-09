@@ -15,4 +15,5 @@ public interface UserDao {
     int insertUserInfo(UserInfo userInfo);
     VteamUser getVteamUser(String username);
     int editUserInfo(String username,String name,String sex,String email,String school);
+    int editUserPwd(String username,String oldPwd,String newPwd);
 }

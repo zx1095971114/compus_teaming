@@ -29,5 +29,9 @@ public interface UserController {
                         @RequestParam("sex") String sex,
                         @RequestParam("email") String email,
                         @RequestParam("school") String school);
+    MyJson editUserPwd(HttpServletRequest request,
+                       @RequestParam("username") String username,
+                       @RequestParam("oldPwd") String oldPwd,
+                       @RequestParam("newPwd") String newPwd);
 
 }

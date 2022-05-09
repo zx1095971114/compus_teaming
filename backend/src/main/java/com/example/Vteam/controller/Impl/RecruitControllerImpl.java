@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Map;
+
 import static com.example.Vteam.utils.MyFunction.isLoggedIn;
 
 /**
@@ -57,5 +59,16 @@ public class RecruitControllerImpl implements RecruitController {
         MyJson myJson = isLoggedIn(request);
         if (myJson.getStatus() == 403) return myJson;
         return myJson;
+    }
+
+    @Override
+    public MyJson getRecruitInfo(HttpServletRequest request, String username, String rid) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403) return myjson;
+        else{
+            Map<String,Object> mymap = recruitService.getRecruitInfo(username,rid);
+            myjson.setResult(mymap);
+            return myjson;
+        }
     }
 }

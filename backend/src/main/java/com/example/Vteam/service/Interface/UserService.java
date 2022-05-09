@@ -23,4 +23,7 @@ public interface UserService {
                      String sex,
                      String email,
                      String school);
+    int editUserPwd(String username,
+                    String oldPwd,
+                    String newPwd);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -89,5 +90,10 @@ public class RecruitServiceImpl implements RecruitService {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public Map getRecruitInfo(String username, String rid) {
+        return recruitDao.getRecruitInfo(username,rid);
     }
 }
