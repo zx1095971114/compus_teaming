@@ -18,4 +18,9 @@ public interface UserService {
                  String grade,
                  String sex,
                  MultipartFile avatar);
+    int editUserInfo(String username,
+                     String name,
+                     String sex,
+                     String email,
+                     String school);
 }

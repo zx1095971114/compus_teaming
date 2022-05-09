@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService {
         }
         return -1;
     }
+
+    @Override
+    public int editUserInfo(String username,String name, String sex, String email, String school) {
+        int suc = userDao.editUserInfo(username,name,sex,email,school);
+        return suc;
+    }
 }

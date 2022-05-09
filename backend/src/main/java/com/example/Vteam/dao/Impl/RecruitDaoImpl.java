@@ -5,6 +5,7 @@ import com.example.Vteam.entity.RecruitInfo;
 import com.example.Vteam.repository.RecruitInfoRepository;
 import com.example.Vteam.utils.MyFunction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
  * @Date 2022/5/9 14:36
  * @Version 1.0
  */
+@Component
 public class RecruitDaoImpl implements RecruitDao {
 
     @Autowired

@@ -47,4 +47,15 @@ public class UserDaoImpl implements UserDao {
     public VteamUser getVteamUser(String username) {
         return userRepository.getById(username);
     }
+
+    @Override
+    public int editUserInfo(String username,String name, String sex, String email, String school) {
+        UserInfo userinfo = userInfoRepository.getById(username);
+        userinfo.setName(name);
+        userinfo.setSex(sex);
+        userinfo.setEmail(email);
+        userinfo.setSchool(school);
+        userInfoRepository.save(userinfo);
+        return 1;
+    }
 }

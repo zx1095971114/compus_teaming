@@ -44,6 +44,26 @@ public class MessageControllerImpl implements MessageController {
                 myjson.setStatus(200);
                 myjson.setMessage("修改成功！");
             }else{
+                myjson.setStatus(500);
+                myjson.setMessage("修改失败！");
+            }
+            return myjson;
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "/setAllMessageStatus")
+    public MyJson setAllMessageStatus(HttpServletRequest request, String username) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403)
+            return myjson;
+        else {
+            int suc = messageService.setAllMessageStatus(username);
+            if(suc == 1) {
+                myjson.setStatus(200);
+                myjson.setMessage("修改成功！");
+            }else{
+                myjson.setStatus(500);
                 myjson.setMessage("修改失败！");
             }
             return myjson;

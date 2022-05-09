@@ -26,4 +26,14 @@ public class MessageDaoImpl implements MessageDao {
         messageRepository.save(message);
         return 1;
     }
+
+    @Override
+    public int setAllMessageStatus(String username) {
+        List<Message> l = messageRepository.findAllMessageByUsername(username);
+        for (Message m : l) {
+            m.setStatus(1);
+            messageRepository.save(m);
+        }
+        return 1;
+    }
 }

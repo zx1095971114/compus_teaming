@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import static com.example.Vteam.utils.MyFunction.isLoggedIn;
+
 
 @RestController
 @RequestMapping(value = "/user/api")
@@ -39,6 +42,25 @@ public class UserControllerImpl implements UserController {
             myJson.setMessage("注册失败，账号已存在！");
         }
         return myJson;
+    }
+
+    @Override
+    @RequestMapping(value = "/editUserInfo")
+    public MyJson editUserInfo(HttpServletRequest request,String username,String name, String sex, String email, String school) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403)
+            return myjson;
+        else{
+            int suc = userService.editUserInfo(username,name,sex,email,school);
+            if(suc == 1){
+                myjson.setStatus(200);
+                myjson.setMessage("修改成功！");
+            }else{
+                myjson.setStatus(500);
+                myjson.setMessage("修改失败！");
+            }
+            return myjson;
+        }
     }
 
 }

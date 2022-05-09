@@ -10,4 +10,6 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message,String> {
     @Query("select m from Message m where m.username=?1")
     List<Message> findAllMessageByUsername(String username);
+
+
 }

@@ -4,6 +4,8 @@ import com.example.Vteam.utils.MyJson;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Author Lang wenchong
  * @Date 2022/5/9 13:10
@@ -21,5 +23,11 @@ public interface UserController {
                     @RequestParam("grade") String grade,
                     @RequestParam("sex") String sex,
                     @RequestParam("avatar") MultipartFile avatar);
+    MyJson editUserInfo(HttpServletRequest request,
+                        @RequestParam("username") String username,
+                        @RequestParam("name") String name,
+                        @RequestParam("sex") String sex,
+                        @RequestParam("email") String email,
+                        @RequestParam("school") String school);
 
 }
