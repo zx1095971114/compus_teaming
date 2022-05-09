@@ -2,6 +2,7 @@ package com.example.Vteam.controller.Impl;
 
 import com.example.Vteam.controller.Interface.RecruitController;
 import com.example.Vteam.service.Interface.RecruitService;
+import com.example.Vteam.utils.MyFunction;
 import com.example.Vteam.utils.MyJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
+import java.util.Map;
 
 import static com.example.Vteam.utils.MyFunction.isLoggedIn;
 
@@ -56,6 +60,25 @@ public class RecruitControllerImpl implements RecruitController {
                               @RequestParam("username") String username) {
         MyJson myJson = isLoggedIn(request);
         if (myJson.getStatus() == 403) return myJson;
+        return myJson;
+    }
+
+    @Override
+    public  MyJson getScreenRecruitInfo(HttpServletRequest request){
+        MyJson myJson = MyFunction.isLoggedIn(request);
+        if(myJson.getStatus() == 403) { return myJson; }
+
+
+        List<Map<String,Object>> result = recruitService.getScreenRecruitInfo();
+        if(result != null){
+            myJson.setResult(result);
+            myJson.setMessage("获取需要显示的招募信息成功");
+            myJson.setStatus(200);
+        } else {
+            myJson.setMessage("获取需要显示的招募信息失败");
+            myJson.setStatus(500);
+        }
+
         return myJson;
     }
 }
