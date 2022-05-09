@@ -1,5 +1,6 @@
 package com.example.Vteam.service.Interface;
 
+import com.example.Vteam.entity.UserInfo;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -18,4 +19,6 @@ public interface UserService {
                  String grade,
                  String sex,
                  MultipartFile avatar);
+
+    UserInfo getUserInfo(String username);
 }

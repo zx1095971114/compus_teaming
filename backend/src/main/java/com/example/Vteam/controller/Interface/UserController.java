@@ -1,8 +1,11 @@
 package com.example.Vteam.controller.Interface;
 
 import com.example.Vteam.utils.MyJson;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author Lang wenchong
@@ -21,5 +24,8 @@ public interface UserController {
                     @RequestParam("grade") String grade,
                     @RequestParam("sex") String sex,
                     @RequestParam("avatar") MultipartFile avatar);
+
+    MyJson getUserInfo(HttpServletRequest request,
+                       @RequestParam("username") String username);
 
 }

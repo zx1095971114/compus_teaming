@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
         }
         return -1;
     }
+
+    @Override
+    public UserInfo getUserInfo(String username){
+        return userDao.getUserInfo(username);
+    }
 }
