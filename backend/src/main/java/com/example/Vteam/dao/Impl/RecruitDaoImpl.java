@@ -6,6 +6,8 @@ import com.example.Vteam.repository.RecruitInfoRepository;
 import com.example.Vteam.utils.MyFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -43,5 +45,20 @@ public class RecruitDaoImpl implements RecruitDao {
     public int updateRecruitInfo(RecruitInfo recruitInfo) {
         recruitInfoRepository.save(recruitInfo);
         return 1;
+    }
+
+    @Override
+    public List<RecruitInfo> getMyCreatedRecruit(String username) {
+        return recruitInfoRepository.findRecruitInfoByUsernameAndIsDestroy(username);
+    }
+
+    @Override
+    public RecruitInfo getRecruitInfoByTid(String tid) {
+        List<RecruitInfo> list = recruitInfoRepository.findRecruitInfoByTid(tid);
+        for (RecruitInfo recruitInfo : list) {
+//            实际上只会有这一个，因此直接return
+            return recruitInfo;
+        }
+        return null;
     }
 }

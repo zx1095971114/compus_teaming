@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -123,5 +124,15 @@ public class RecruitServiceImpl implements RecruitService {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public List<RecruitInfo> getMyCreatedRecruit(String username) {
+        return recruitDao.getMyCreatedRecruit(username);
+    }
+
+    @Override
+    public RecruitInfo getRecruitInfo(String tid) {
+        return recruitDao.getRecruitInfoByTid(tid);
     }
 }

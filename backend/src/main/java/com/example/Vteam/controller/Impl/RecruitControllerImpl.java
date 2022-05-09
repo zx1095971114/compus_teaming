@@ -1,7 +1,11 @@
 package com.example.Vteam.controller.Impl;
 
 import com.example.Vteam.controller.Interface.RecruitController;
+import com.example.Vteam.dao.Interface.TeamDao;
+import com.example.Vteam.entity.RecruitInfo;
+import com.example.Vteam.entity.VteamInfo;
 import com.example.Vteam.service.Interface.RecruitService;
+import com.example.Vteam.service.Interface.TeamService;
 import com.example.Vteam.utils.MyJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static com.example.Vteam.utils.MyFunction.isLoggedIn;
 
@@ -25,6 +33,8 @@ public class RecruitControllerImpl implements RecruitController {
     @Autowired
     RecruitService recruitService;
 
+    @Autowired
+    TeamService teamService;
 
     @Override
     @RequestMapping("/creat")
@@ -57,7 +67,49 @@ public class RecruitControllerImpl implements RecruitController {
                               @RequestParam("username") String username) {
         MyJson myJson = isLoggedIn(request);
         if (myJson.getStatus() == 403) return myJson;
-        int suc=recruitService.joinRecruit(rid,username);
+        int suc = recruitService.joinRecruit(rid, username);
+        if (suc == 1) {
+            myJson.setStatus(200);
+            myJson.setMessage("加入招募成功！");
+        } else {
+            myJson.setStatus(500);
+            myJson.setMessage("加入招募失败！");
+        }
         return myJson;
     }
+
+    @Override
+    @RequestMapping(value = "/getMyCreatedRecruit")
+    public MyJson getMyCreatedRecruit(HttpServletRequest request,
+                                      @RequestParam("username") String username) {
+        MyJson myJson = isLoggedIn(request);
+        if (myJson.getStatus() == 403) return myJson;
+        List<RecruitInfo> result = recruitService.getMyCreatedRecruit(username);
+        myJson.setResult(200);
+        myJson.setResult(result);
+        return myJson;
+    }
+
+    @Override
+    @RequestMapping(value = "/getMyAttendedRecruit")
+    public MyJson getMyAttendedRecruit(HttpServletRequest request, String username) {
+        MyJson myJson = isLoggedIn(request);
+        if (myJson.getStatus() == 403) return myJson;
+        List<VteamInfo> teams = teamService.getMyAttendedTeam(username);
+        List<RecruitInfo> result = new ArrayList<>();
+        for (VteamInfo team : teams) {
+            RecruitInfo recruitInfo = recruitService.getRecruitInfo(team.getTid());
+            result.add(recruitInfo);
+        }
+        myJson.setStatus(200);
+        myJson.setResult(result);
+        return myJson;
+    }
+
+    @Override
+    public MyJson uploadImg(HttpServletRequest request, MultipartFile img) {
+        return null;
+    }
+
+
 }

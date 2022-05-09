@@ -6,6 +6,7 @@ import com.example.Vteam.repository.VteamInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -45,6 +46,12 @@ public class TeamDaoImpl implements TeamDao {
         vteamInfoRepository.save(vteaminfo);
         return 1;
     }
+
+    @Override
+    public List<VteamInfo> getMyAttendedTeam(String username) {
+        return vteamInfoRepository.findVTeamInfoByUsernameAndIsSuccess(username);
+    }
+
 
 
 }

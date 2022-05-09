@@ -28,4 +28,13 @@ public interface RecruitController {
     MyJson joinRecruit(HttpServletRequest request,
                        @RequestParam("rid") String rid,
                        @RequestParam("username") String username);
+
+    MyJson getMyCreatedRecruit(HttpServletRequest request,
+                               @RequestParam("username") String username);
+
+    MyJson getMyAttendedRecruit(HttpServletRequest request,
+                                @RequestParam("username") String username);
+
+    MyJson uploadImg(HttpServletRequest request,
+                     @RequestParam("img") MultipartFile img);
 }
