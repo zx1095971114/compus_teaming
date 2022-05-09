@@ -14,4 +14,6 @@ public interface UserDao {
     int insertVteamUser(VteamUser vteamUser);
     int insertUserInfo(UserInfo userInfo);
     VteamUser getVteamUser(String username);
+
+    UserInfo getUserInfo(String username);
 }

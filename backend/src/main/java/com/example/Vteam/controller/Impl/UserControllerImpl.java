@@ -1,7 +1,9 @@
 package com.example.Vteam.controller.Impl;
 
 import com.example.Vteam.controller.Interface.UserController;
+import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.service.Interface.UserService;
+import com.example.Vteam.utils.MyFunction;
 import com.example.Vteam.utils.MyJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -62,5 +65,29 @@ public class UserControllerImpl implements UserController {
         }
         return myJson;
     }
+
+    @RequestMapping(value = "/getUserInfo")
+    public MyJson getUserInfo(HttpServletRequest request,
+                              @RequestParam("username") String username) {
+        MyJson myJson = MyFunction.isLoggedIn(request);
+        if (myJson.getStatus() == 403) {
+            return myJson;
+        }
+
+        UserInfo userInfo = userService.getUserInfo(username);
+
+        if (userInfo != null) {
+            myJson.setResult(userInfo);
+            myJson.setMessage("获取个人信息成功");
+            myJson.setStatus(200);
+        } else {
+            myJson.setStatus(500);
+            myJson.setMessage("获取个人信息失败");
+        }
+
+        return myJson;
+
+    }
+
 
 }

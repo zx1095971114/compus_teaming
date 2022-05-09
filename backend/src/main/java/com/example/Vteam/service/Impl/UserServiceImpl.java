@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService {
         tokenMap.put(token, username);
         return token;
     }
+
+    public UserInfo getUserInfo(String username) {
+        return userDao.getUserInfo(username);
+
+    }
 }
