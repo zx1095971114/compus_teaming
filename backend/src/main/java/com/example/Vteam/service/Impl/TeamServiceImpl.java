@@ -1,6 +1,7 @@
 package com.example.Vteam.service.Impl;
 
 import com.example.Vteam.dao.Interface.TeamDao;
+import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.entity.VteamInfo;
 import com.example.Vteam.service.Interface.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<VteamInfo> getMyAttendedTeam(String username) {
         return teamDao.getMyAttendedTeam(username);
+    }
+
+    @Override
+    public List<UserInfo> getTeamInfo(String tid) {
+        return teamDao.getTeamInfo(tid);
     }
 }
