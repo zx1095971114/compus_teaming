@@ -56,7 +56,7 @@
               <i class="fad fa-clock"></i>&nbsp;{{ topic.time }}
             </div>
             <div class="box">
-              <div class="tag" v-for="(topicTag, k) in topic.ttags" :key="k">
+              <div class="tag" v-for="(topicTag, k) in topic.rtags" :key="k">
                 <i class="fad fa-tag"></i>&nbsp;{{ topicTag }}
               </div>
             </div>
@@ -248,7 +248,7 @@ export default {
     hasTag(topic) {
       var v = false;
       for (let i = 0; i < this.mytags.length; i++) {
-        if (topic.ttags.indexOf(this.mytags[i]) != -1) {
+        if (topic.rtags.indexOf(this.mytags[i]) != -1) {
           v = true;
           break;
         }
@@ -262,7 +262,7 @@ export default {
       var arr = [];
       for (let i = 0; i < data.length; i++) {
         var flag = true;
-        if (data[i].class != this.value && this.value != "全部板块") {
+        if (data[i].rclass != this.value && this.value != "全部板块") {
           flag = false;
         }
         if (!this.hasTag(data[i])) {
@@ -408,8 +408,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 809,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-12`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
@@ -430,8 +430,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 890,
-          class: "生活板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "生活板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-13`,
           img: ``,
           byTeacher: true,
@@ -452,8 +452,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 200,
-          class: "其他板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "其他板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-14`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
@@ -474,8 +474,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 8,
-          class: "其他板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "其他板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-15`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
@@ -496,8 +496,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 90,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-16`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: true,
@@ -518,8 +518,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 27,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-17`,
           img: ``,
           byTeacher: false,
@@ -540,8 +540,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 88,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-18`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
@@ -562,8 +562,8 @@ export default {
             不建议直接看已经多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 80,
-          class: "生活板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "生活板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-19`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: true,
@@ -584,8 +584,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-20`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
@@ -606,8 +606,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 69,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-21`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
@@ -628,8 +628,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 803,
-          class: "学习板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "学习板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-22`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: true,
@@ -650,8 +650,8 @@ export default {
             不建议直接看已经迭代了这么多大版本的框架源码，如果想看源码，可以循序渐进的看。
             第一步：可以从lodash这种工具库开始看，因为都是比较小块的函`,
           subscribe: 2,
-          class: "生活板块",
-          ttags: ["三国杀", "2222", "3333"],
+          rclass: "生活板块",
+          rtags: ["三国杀", "2222", "3333"],
           time: `2021-01-23`,
           img: `https://pic1.zhimg.com/v2-4b8aef679373a73bd99c862f19817223.jpg?source=382ee89a`,
           byTeacher: false,
