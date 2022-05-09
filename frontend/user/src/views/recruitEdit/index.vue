@@ -5,7 +5,7 @@
         <h3>———————— 标签选择 ————————</h3>
         <div class="tags">
           <div>
-            <el-checkbox-group v-model="recruitInfo.ttags">
+            <el-checkbox-group v-model="recruitInfo.rtags">
               <el-checkbox-button
                 border
                 v-for="tag in tags"
@@ -118,7 +118,7 @@
       </div>
       <div class="box">
         <strong>展示板块(必选)</strong>
-        <el-select v-model="recruitInfo.class" placeholder="请选择">
+        <el-select v-model="recruitInfo.rclass" placeholder="请选择">
           <template slot="prefix">展示板块:</template>
           <el-option
             v-for="item in options"
@@ -179,11 +179,11 @@ export default {
     return {
       recruitInfo: {
         endtime: "",
-        ttags: [],
+        rtags: [],
         num: 3,
         title: "",
         description: "",
-        class: "学习板块",
+        rclass: "学习板块",
         content: "", // 富文本里的内容
       },
       tags: [
