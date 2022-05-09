@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @version: 1.0
  */
 @Entity
-@Table(name="vteam_info")
+@Table(name = "vteam_info")
 public class VteamInfo {
     @Id
     @Column(name = "tid")
@@ -37,6 +37,10 @@ public class VteamInfo {
 
     @Column(name = "isSuccess")
     private int isSuccess;
+
+
+    public VteamInfo() {
+    }
 
     public VteamInfo(String tid, int maxMates, int currentMats, String teamMates, String successTime, int isSuccess) {
         this.tid = tid;
