@@ -33,4 +33,15 @@ public class RecruitDaoImpl implements RecruitDao {
             return -1;
         }
     }
+
+    @Override
+    public RecruitInfo getRecruitInfo(String rid) {
+        return recruitInfoRepository.getById(rid);
+    }
+
+    @Override
+    public int updateRecruitInfo(RecruitInfo recruitInfo) {
+        recruitInfoRepository.save(recruitInfo);
+        return 1;
+    }
 }

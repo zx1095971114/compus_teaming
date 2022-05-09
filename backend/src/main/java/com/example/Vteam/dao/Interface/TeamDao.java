@@ -9,5 +9,10 @@ import com.example.Vteam.entity.VteamInfo;
  */
 public interface TeamDao {
     VteamInfo createTeamInfo();
+
     int insertTeamInfo(VteamInfo vteamInfo);
+
+    VteamInfo getVteamInfo(String tid);
+
+    int updateVteamInfo(VteamInfo vteaminfo);
 }

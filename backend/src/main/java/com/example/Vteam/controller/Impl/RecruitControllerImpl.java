@@ -53,9 +53,11 @@ public class RecruitControllerImpl implements RecruitController {
 
     @Override
     public MyJson joinRecruit(HttpServletRequest request,
+                              @RequestParam("rid") String rid,
                               @RequestParam("username") String username) {
         MyJson myJson = isLoggedIn(request);
         if (myJson.getStatus() == 403) return myJson;
+        int suc=recruitService.joinRecruit(rid,username);
         return myJson;
     }
 }

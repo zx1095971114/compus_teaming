@@ -14,4 +14,8 @@ public interface RecruitDao {
     RecruitInfo createRecruitInfo();
 
     int insertRecruitInfo(RecruitInfo recruitInfo);
+
+    RecruitInfo getRecruitInfo(String rid);
+
+    int updateRecruitInfo(RecruitInfo recruitInfo);
 }

@@ -19,4 +19,6 @@ public interface RecruitService {
                       String content,
                       MultipartFile img,
                       String[] rtags);
+
+    int joinRecruit(String rid, String username);
 }

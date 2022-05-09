@@ -34,4 +34,17 @@ public class TeamDaoImpl implements TeamDao {
             return -1;
         }
     }
+
+    @Override
+    public VteamInfo getVteamInfo(String tid) {
+        return vteamInfoRepository.getById(tid);
+    }
+
+    @Override
+    public int updateVteamInfo(VteamInfo vteaminfo) {
+        vteamInfoRepository.save(vteaminfo);
+        return 1;
+    }
+
+
 }
