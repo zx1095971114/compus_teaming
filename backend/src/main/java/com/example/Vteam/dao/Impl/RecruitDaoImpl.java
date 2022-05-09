@@ -71,7 +71,7 @@ public class RecruitDaoImpl implements RecruitDao {
             myavator.add(userinfo.getAvatarPath());
         }
 
-        mymap.put("avatorPath",myavator);
+        mymap.put("allAvatorPath",myavator);
 
         return mymap;
     }
