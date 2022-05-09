@@ -32,4 +32,8 @@ public interface RecruitService {
     RecruitInfo getRecruitInfo(String tid);
     Map getRecruitInfo(String username, String rid);
     List<Map<String,Object>> getScreenRecruitInfo();
+
+    String uploadImg(MultipartFile img);
+
+    int watchRecruit(String username, String rid);
 }

@@ -1,6 +1,7 @@
 package com.example.Vteam.dao.Impl;
 
 import com.example.Vteam.dao.Interface.HistoryDao;
+import com.example.Vteam.entity.History;
 import com.example.Vteam.repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,4 +18,12 @@ public class HistoryDaoImpl implements HistoryDao {
     public List searchHistory(String username) {
         return historyRepository.findAllHistoryByUsername(username);
     }
+
+    @Override
+    public int insertHistory(History history) {
+        historyRepository.save(history);
+        return 1;
+    }
+
+
 }

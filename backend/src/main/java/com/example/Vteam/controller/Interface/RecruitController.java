@@ -44,4 +44,9 @@ public interface RecruitController {
 
     //获取首页招募信息列表
     MyJson getScreenRecruitInfo(HttpServletRequest request);
+
+    //    查看招募信息
+    MyJson watchRecruit(HttpServletRequest request,
+                        @RequestParam("username") String username,
+                        @RequestParam("rid") String rid);
 }

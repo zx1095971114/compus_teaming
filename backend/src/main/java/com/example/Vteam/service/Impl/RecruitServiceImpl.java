@@ -1,12 +1,10 @@
 package com.example.Vteam.service.Impl;
 
+import com.example.Vteam.dao.Interface.HistoryDao;
 import com.example.Vteam.dao.Interface.RecruitDao;
 import com.example.Vteam.dao.Interface.TeamDao;
 import com.example.Vteam.dao.Interface.UserDao;
-import com.example.Vteam.entity.RecruitInfo;
-import com.example.Vteam.entity.UserInfo;
-import com.example.Vteam.entity.VteamInfo;
-import com.example.Vteam.entity.VteamUser;
+import com.example.Vteam.entity.*;
 import com.example.Vteam.service.Interface.RecruitService;
 import com.example.Vteam.utils.MyFunction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,8 @@ public class RecruitServiceImpl implements RecruitService {
     @Autowired
     TeamDao teamDao;
 
+    @Autowired
+    HistoryDao historyDao;
     @Value("${root}")
     private String root;
 
@@ -86,9 +86,12 @@ public class RecruitServiceImpl implements RecruitService {
             }
             recruitInfo.setImg(imgPath);
         }
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "创建招募", "你创建了招募：" + rtitle, MyFunction.getTime());
+        int suc3 = historyDao.insertHistory(history);
         int suc1 = teamDao.insertTeamInfo(vteamInfo);
         int suc2 = recruitDao.insertRecruitInfo(recruitInfo);
-        if (suc1 == 1 && suc2 == 1) {
+        if (suc1 == 1 && suc2 == 1 && suc3 == 1) {
             return 1;
         } else {
             return -1;
@@ -120,9 +123,13 @@ public class RecruitServiceImpl implements RecruitService {
             vteaminfo.setIsSuccess(1);
             recruitInfo.setIsDestroy(1);
         }
+
         int suc1 = recruitDao.updateRecruitInfo(recruitInfo);
         int suc2 = teamDao.updateVteamInfo(vteaminfo);
-        if (suc1 == 1 && suc2 == 1) {
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "加入招募", "你加入了招募：" + recruitInfo.getRtitle(), MyFunction.getTime());
+        int suc3 = historyDao.insertHistory(history);
+        if (suc1 == 1 && suc2 == 1 && suc3 == 1) {
             return 1;
         } else {
             return -1;
@@ -184,5 +191,33 @@ public class RecruitServiceImpl implements RecruitService {
 
         //返回处理好的该显示的List对象
         return screenRecruitInfo;
+    }
+
+    @Override
+    public String uploadImg(MultipartFile img) {
+        String imgName = UUID.randomUUID().toString().replaceAll("-", "");
+        String imgPath = "/richEditorImg/" + imgName + ".png";
+        File directory = new File(new File(root).getAbsolutePath() + "/richEditorImg/");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        try {
+            img.transferTo(new File(new File(root).getAbsolutePath() + imgPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return imgPath;
+    }
+
+    @Override
+    public int watchRecruit(String username, String rid) {
+        RecruitInfo recruitInfo = recruitDao.getRecruitInfo(rid);
+        recruitInfo.setSubscribe((recruitInfo.getSubscribe() + 1));
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "查看招募", "你查看了招募：" + recruitInfo.getRtitle(), MyFunction.getTime());
+        int suc1 = historyDao.insertHistory(history);
+        int suc2 = recruitDao.updateRecruitInfo(recruitInfo);
+        return suc1 & suc2;
     }
 }

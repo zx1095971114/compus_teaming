@@ -1,7 +1,9 @@
 package com.example.Vteam.controller.Impl;
 
 import com.example.Vteam.controller.Interface.RecruitController;
+import com.example.Vteam.dao.Interface.RecruitDao;
 import com.example.Vteam.dao.Interface.TeamDao;
+import com.example.Vteam.entity.History;
 import com.example.Vteam.entity.RecruitInfo;
 import com.example.Vteam.entity.VteamInfo;
 import com.example.Vteam.service.Interface.RecruitService;
@@ -17,10 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.example.Vteam.utils.MyFunction.isLoggedIn;
 
@@ -109,8 +108,20 @@ public class RecruitControllerImpl implements RecruitController {
     }
 
     @Override
-    public MyJson uploadImg(HttpServletRequest request, MultipartFile img) {
-        return null;
+
+    public MyJson uploadImg(HttpServletRequest request, @RequestParam("img") MultipartFile img) {
+        MyJson myjson = isLoggedIn(request);
+        if (myjson.getStatus() == 403) return myjson;
+        String imgPath = recruitService.uploadImg(img);
+        if (imgPath.equals("error")) {
+            myjson.setStatus(500);
+        } else {
+            myjson.setStatus(200);
+            Map<String, String> result = new HashMap<>();
+            result.put("imgPath", imgPath);
+            myjson.setResult(result);
+        }
+        return myjson;
     }
 
 
@@ -141,6 +152,27 @@ public class RecruitControllerImpl implements RecruitController {
             myJson.setStatus(500);
         }
 
+        return myJson;
+    }
+
+    @Override
+    @RequestMapping(value = "/watchRecruit")
+    public MyJson watchRecruit(HttpServletRequest request,
+                               @RequestParam("username") String username,
+                               @RequestParam("rid") String rid) {
+        MyJson myJson = MyFunction.isLoggedIn(request);
+        if (myJson.getStatus() == 403) {
+            return myJson;
+        }
+        int suc = recruitService.watchRecruit(username, rid);
+        if (suc == 1) {
+            myJson.setStatus(200);
+            myJson.setMessage("热度值更新成功！");
+            return myJson;
+        } else {
+            myJson.setStatus(500);
+            myJson.setMessage("热度值更新失败！");
+        }
         return myJson;
     }
 }

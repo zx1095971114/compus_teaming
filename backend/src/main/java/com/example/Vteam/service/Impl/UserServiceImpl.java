@@ -1,6 +1,8 @@
 package com.example.Vteam.service.Impl;
 
+import com.example.Vteam.dao.Interface.HistoryDao;
 import com.example.Vteam.dao.Interface.UserDao;
+import com.example.Vteam.entity.History;
 import com.example.Vteam.entity.UserInfo;
 import com.example.Vteam.entity.VteamUser;
 import com.example.Vteam.service.Interface.UserService;
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    HistoryDao historyDao;
+
     @Value("${root}")
     private String root;
 
@@ -47,11 +52,14 @@ public class UserServiceImpl implements UserService {
         }
         String registerTime = MyFunction.getTime();
         UserInfo userInfo = new UserInfo(username, email, name, phoneNumber, school, grade, sex, avatarPath, registerTime);
-        System.out.println(vteamUser.getUsername());
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "注册账号", name + "注册账号加入了北洋有约平台", registerTime);
+        int suc3 = historyDao.insertHistory(history);
+//        System.out.println(vteamUser.getUsername());
         int suc1 = userDao.insertVteamUser(vteamUser);
         int suc2 = userDao.insertUserInfo(userInfo);
-        System.out.println(suc1 + "" + suc2);
-        if (suc1 == 1 && suc2 == 1) {
+//        System.out.println(suc1 + "" + suc2);
+        if (suc1 == 1 && suc2 == 1 && suc3 == 1) {
             return 1;
         }
         return -1;
@@ -74,13 +82,19 @@ public class UserServiceImpl implements UserService {
     }
 
     public int editUserInfo(String username, String name, String sex, String email, String school) {
-        int suc = userDao.editUserInfo(username, name, sex, email, school);
-        return suc;
+        int suc1 = userDao.editUserInfo(username, name, sex, email, school);
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "修改信息", "你修改了个人信息", MyFunction.getTime());
+        int suc2 = historyDao.insertHistory(history);
+        return suc1 & suc2;
     }
 
     @Override
     public int editUserPwd(String username, String oldPwd, String newPwd) {
-        int suc = userDao.editUserPwd(username, oldPwd, newPwd);
-        return suc;
+        int suc1 = userDao.editUserPwd(username, oldPwd, newPwd);
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "创建招募", "你修改了个人密码", MyFunction.getTime());
+        int suc2 = historyDao.insertHistory(history);
+        return suc1 & suc2;
     }
 }
