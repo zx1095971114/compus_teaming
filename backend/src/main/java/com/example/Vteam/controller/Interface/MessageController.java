@@ -10,4 +10,6 @@ public interface MessageController {
                          @RequestParam("username") String username);
     MyJson setSingleMessageStatus(HttpServletRequest request,
                                   @RequestParam("mid") String mid);
+    MyJson setAllMessageStatus(HttpServletRequest request,
+                               @RequestParam("username") String username);
 }

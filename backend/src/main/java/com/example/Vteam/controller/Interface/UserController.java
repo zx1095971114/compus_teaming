@@ -24,6 +24,16 @@ public interface UserController {
                     @RequestParam("grade") String grade,
                     @RequestParam("sex") String sex,
                     @RequestParam("avatar") MultipartFile avatar);
+    MyJson editUserInfo(HttpServletRequest request,
+                        @RequestParam("username") String username,
+                        @RequestParam("name") String name,
+                        @RequestParam("sex") String sex,
+                        @RequestParam("email") String email,
+                        @RequestParam("school") String school);
+    MyJson editUserPwd(HttpServletRequest request,
+                       @RequestParam("username") String username,
+                       @RequestParam("oldPwd") String oldPwd,
+                       @RequestParam("newPwd") String newPwd);
 
 
     MyJson login(@RequestParam("username") String username,

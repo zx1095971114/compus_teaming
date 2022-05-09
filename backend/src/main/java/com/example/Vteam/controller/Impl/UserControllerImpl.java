@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+=======
+import javax.servlet.http.HttpServletRequest;
+import static com.example.Vteam.utils.MyFunction.isLoggedIn;
+>>>>>>> 3f3154d03e9a76d5a35bf6642fef7ccd1775d497
 
 
 @RestController
@@ -48,6 +53,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
+<<<<<<< HEAD
     @RequestMapping(value = "/login")
     public MyJson login(@RequestParam("username") String username,
                         @RequestParam("password") String password) {
@@ -90,4 +96,42 @@ public class UserControllerImpl implements UserController {
     }
 
 
+=======
+    @RequestMapping(value = "/editUserInfo")
+    public MyJson editUserInfo(HttpServletRequest request,String username,String name, String sex, String email, String school) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403)
+            return myjson;
+        else{
+            int suc = userService.editUserInfo(username,name,sex,email,school);
+            if(suc == 1){
+                myjson.setStatus(200);
+                myjson.setMessage("修改成功！");
+            }else{
+                myjson.setStatus(500);
+                myjson.setMessage("修改失败！");
+            }
+            return myjson;
+        }
+    }
+
+    @Override
+    public MyJson editUserPwd(HttpServletRequest request,String username,String oldPwd, String newPwd) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403)
+            return myjson;
+        else{
+            int suc = userService.editUserPwd(username,oldPwd,newPwd);
+            if(suc == 1){
+                myjson.setStatus(200);
+                myjson.setMessage("修改成功！");
+            }else{
+                myjson.setStatus(500);
+                myjson.setMessage("修改失败！");
+            }
+            return myjson;
+        }
+    }
+
+>>>>>>> 3f3154d03e9a76d5a35bf6642fef7ccd1775d497
 }

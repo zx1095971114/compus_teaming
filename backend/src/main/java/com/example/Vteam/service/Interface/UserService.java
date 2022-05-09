@@ -20,9 +20,17 @@ public interface UserService {
                  String sex,
                  MultipartFile avatar);
 
-<<<<<<< HEAD
+
     String login(String username, String password);
-=======
     UserInfo getUserInfo(String username);
->>>>>>> c8f5fa1230b4739003c40d6fe307a99c623f0db6
+
+    int editUserInfo(String username,
+                     String name,
+                     String sex,
+                     String email,
+                     String school);
+    int editUserPwd(String username,
+                    String oldPwd,
+                    String newPwd);
+
 }

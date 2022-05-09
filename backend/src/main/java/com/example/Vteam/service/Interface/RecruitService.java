@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Lang wenchong
@@ -29,4 +30,5 @@ public interface RecruitService {
     List<RecruitInfo> getMyCreatedRecruit(String username);
 
     RecruitInfo getRecruitInfo(String tid);
+    Map getRecruitInfo(String username, String rid);
 }

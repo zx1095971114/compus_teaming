@@ -23,4 +23,11 @@ public class MessageServiceImpl implements MessageService {
         int suc = messageDao.setSingleMessageStatus(mid);
         return suc;
     }
+
+    @Override
+    public int setAllMessageStatus(String username) {
+        int suc = messageDao.setAllMessageStatus(username);
+        return suc;
+
+    }
 }

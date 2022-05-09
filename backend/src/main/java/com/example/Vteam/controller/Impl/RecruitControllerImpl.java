@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.Vteam.utils.MyFunction.isLoggedIn;
 
@@ -112,4 +113,13 @@ public class RecruitControllerImpl implements RecruitController {
     }
 
 
+    public MyJson getRecruitInfo(HttpServletRequest request, String username, String rid) {
+        MyJson myjson = isLoggedIn(request);
+        if(myjson.getStatus() == 403) return myjson;
+        else{
+            Map<String,Object> mymap = recruitService.getRecruitInfo(username,rid);
+            myjson.setResult(mymap);
+            return myjson;
+        }
+    }
 }

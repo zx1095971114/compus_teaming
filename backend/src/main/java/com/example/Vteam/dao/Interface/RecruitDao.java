@@ -4,6 +4,7 @@ import com.example.Vteam.entity.RecruitInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Lang wenchong
@@ -24,4 +25,5 @@ public interface RecruitDao {
     List<RecruitInfo> getMyCreatedRecruit(String username);
 
     RecruitInfo getRecruitInfoByTid(String tid);
+    Map getRecruitInfo(String username, String rid);
 }

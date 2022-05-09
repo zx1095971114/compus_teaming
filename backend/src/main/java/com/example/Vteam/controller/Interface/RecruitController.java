@@ -37,4 +37,7 @@ public interface RecruitController {
 
     MyJson uploadImg(HttpServletRequest request,
                      @RequestParam("img") MultipartFile img);
+    MyJson getRecruitInfo(HttpServletRequest request,
+                          @RequestParam("username") String username,
+                          @RequestParam("rid") String rid);
 }
