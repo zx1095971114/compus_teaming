@@ -22,4 +22,6 @@ public interface UserController {
                     @RequestParam("sex") String sex,
                     @RequestParam("avatar") MultipartFile avatar);
 
+    MyJson login(@RequestParam("username") String username,
+                 @RequestParam("password") String password);
 }

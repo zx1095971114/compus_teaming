@@ -12,6 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
+
+import static com.example.Vteam.utils.MyFunction.findKeyByValue;
+import static com.example.Vteam.utils.Token.tokenMap;
 
 /**
  * @Author Lang wenchong
@@ -51,5 +55,17 @@ public class UserServiceImpl implements UserService {
             return 1;
         }
         return -1;
+    }
+
+    @Override
+    public String login(String username, String password) {
+        VteamUser user = userDao.getVteamUser(username);
+        if (user == null || !user.getPassword().equals(password)) {
+            return "wrong";
+        }
+        String tmp = findKeyByValue(username, tokenMap);
+        String token = tmp == null ? UUID.randomUUID().toString().replaceAll("-", "") : tmp;
+        tokenMap.put(token, username);
+        return token;
     }
 }

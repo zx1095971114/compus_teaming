@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping(value = "/user/api")
@@ -37,6 +40,25 @@ public class UserControllerImpl implements UserController {
         } else {
             myJson.setStatus(500);
             myJson.setMessage("注册失败，账号已存在！");
+        }
+        return myJson;
+    }
+
+    @Override
+    @RequestMapping(value = "/login")
+    public MyJson login(@RequestParam("username") String username,
+                        @RequestParam("password") String password) {
+        MyJson myJson = new MyJson();
+        String token = userService.login(username, password);
+        if (token.equals("wrong")) {
+            myJson.setStatus(500);
+            myJson.setMessage("账号或者密码错误");
+        } else {
+            myJson.setStatus(200);
+            myJson.setMessage("登陆成功");
+            Map<String, String> result = new HashMap<>();
+            result.put("token", token);
+            myJson.setResult(result);
         }
         return myJson;
     }

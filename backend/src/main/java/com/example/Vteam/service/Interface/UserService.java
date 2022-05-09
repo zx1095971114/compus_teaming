@@ -18,4 +18,6 @@ public interface UserService {
                  String grade,
                  String sex,
                  MultipartFile avatar);
+
+    String login(String username, String password);
 }
