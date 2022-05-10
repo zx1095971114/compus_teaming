@@ -74,7 +74,7 @@
     <div id="r-bar" class="animate__animated animate__fadeInRight">
       <div id="avatar">
         <div id="imgBx">
-          <img :src="myInfo.avatar" />
+          <img :src="myInfo.avatarPath" />
           <div id="status">
             <p id="icon" :title="myInfo.status">👨‍🎓</p>
           </div>
@@ -105,11 +105,11 @@
             </span>
             <span class="tag">
               <i class="fal fa-mobile"></i>
-              &nbsp;{{ myInfo.phone }}
+              &nbsp;{{ myInfo.phoneNumber }}
             </span>
             <span class="tag">
               <i class="fal fa-house"></i>
-              {{ myInfo.address }}
+              {{ myInfo.school }}
             </span>
             <span class="tag">
               <i class="fal fa-envelope"></i>
@@ -143,6 +143,14 @@ export default {
         el.style.backgroundColor = "#0984e3";
       }
     },
+  },
+  created(){
+    this.apis.account.getuserinfo(sessionStorage.getItem("username")).then((res) => {
+      var result = res.data.result;
+      console.log(result);
+      result.avatarPath = "http://192.168.43.94:8088/images"+result.avatarPath;
+      this.myInfo = result;
+    })
   },
   mounted() {
     setTimeout(function () {
@@ -608,20 +616,7 @@ export default {
   },
   data() {
     return {
-      myInfo: {
-        email: "1625744287@qq.com",
-        grade: "2019级",
-        phone: "12345678910",
-        sex: "男",
-        address: "天津大学(北洋园校区)",
-        status: "student",
-        followers: "2.3k",
-        following: "300",
-        name: "Peng Peng Lang",
-        subtitle: "保持热爱，奔赴山海",
-        avatar:
-          "https://portrait.gitee.com/uploads/avatars/user/2517/7552702_Langwenchong_1644047602.png!avatar100",
-      },
+      myInfo: {},
 
       arr1: [
         {
@@ -1041,6 +1036,7 @@ export default {
 
 #imgBx img {
   width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
 }

@@ -187,8 +187,8 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.apis.myinfo
-            .editInfo(
+          this.apis.account
+            .edituserinfo(
               sessionStorage.getItem("username"),
               this.myInfoForm.name,
               this.myInfoForm.sex,

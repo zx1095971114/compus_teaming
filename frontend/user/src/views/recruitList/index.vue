@@ -256,6 +256,18 @@ export default {
       return v;
     },
   },
+  created() {
+    this.apis.settings.getsettings().then((res) => {
+      var result = res.data.result;
+      // console.log(result);
+      this.tags = result.tags;
+      this.mytags = this.tags;
+      this.options = result.options;
+
+    })
+  },
+
+  
   computed: {
     filterTopics() {
       var data = this.topics;
@@ -306,92 +318,11 @@ export default {
   },
   data() {
     return {
-      mytags: [
-        "大作业组队",
-        "大创组队",
-        "毕设讨论",
-        "实验室招募",
-        "研友寻找",
-        "竞赛组队",
-        "志愿者招募",
-        "学业辅导班",
-        "拼单购物",
-        "拼车出行",
-        "帮忙取外卖",
-        "帮忙取快递",
-        "帮砍互助",
-        "寻找女朋友",
-        "寻找男朋友",
-        "铁友寻找",
-        "开黑四缺一",
-        "ACM打铁",
-        "姐妹相约购物",
-        "狼人杀",
-        "三国杀",
-        "UNO桌游",
-        "斗地主",
-        "是兄弟一起打麻将",
-        "美食城探索",
-        "联名问政",
-        "出售物品",
-        "回收物品",
-        "兼职招募",
-      ],
-      tags: [
-        "大作业组队",
-        "大创组队",
-        "毕设讨论",
-        "实验室招募",
-        "研友寻找",
-        "竞赛组队",
-        "志愿者招募",
-        "学业辅导班",
-        "拼单购物",
-        "拼车出行",
-        "帮忙取外卖",
-        "帮忙取快递",
-        "帮砍互助",
-        "寻找女朋友",
-        "寻找男朋友",
-        "铁友寻找",
-        "开黑四缺一",
-        "ACM打铁",
-        "姐妹相约购物",
-        "狼人杀",
-        "三国杀",
-        "UNO桌游",
-        "斗地主",
-        "是兄弟一起打麻将",
-        "美食城探索",
-        "联名问政",
-        "出售物品",
-        "回收物品",
-        "兼职招募",
-      ],
+      mytags: [],
+      tags: [],
       drawer: false,
       hotsort: false,
-      options: [
-        {
-          value: "全部板块",
-          label: "全部板块",
-        },
-        {
-          value: "学习板块",
-          label: "学习板块",
-        },
-        {
-          value: "生活板块",
-          label: "生活板块",
-        },
-        {
-          value: "娱乐板块",
-          label: "娱乐板块",
-        },
-        {
-          value: "其他板块",
-          label: "其他板块",
-        },
-      ],
+      options: [],
       value: "全部板块",
       searchTxt: ``,
       teacherRepply: false,
