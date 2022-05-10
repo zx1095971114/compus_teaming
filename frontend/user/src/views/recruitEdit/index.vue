@@ -39,6 +39,7 @@
         action="a"
         :before-upload="bfUpload"
         with-credentials
+        ref="coverImgUpload"
       >
       </el-upload>
       <quill-editor
@@ -89,7 +90,8 @@
       <div class="box">
         <strong>截止时间(必填)</strong>
         <el-date-picker
-          v-model="recruitInfo.endtime"
+          v-model="recruitInfo.endTime"
+          value-format="yyyy-MM-dd hh:mm:ss"
           type="datetime"
           placeholder="选择日期"
         >
@@ -134,7 +136,7 @@
         </div>
       </div>
       <div class="box">
-        <div class="submit">
+        <div class="submit" @click="submit">
           <strong
             ><i class="fad fa-paper-plane"></i>&nbsp;&nbsp;发布招募</strong
           >
@@ -159,9 +161,7 @@ export default {
     quillEditor,
   },
   name: "recruitEdit",
-  created() {
-    
-  },
+  created() {},
   data() {
     const toolbarOptions = [
       ["bold", "italic", "underline", "strike"],
@@ -178,7 +178,7 @@ export default {
 
     return {
       recruitInfo: {
-        endtime: "",
+        endTime: "",
         rtags: [],
         num: 3,
         title: "",
@@ -266,6 +266,51 @@ export default {
     };
   },
   methods: {
+    submit() {
+      if (
+        this.endtime == `` ||
+        this.recruitInfo.num <= 0 ||
+        this.recruitInfo.title == `` ||
+        this.recruitInfo.endTime == `` ||
+        this.recruitInfo.description == `` ||
+        this.recruitInfo.content == `` ||
+        this.recruitInfo.rtags.length <= 0
+      ) {
+        this.$notify.error({
+          title: "错误",
+          message: "请确保信息已正确填写！",
+        });
+        return;
+      } else {
+        this.$refs.coverImageUpload.submit();
+        console.log(
+          sessionStorage.getItem("username"),
+          this.recruitInfo.title,
+          this.recruitInfo.description,
+          this.recruitInfo.num,
+          this.recruitInfo.endTime,
+          this.recruitInfo.rclass,
+          this.recruitInfo.content,
+          this.coverImage,
+          this.recruitInfo.rtags
+        );
+        this.apis.recruitEdit
+          .createRecruit(
+            sessionStorage.getItem("username"),
+            this.recruitInfo.title,
+            this.recruitInfo.description,
+            this.recruitInfo.num,
+            this.recruitInfo.endTime,
+            this.recruitInfo.rclass,
+            this.recruitInfo.content,
+            this.coverImage,
+            this.recruitInfo.rtags
+          )
+          .then((res) => {
+            console.log(res);
+          });
+      }
+    },
     beforeUpload(file) {
       this.coverImage = file;
     },
@@ -280,35 +325,29 @@ export default {
     //上传图片之前校验
     bfUpload(file) {
       // console.log(file);
+      let quill = this.$refs.myQuillEditor.quill;
       if ("image/png" == file.type || "image/jpeg" == file.type) {
+        this.apis.recruitEdit.uploadImg(file).then((res) => {
+          // console.log(res);
+          if (res.data.status === 200) {
+            //获取光标所在位置
+            let length = quill.getSelection().index;
+            //插入图片
+            quill.insertEmbed(
+              length,
+              "image",
+              "http://192.168.43.94:8088/images" + res.data.result.imgPath
+            );
+            //移动光标到图片后
+            quill.setSelection(length + 1);
+          } else {
+            this.$message.error("图片插入失败");
+          }
+        });
       } else {
         this.$message.error("图片插入失败,请检查文件格式");
         return;
       }
-    },
-    //获取时间戳
-    currentTime() {
-      var now = new Date();
-      var year = now.getFullYear(); //年
-      var month = now.getMonth() + 1; //月
-      var day = now.getDate(); //日
-
-      var hh = now.getHours(); //时
-      var mm = now.getMinutes(); //分
-      var ss = now.getSeconds();
-
-      var clock = year + "-";
-      if (month < 10) clock += "0";
-      clock += month + "-";
-      if (day < 10) clock += "0";
-      clock += day + " ";
-      if (hh < 10) clock += "0";
-      clock += hh + ":";
-      if (mm < 10) clock += "0";
-      clock += mm + ":";
-      if (ss < 10) clock += "0";
-      clock += ss;
-      return clock;
     },
   },
 };

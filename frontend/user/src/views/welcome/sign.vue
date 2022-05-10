@@ -95,7 +95,7 @@ export default {
             localStorage.setItem("password", this.password);
             // 存储token值
             // console.log(res.data);
-            sessionStorage.setItem("username",this.username);
+            sessionStorage.setItem("username", this.username);
             this.$router.push({ name: "homepage" });
           } else {
             localStorage.removeItem("username");

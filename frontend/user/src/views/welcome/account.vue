@@ -50,9 +50,9 @@
         </el-form-item>
         <el-form-item prop="sex">
           <el-select v-model="ruleForm.sex" placeholder="请选择您的性别">
-            <el-option label="男士" value="male"></el-option>
-            <el-option label="女士" value="female"></el-option>
-            <el-option label="不愿透露" value="none"></el-option>
+            <el-option label="男士" value="男士"></el-option>
+            <el-option label="女士" value="女士"></el-option>
+            <el-option label="不愿透露" value="不愿透露"></el-option>
           </el-select>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
@@ -124,7 +124,7 @@ export default {
         name: "",
         phoneNumber: "",
         school: "",
-        grade:"",
+        grade: "",
         sex: "",
       },
       avatar: null,
@@ -142,7 +142,7 @@ export default {
           let username = this.$route.params.username;
           let email = this.$route.params.email;
           let password = this.$route.params.password;
-          console.log(username,email,password);
+          console.log(username, email, password);
           this.$refs.uploader.submit();
           this.apis.welcome
             .register(this.ruleForm, this.avatar, username, email, password)
