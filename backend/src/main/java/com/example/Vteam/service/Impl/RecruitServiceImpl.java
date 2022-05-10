@@ -43,12 +43,8 @@ public class RecruitServiceImpl implements RecruitService {
     private String root;
 
     @Override
-    public int createRecruit(String username, String rtitle, String description, int maxMates, String endTime, String rclass, String content, MultipartFile img, String[] rtags) {
+    public int createRecruitWithImg(String username, String rtitle, String description, int maxMates, String endTime, String rclass, String content, MultipartFile img, String rtags) {
         RecruitInfo recruitInfo = recruitDao.createRecruitInfo();
-        String tags = "";
-        for (String rtag : rtags) {
-            tags += rtag;
-        }
         String startTime = MyFunction.getTime();
         VteamUser user = userDao.getVteamUser(username);
         if (user == null) {
@@ -65,7 +61,7 @@ public class RecruitServiceImpl implements RecruitService {
         recruitInfo.setDescription(description);
         recruitInfo.setCreator(username);
         recruitInfo.setRclass(rclass);
-        recruitInfo.setRtags(tags);
+        recruitInfo.setRtags(rtags);
         recruitInfo.setContent(content);
         recruitInfo.setCreator(username);
         recruitInfo.setByTeacher(byTeacher);
@@ -86,6 +82,43 @@ public class RecruitServiceImpl implements RecruitService {
             }
             recruitInfo.setImg(imgPath);
         }
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "创建招募", "你创建了招募：" + rtitle, MyFunction.getTime());
+        int suc3 = historyDao.insertHistory(history);
+        int suc1 = teamDao.insertTeamInfo(vteamInfo);
+        int suc2 = recruitDao.insertRecruitInfo(recruitInfo);
+        if (suc1 == 1 && suc2 == 1 && suc3 == 1) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    @Override
+    public int createRecruitWithoutImg(String username, String rtitle, String description, int maxMates, String endTime, String rclass, String content, String rtags) {
+        RecruitInfo recruitInfo = recruitDao.createRecruitInfo();
+        String startTime = MyFunction.getTime();
+        VteamUser user = userDao.getVteamUser(username);
+        if (user == null) {
+            //未找到用户
+            return -1;
+        }
+        int byTeacher = user.getStatus().equals("学生") ? 0 : 1;
+        VteamInfo vteamInfo = teamDao.createTeamInfo();
+//        存储团队初始化信息
+        vteamInfo.setMaxMates(maxMates);
+        vteamInfo.setTeamMates(username);
+//        存储招募帖子信息
+        recruitInfo.setRtitle(rtitle);
+        recruitInfo.setDescription(description);
+        recruitInfo.setCreator(username);
+        recruitInfo.setRclass(rclass);
+        recruitInfo.setRtags(rtags);
+        recruitInfo.setContent(content);
+        recruitInfo.setCreator(username);
+        recruitInfo.setByTeacher(byTeacher);
+        recruitInfo.setEndTime(endTime);
+        recruitInfo.setTid(vteamInfo.getTid());
         String hid = UUID.randomUUID().toString().replaceAll("-", "");
         History history = new History(hid, username, "创建招募", "你创建了招募：" + rtitle, MyFunction.getTime());
         int suc3 = historyDao.insertHistory(history);

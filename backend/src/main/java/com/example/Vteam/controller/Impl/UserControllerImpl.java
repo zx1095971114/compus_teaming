@@ -80,6 +80,7 @@ public class UserControllerImpl implements UserController {
         }
 
         UserInfo userInfo = userService.getUserInfo(username);
+//        System.out.println(userInfo.getAvatarPath());
 
         if (userInfo != null) {
             myJson.setResult(userInfo);
@@ -114,6 +115,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
+    @RequestMapping(value = "/editUserPwd")
     public MyJson editUserPwd(HttpServletRequest request, String username, String oldPwd, String newPwd) {
         MyJson myjson = isLoggedIn(request);
         if (myjson.getStatus() == 403)

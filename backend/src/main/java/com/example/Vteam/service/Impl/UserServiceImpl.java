@@ -74,6 +74,9 @@ public class UserServiceImpl implements UserService {
         String tmp = findKeyByValue(username, tokenMap);
         String token = tmp == null ? UUID.randomUUID().toString().replaceAll("-", "") : tmp;
         tokenMap.put(token, username);
+        String hid = UUID.randomUUID().toString().replaceAll("-", "");
+        History history = new History(hid, username, "登录账号", "你登录了北洋有约平台", MyFunction.getTime());
+        historyDao.insertHistory(history);
         return token;
     }
 
@@ -93,7 +96,7 @@ public class UserServiceImpl implements UserService {
     public int editUserPwd(String username, String oldPwd, String newPwd) {
         int suc1 = userDao.editUserPwd(username, oldPwd, newPwd);
         String hid = UUID.randomUUID().toString().replaceAll("-", "");
-        History history = new History(hid, username, "创建招募", "你修改了个人密码", MyFunction.getTime());
+        History history = new History(hid, username, "修改信息", "你修改了个人密码", MyFunction.getTime());
         int suc2 = historyDao.insertHistory(history);
         return suc1 & suc2;
     }

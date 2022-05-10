@@ -15,7 +15,7 @@ import java.util.Map;
  * @Version 1.0
  */
 public interface RecruitService {
-    int createRecruit(String username,
+    int createRecruitWithImg(String username,
                       String rtitle,
                       String description,
                       int maxMates,
@@ -23,7 +23,16 @@ public interface RecruitService {
                       String rclass,
                       String content,
                       MultipartFile img,
-                      String[] rtags);
+                      String rtags);
+
+    int createRecruitWithoutImg(String username,
+                             String rtitle,
+                             String description,
+                             int maxMates,
+                             String endTime,
+                             String rclass,
+                             String content,
+                             String rtags);
 
     int joinRecruit(String rid, String username);
 

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface HistoryRepository extends JpaRepository<History,String> {
-    @Query("select h from History h where h.username=?1")
+public interface HistoryRepository extends JpaRepository<History, String> {
+    @Query("select h from History h where h.username=?1 order by h.htime asc ")
     List<History> findAllHistoryByUsername(String username);
 }

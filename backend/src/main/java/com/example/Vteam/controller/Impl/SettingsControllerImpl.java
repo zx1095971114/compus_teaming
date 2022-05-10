@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.example.Vteam.utils.MyFunction;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @projectName: project
@@ -32,13 +31,33 @@ public class SettingsControllerImpl implements SettingsController {
     SettingsService settingsService;
 
     @RequestMapping(value = "/getSettings")
-    public MyJson getSettings(HttpServletRequest request){
+    public MyJson getSettings(HttpServletRequest request) {
         MyJson myJson = MyFunction.isLoggedIn(request);
-        if(myJson.getStatus() == 403) { return myJson;}
+        if (myJson.getStatus() == 403) {
+            return myJson;
+        }
 
         //获取class和tags
-        List<Settings> result = settingsService.getSettings();
-        if(!result.isEmpty()){
+        List<Settings> list = settingsService.getSettings();
+        Map<String, Object> result = new HashMap();
+        List<String> tags = new ArrayList();
+        Set<String> s = new HashSet<>();
+        for (Settings settings : list) {
+            tags.add(settings.getId().getTags());
+            s.add(settings.getId().getClasses());
+        }
+        s.add("全部板块");
+        List<Map<String, String>> classes = new ArrayList();
+        for (String s1 : s) {
+            Map<String, String> option = new HashMap<>();
+            option.put("value", s1);
+            option.put("label", s1);
+            classes.add(option);
+        }
+        result.put("tags", tags);
+        result.put("options", classes);
+//        System.out.println(result);
+        if (!result.isEmpty()) {
             myJson.setStatus(200);
             myJson.setMessage("获取全部标签，板块成功");
             myJson.setResult(result);

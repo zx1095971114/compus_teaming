@@ -45,15 +45,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public VteamUser getVteamUser(String username) {
-        return userRepository.getById(username);
+        if (userRepository.existsById(username))
+            return userRepository.getById(username);
+        else
+            return null;
     }
 
     @Override
-    public UserInfo getUserInfo(String username){
+    public UserInfo getUserInfo(String username) {
         return userInfoRepository.getById(username);
     }
 
-    public int editUserInfo(String username,String name, String sex, String email, String school) {
+    public int editUserInfo(String username, String name, String sex, String email, String school) {
         UserInfo userinfo = userInfoRepository.getById(username);
         userinfo.setName(name);
         userinfo.setSex(sex);
@@ -67,11 +70,11 @@ public class UserDaoImpl implements UserDao {
     public int editUserPwd(String username, String oldPwd, String newPwd) {
         VteamUser vteamuser = userRepository.getById(username);
         String myOldPwd = vteamuser.getPassword();
-        if(oldPwd.equals(myOldPwd)){
+        if (oldPwd.equals(myOldPwd)) {
             vteamuser.setPassword(newPwd);
             userRepository.save(vteamuser);
             return 1;
-        }else{
+        } else {
             return -1;
         }
     }
