@@ -94,7 +94,7 @@ public class UserControllerImpl implements UserController {
 
     }
 
-
+    @Override
     @RequestMapping(value = "/editUserInfo")
     public MyJson editUserInfo(HttpServletRequest request, String username, String name, String sex, String email, String school) {
         MyJson myjson = isLoggedIn(request);
@@ -114,6 +114,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
+    @RequestMapping(value = "/editPwd")
     public MyJson editUserPwd(HttpServletRequest request, String username, String oldPwd, String newPwd) {
         MyJson myjson = isLoggedIn(request);
         if (myjson.getStatus() == 403)

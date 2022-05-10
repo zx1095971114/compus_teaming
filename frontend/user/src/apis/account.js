@@ -15,3 +15,12 @@ export const edituserinfo = (username,name,sex,email,school) => {
     fd.append("school",school);
     return axios.post('/user/api/editUserInfo',fd);
 }
+
+export const editpwd = (username,oldPwd,newPwd) => {
+    let fd = new FormData();
+    fd.append("username",username);
+    fd.append("oldPwd",oldPwd);
+    fd.append("newPwd",newPwd);
+    return axios.post('/user/api/editUserPwd',fd);
+
+}
