@@ -2,11 +2,10 @@ import axios from 'axios'
 
 import ElementUI from 'element-ui';
 
-import * as welcome from './welcome.js'
-
+axios.defaults.baseURL = 'http://172.23.153.119:8088';
 // 读取api.js内部定义的请求方法
+import * as welcome from './welcome.js';
 
-// 暴露给外部以便调用，此时所有的api方法整合到了一起形成一个对象命名为apis
 
 // http request拦截器 添加一个请求拦截器
 axios.interceptors.request.use(function (config) {
@@ -41,7 +40,8 @@ axios.interceptors.response.use(
   }
 )
 
-const apis={
+// 暴露给外部以便调用，此时所有的api方法整合到了一起形成一个对象命名为apis
+const apis = {
   welcome
 }
 export default apis

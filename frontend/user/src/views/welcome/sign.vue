@@ -88,20 +88,23 @@ export default {
   },
   methods: {
     submitLogin() {
-      // this.apis.welcome.login(this.username, this.password).then((res) => {
-      //   if (res.data.status === 200) {
-      //     if (this.rememberme) {
-      //       localStorage.setItem("username", this.username);
-      //       localStorage.setItem("password", this.password);
-      //       sessionStorage.setItem("username",this.username);
-      //     } else {
-      //       localStorage.removeItem("username");
-      //       localStorage.removeItem("password");
-      //       sessionStorage.setItem("username",this.username);
-      //     }
-      this.$router.push({ name: "homepage" });
-      //   }
-      // });
+      this.apis.welcome.login(this.username, this.password).then((res) => {
+        if (res.data.status === 200) {
+          if (this.rememberme) {
+            localStorage.setItem("username", this.username);
+            localStorage.setItem("password", this.password);
+            this.$router.push({ name: "homepage" });
+          } else {
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+          }
+        } else if (res.data.status == 500) {
+          this.$notify.error({
+            title: "登录失败",
+            message: "账号或者密码错误,请重新尝试！",
+          });
+        }
+      });
     },
     clearInput() {
       this.username = "";
