@@ -19,9 +19,9 @@
 
         <el-form-item label="性别" prop="sex">
           <el-select v-model="myInfoForm.sex" placeholder="请选择性别">
-            <el-option label="男" value="man"></el-option>
-            <el-option label="女" value="woman"></el-option>
-            <el-option label="保密" value="secrecy"></el-option>
+            <el-option label="男士" value="男士"></el-option>
+            <el-option label="女士" value="女士"></el-option>
+            <el-option label="不愿透露" value="不愿透露"></el-option>
           </el-select>
         </el-form-item>
 
