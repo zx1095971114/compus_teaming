@@ -90,7 +90,8 @@
       <div class="box">
         <strong>截止时间(必填)</strong>
         <el-date-picker
-          v-model="recruitInfo.endtime"
+          v-model="recruitInfo.endTime"
+          value-format="yyyy-MM-dd hh:mm:ss"
           type="datetime"
           placeholder="选择日期"
         >
@@ -177,7 +178,7 @@ export default {
 
     return {
       recruitInfo: {
-        endtime: "",
+        endTime: "",
         rtags: [],
         num: 3,
         title: "",
@@ -270,6 +271,7 @@ export default {
         this.endtime == `` ||
         this.recruitInfo.num <= 0 ||
         this.recruitInfo.title == `` ||
+        this.recruitInfo.endTime == `` ||
         this.recruitInfo.description == `` ||
         this.recruitInfo.content == `` ||
         this.recruitInfo.rtags.length <= 0

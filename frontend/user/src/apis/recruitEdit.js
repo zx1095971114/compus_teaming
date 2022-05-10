@@ -19,5 +19,5 @@ export const createRecruit = (username, rtitle, description, maxMates, endTime, 
   for (let i = 0; i < rtags.length; i++) {
     fd.append("rtags", rtags[i])
   }
-  return axios.post("/recruit/api/createRecruit", fd);
+  return axios.post("/recruit/api/create", fd);
 }

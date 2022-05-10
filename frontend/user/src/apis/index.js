@@ -6,6 +6,8 @@ axios.defaults.baseURL = 'http://192.168.43.94:8088';
 // 读取api.js内部定义的请求方法
 import * as welcome from './welcome.js';
 import * as recruitEdit from './recruitEdit.js';
+import * as settings from './settings.js';
+import * as account from './account.js';
 
 
 // http request拦截器 添加一个请求拦截器
@@ -44,6 +46,8 @@ axios.interceptors.response.use(
 // 暴露给外部以便调用，此时所有的api方法整合到了一起形成一个对象命名为apis
 const apis = {
   welcome,
-  recruitEdit
+  recruitEdit,
+  settings,
+  account,
 }
 export default apis
