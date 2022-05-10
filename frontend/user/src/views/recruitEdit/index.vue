@@ -294,21 +294,54 @@ export default {
           this.coverImage,
           this.recruitInfo.rtags
         );
-        this.apis.recruitEdit
-          .createRecruit(
-            sessionStorage.getItem("username"),
-            this.recruitInfo.title,
-            this.recruitInfo.description,
-            this.recruitInfo.num,
-            this.recruitInfo.endTime,
-            this.recruitInfo.rclass,
-            this.recruitInfo.content,
-            this.coverImage,
-            this.recruitInfo.rtags
-          )
-          .then((res) => {
-            console.log(res);
-          });
+        if (this.coverImage !== null) {
+          this.apis.recruitEdit
+            .createRecruitWithImg(
+              sessionStorage.getItem("username"),
+              this.recruitInfo.title,
+              this.recruitInfo.description,
+              this.recruitInfo.num,
+              this.recruitInfo.endTime,
+              this.recruitInfo.rclass,
+              this.recruitInfo.content,
+              this.coverImage,
+              this.recruitInfo.rtags
+            )
+            .then((res) => {
+              // console.log(res);
+              if (res.data.status == 200) {
+                this.$router.push({ name: "recruitList" });
+                this.$notify({
+                  title: "发布成功",
+                  message: "您已成功发布招募！",
+                  type: "success",
+                });
+              }
+            });
+        } else {
+          this.apis.recruitEdit
+            .createRecruitWithoutImg(
+              sessionStorage.getItem("username"),
+              this.recruitInfo.title,
+              this.recruitInfo.description,
+              this.recruitInfo.num,
+              this.recruitInfo.endTime,
+              this.recruitInfo.rclass,
+              this.recruitInfo.content,
+              this.recruitInfo.rtags
+            )
+            .then((res) => {
+              // console.log(res);
+              if (res.data.status == 200) {
+                this.$router.push({ name: "recruitList" });
+                this.$notify({
+                  title: "发布成功",
+                  message: "您已成功发布招募！",
+                  type: "success",
+                });
+              }
+            });
+        }
       }
     },
     beforeUpload(file) {
