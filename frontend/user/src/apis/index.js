@@ -2,28 +2,28 @@ import axios from 'axios'
 
 import ElementUI from 'element-ui';
 
-import * as apis from './apis.js'
+import * as welcome from './welcome.js'
 
 // 读取api.js内部定义的请求方法
 
 // 暴露给外部以便调用，此时所有的api方法整合到了一起形成一个对象命名为apis
 
 // http request拦截器 添加一个请求拦截器
-// axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function (config) {
 
-//   // config.headers['Content-Type'] = "multipart/form-data"
-//   // 
-//   let token = sessionStorage.getItem("token");
+  // config.headers['Content-Type'] = "multipart/form-data"
+  // 
+  let token = sessionStorage.getItem("token");
 
-//   if (token) {
-//     //将token放到请求头发送给服务器,将tokenkey放在请求头中
-//     config.headers["x-auth-token"] = token;
-//   }
-//   return config;
-// }, function (error) {
-//   // Do something with request error
-//   return Promise.reject(error);
-// });
+  if (token) {
+    //将token放到请求头发送给服务器,将tokenkey放在请求头中
+    config.headers["x-auth-token"] = token;
+  }
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 // 拦截器
 axios.interceptors.response.use(
@@ -33,7 +33,7 @@ axios.interceptors.response.use(
   error => {
     ElementUI.Notification({
       title: '警告',
-      message: '出错了~请检查填写数据格式是否符合规范🛠️！',
+      message: '出错了~后台小哥哥正在紧急维护中🛠️！',
       type: 'error'
     });
     submitError();
@@ -41,4 +41,7 @@ axios.interceptors.response.use(
   }
 )
 
+const apis={
+  welcome
+}
 export default apis
