@@ -8,6 +8,7 @@ import * as welcome from './welcome.js';
 import * as recruitEdit from './recruitEdit.js';
 import * as settings from './settings.js';
 import * as account from './account.js';
+import * as history from './history.js'
 
 
 // http request拦截器 添加一个请求拦截器
@@ -49,5 +50,6 @@ const apis = {
   recruitEdit,
   settings,
   account,
+  history,
 }
 export default apis
