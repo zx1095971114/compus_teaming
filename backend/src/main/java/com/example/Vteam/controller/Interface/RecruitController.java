@@ -13,16 +13,27 @@ import javax.servlet.http.HttpServletRequest;
  * @Version 1.0
  */
 public interface RecruitController {
-    MyJson createRecruit(HttpServletRequest request,
-                         @RequestParam("username") String username,
-                         @RequestParam("rtitle") String rtitle,
-                         @RequestParam("description") String description,
-                         @RequestParam("maxMates") int maxMates,
-                         @RequestParam("endTime") String endTime,
-                         @RequestParam("rclass") String rclass,
-                         @RequestParam("content") String content,
-                         @RequestParam("img") MultipartFile img,
-                         @RequestBody String[] rtags
+    MyJson createRecruitWithImg(HttpServletRequest request,
+                                @RequestParam("username") String username,
+                                @RequestParam("rtitle") String rtitle,
+                                @RequestParam("description") String description,
+                                @RequestParam("maxMates") int maxMates,
+                                @RequestParam("endTime") String endTime,
+                                @RequestParam("rclass") String rclass,
+                                @RequestParam("content") String content,
+                                @RequestParam("rtags") String rtags,
+                                @RequestParam("img") MultipartFile img
+    );
+
+    MyJson createRecruitWithoutImg(HttpServletRequest request,
+                                   @RequestParam("username") String username,
+                                   @RequestParam("rtitle") String rtitle,
+                                   @RequestParam("description") String description,
+                                   @RequestParam("maxMates") int maxMates,
+                                   @RequestParam("endTime") String endTime,
+                                   @RequestParam("rclass") String rclass,
+                                   @RequestParam("content") String content,
+                                   @RequestParam("rtags") String rtags
     );
 
     MyJson joinRecruit(HttpServletRequest request,

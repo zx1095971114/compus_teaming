@@ -9,6 +9,7 @@ import com.example.Vteam.repository.RecruitInfoRepository;
 import com.example.Vteam.repository.UserInfoRepository;
 import com.example.Vteam.repository.VteamInfoRepository;
 import com.example.Vteam.repository.UserRepository;
+import com.example.Vteam.utils.MyFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +40,7 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public VteamInfo createTeamInfo() {
         String tid = UUID.randomUUID().toString().replaceAll("-", "");
-        return new VteamInfo(tid, 0, 0, "", "", 0);
+        return new VteamInfo(tid, 0, 0, "", MyFunction.getTime(), 0);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class TeamDaoImpl implements TeamDao {
 
     @Override
     public List<VteamInfo> getMyAttendedTeam(String username) {
-        return vteamInfoRepository.findVTeamInfoByUsernameAndIsNotSuccess('-'+username);
+        return vteamInfoRepository.findVTeamInfoByUsernameAndIsNotSuccess('-' + username);
     }
 
     @Override
@@ -80,22 +81,22 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public UserInfo getUserInfoByUsername(String username){
+    public UserInfo getUserInfoByUsername(String username) {
         return userInfoRepository.getById(username);
     }
 
     @Override
-    public List<VteamInfo> getUserVteamInfo(String username){
+    public List<VteamInfo> getUserVteamInfo(String username) {
         return vteamInfoRepository.findVTeamInfoByUsernameAndIsSuccess(username);
     }
 
     @Override
-    public VteamUser getVteamUserByUsername(String username){
+    public VteamUser getVteamUserByUsername(String username) {
         return vteamUser.getById(username);
     }
 
     @Override
-    public List<RecruitInfo> getRecruitInfoByTid(String tid){
+    public List<RecruitInfo> getRecruitInfoByTid(String tid) {
         return recruitInfoRepository.findRecruitInfoByTid(tid);
     }
 

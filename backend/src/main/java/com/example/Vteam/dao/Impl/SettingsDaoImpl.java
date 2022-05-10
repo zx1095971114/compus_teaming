@@ -26,6 +26,6 @@ public class SettingsDaoImpl implements SettingsDao {
     SettingsRepository settingsRepository;
 
     public List<Settings> getAllSettings() {
-        return settingsRepository.findAll();
+        return settingsRepository.findAllSettings();
     }
 }

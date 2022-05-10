@@ -27,12 +27,12 @@ public class MyFunction {
     public static MyJson isLoggedIn(HttpServletRequest request) {
         MyJson myJson = new MyJson();
         // 通过请求头判断用户登录状态
-        String token = request.getHeader("token");
-        if (!tokenMap.containsKey(token)) {
-            myJson.setStatus(403);
-            myJson.setResult("fail");
-            myJson.setMessage("Please login first");
-        }
+//        String token = request.getHeader("token");
+//        if (!tokenMap.containsKey(token)) {
+//            myJson.setStatus(403);
+//            myJson.setResult("fail");
+//            myJson.setMessage("Please login first");
+//        }
         // test
         myJson.setStatus(200);
         return myJson;

@@ -6,7 +6,7 @@ export const uploadImg = (img) => {
   return axios.post('/recruit/api/uploadImg', fd);
 }
 
-export const createRecruit = (username, rtitle, description, maxMates, endTime, rclass, content, img, rtags) => {
+export const createRecruitWithImg = (username, rtitle, description, maxMates, endTime, rclass, content, img, rtags) => {
   let fd = new FormData();
   fd.append("username", username);
   fd.append("rtitle", rtitle);
@@ -16,8 +16,28 @@ export const createRecruit = (username, rtitle, description, maxMates, endTime, 
   fd.append("rclass", rclass);
   fd.append("content", content);
   fd.append("img", img);
-  for (let i = 0; i < rtags.length; i++) {
-    fd.append("rtags", rtags[i])
+  var tags = rtags[0];
+  for (let i = 1; i < rtags.length; i++) {
+    tags = tags + "-" + rtags[i]
   }
-  return axios.post("/recruit/api/create", fd);
+  fd.append("rtags", tags);
+  return axios.post("/recruit/api/createWithImg", fd);
+}
+
+
+export const createRecruitWithoutImg = (username, rtitle, description, maxMates, endTime, rclass, content, rtags) => {
+  let fd = new FormData();
+  fd.append("username", username);
+  fd.append("rtitle", rtitle);
+  fd.append("description", description);
+  fd.append("maxMates", maxMates);
+  fd.append("endTime", endTime);
+  fd.append("rclass", rclass);
+  fd.append("content", content);
+  var tags = rtags[0];
+  for (let i = 1; i < rtags.length; i++) {
+    tags = tags + "-" + rtags[i]
+  }
+  fd.append("rtags", tags);
+  return axios.post("/recruit/api/createWithoutImg", fd);
 }

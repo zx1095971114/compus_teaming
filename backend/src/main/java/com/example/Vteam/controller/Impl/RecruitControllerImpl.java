@@ -38,20 +38,36 @@ public class RecruitControllerImpl implements RecruitController {
     TeamService teamService;
 
     @Override
-    @RequestMapping("/creat")
-    public MyJson createRecruit(HttpServletRequest request,
-                                @RequestParam("username") String username,
-                                @RequestParam("rtitle") String rtitle,
-                                @RequestParam("description") String description,
-                                @RequestParam("maxMates") int maxMates,
-                                @RequestParam("endTime") String endTime,
-                                @RequestParam("rclass") String rclass,
-                                @RequestParam("content") String content,
-                                @RequestParam("img") MultipartFile img,
-                                @RequestBody String[] rtags) {
+    @RequestMapping("/createWithImg")
+    public MyJson createRecruitWithImg(HttpServletRequest request,
+                                       @RequestParam("username") String username,
+                                       @RequestParam("rtitle") String rtitle,
+                                       @RequestParam("description") String description,
+                                       @RequestParam("maxMates") int maxMates,
+                                       @RequestParam("endTime") String endTime,
+                                       @RequestParam("rclass") String rclass,
+                                       @RequestParam("content") String content,
+                                       @RequestParam("rtags") String rtags,
+                                       @RequestParam("img") MultipartFile img) {
         MyJson myJson = isLoggedIn(request);
         if (myJson.getStatus() == 403) return myJson;
-        int suc = recruitService.createRecruit(username, rtitle, description, maxMates, endTime, rclass, content, img, rtags);
+        int suc = recruitService.createRecruitWithImg(username, rtitle, description, maxMates, endTime, rclass, content, img, rtags);
+        if (suc == 1) {
+            myJson.setStatus(200);
+            myJson.setMessage("招募任务发布成功！");
+        } else {
+            myJson.setStatus(500);
+            myJson.setMessage("招募任务发布失败");
+        }
+        return myJson;
+    }
+
+    @Override
+    @RequestMapping(value="createWithoutImg")
+    public MyJson createRecruitWithoutImg(HttpServletRequest request, String username, String rtitle, String description, int maxMates, String endTime, String rclass, String content, String rtags) {
+        MyJson myJson = isLoggedIn(request);
+        if (myJson.getStatus() == 403) return myJson;
+        int suc = recruitService.createRecruitWithoutImg(username, rtitle, description, maxMates, endTime, rclass, content, rtags);
         if (suc == 1) {
             myJson.setStatus(200);
             myJson.setMessage("招募任务发布成功！");
@@ -108,7 +124,7 @@ public class RecruitControllerImpl implements RecruitController {
     }
 
     @Override
-
+    @RequestMapping(value = "/uploadImg")
     public MyJson uploadImg(HttpServletRequest request, @RequestParam("img") MultipartFile img) {
         MyJson myjson = isLoggedIn(request);
         if (myjson.getStatus() == 403) return myjson;
