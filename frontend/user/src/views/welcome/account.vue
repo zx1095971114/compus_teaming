@@ -39,6 +39,15 @@
             ><template slot="prepend">学校名称:</template></el-input
           >
         </el-form-item>
+        <el-form-item prop="grade">
+          <el-input
+            type="text"
+            v-model="ruleForm.grade"
+            autocomplete="off"
+            placeholder="请输入就读年级"
+            ><template slot="prepend">就读年级:</template></el-input
+          >
+        </el-form-item>
         <el-form-item prop="sex">
           <el-select v-model="ruleForm.sex" placeholder="请选择您的性别">
             <el-option label="男士" value="male"></el-option>
@@ -115,6 +124,7 @@ export default {
         name: "",
         phoneNumber: "",
         school: "",
+        grade:"",
         sex: "",
       },
       avatar: null,
@@ -132,6 +142,7 @@ export default {
           let username = this.$route.params.username;
           let email = this.$route.params.email;
           let password = this.$route.params.password;
+          console.log(username,email,password);
           this.$refs.uploader.submit();
           this.apis.welcome
             .register(this.ruleForm, this.avatar, username, email, password)
@@ -142,7 +153,7 @@ export default {
                   message: "账号注册成功！",
                   type: "success",
                 });
-                this.$router.push({ name: "login" });
+                this.$router.push({ name: "sign" });
               } else {
                 this.$notify.error({
                   title: "错误",

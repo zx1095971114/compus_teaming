@@ -93,6 +93,8 @@ export default {
           if (this.rememberme) {
             localStorage.setItem("username", this.username);
             localStorage.setItem("password", this.password);
+            // 存储token值
+            console.log(res.data);
             this.$router.push({ name: "homepage" });
           } else {
             localStorage.removeItem("username");
