@@ -243,6 +243,7 @@ export default {
       this.$router.push({ name: "recruitEdit" });
     },
     content() {
+      sessionStorage.setItem("rid",)
       this.$router.push({ name: "recruitContent" });
     },
     hasTag(topic) {

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan(basePackages ={"com.example"})
+@ComponentScan(basePackages = {"com.example"})
 public class VTeam {
 
     public static void main(String[] args) {
