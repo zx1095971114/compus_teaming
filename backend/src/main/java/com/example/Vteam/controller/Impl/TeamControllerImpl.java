@@ -44,7 +44,6 @@ public class TeamControllerImpl implements TeamController {
                                   @RequestParam("username") String username){
         MyJson myJson = MyFunction.isLoggedIn(request);
         if(myJson.getStatus() == 403){ return myJson; }
-
         List<Map<String,Object>> result = teamService.getUserTeamInfo(username);
         if (result != null){
             myJson.setResult(result);

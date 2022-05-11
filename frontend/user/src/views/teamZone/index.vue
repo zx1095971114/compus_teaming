@@ -19,7 +19,7 @@
       >
         <div class="person">
           <div class="avatar">
-            <img :src="item.avatar" alt />
+            <img :src="item.avatarPath" alt />
           </div>
           <span class="more">{{ item.name }}</span>
         </div>
@@ -31,10 +31,10 @@
             <b><i class="bx bxs-graduation"></i></b>{{ item.grade }}
           </p>
           <p>
-            <b><i class="fad fa-mobile"></i></b>{{ item.phone }}
+            <b><i class="fad fa-mobile"></i></b>{{ item.phoneNumber }}
           </p>
           <p>
-            <b><i class="fad fa-house"></i></b>{{ item.addr }}
+            <b><i class="fad fa-house"></i></b>{{ item.school }}
           </p>
           <p>
             <b><i class="fad fa-envelope"></i></b>{{ item.email }}
@@ -52,8 +52,9 @@ export default {
     this.apis.team.getTeamInfo(sessionStorage.getItem("tid")).then((res) => {
       var result = res.data.result;
       this.arr = result;
+      // console.log(result);
       for(var i=0;i<this.arr.length;i++){
-        this.arr[i].avatar = "http://192.168.43.94:8088/images" + this.arr[i].avatar;
+        this.arr[i].avatarPath = "http://192.168.43.94:8088/images" + this.arr[i].avatarPath;
       }
     })
   },
@@ -147,7 +148,7 @@ export default {
 }
 .person {
   margin-left: 30px;
-
+  min-width: 200px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -188,5 +189,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+.other-info p {
+  min-width: 80px;
+  
 }
 </style>

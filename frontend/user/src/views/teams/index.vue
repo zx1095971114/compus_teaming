@@ -10,7 +10,7 @@
     <div id="container">
       <div id="list">
         <transition-group>
-          <item v-for="el in arr" :key="el.id" :el="el"></item>
+          <item v-for="el in arr" :key="el.tid" :el="el"></item>
         </transition-group>
       </div>
     </div>
@@ -25,70 +25,19 @@ export default {
   components: {
     item,
   },
+  created() {
+    this.apis.teams
+      .getTeamList(sessionStorage.getItem("username"))
+      .then((res) => {
+        console.log(res);
+        if (res.data.status == 200) {
+          this.arr = res.data.result;
+        }
+      });
+  },
   data() {
     return {
-      arr: [
-        {
-          id: "gasgas",
-          title: "寻找伙伴",
-          type: "我创建的",
-          time: "2022-06-05 8:30",
-          ttags: ["三国杀", "2222", "3333"],
-          avatars: [
-            "../../../static/images/teams/avatar1.png",
-            "../../../static/images/teams/avatar2.jpg",
-            "../../../static/images/teams/avatar3.jpg",
-          ],
-        },
-        {
-          id: "gasgafsafs",
-          title: "寻找伙伴",
-          type: "我参与的",
-          time: "2022-07-01 12:00",
-          ttags: ["三国杀", "2222", "3333"],
-          avatars: [
-            "../../../static/images/teams/avatar1.png",
-            "../../../static/images/teams/avatar2.jpg",
-            "../../../static/images/teams/avatar3.jpg",
-          ],
-        },
-        {
-          id: "gafasgas",
-          title: "寻找伙伴",
-          type: "我创建的",
-          time: "2022-06-05 8:30",
-          ttags: ["三国杀", "2222", "3333"],
-          avatars: [
-            "../../../static/images/teams/avatar1.png",
-            "../../../static/images/teams/avatar2.jpg",
-            "../../../static/images/teams/avatar3.jpg",
-          ],
-        },
-        {
-          id: "gafas1gas",
-          title: "寻找伙伴",
-          type: "我创建的",
-          time: "2022-06-05 8:30",
-          ttags: ["三国杀", "2222", "3333"],
-          avatars: [
-            "../../../static/images/teams/avatar1.png",
-            "../../../static/images/teams/avatar2.jpg",
-            "../../../static/images/teams/avatar3.jpg",
-          ],
-        },
-        {
-          id: "gafasg22as",
-          title: "寻找伙伴",
-          type: "我创建的",
-          time: "2022-06-05 8:30",
-          ttags: ["三国杀", "2222", "3333"],
-          avatars: [
-            "../../../static/images/teams/avatar1.png",
-            "../../../static/images/teams/avatar2.jpg",
-            "../../../static/images/teams/avatar3.jpg",
-          ],
-        },
-      ],
+      arr: [],
     };
   },
 };
