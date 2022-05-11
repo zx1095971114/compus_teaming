@@ -10,6 +10,7 @@ import * as settings from './settings.js';
 import * as account from './account.js';
 import * as history from './history.js'
 import * as recruitList from './recruitList.js';
+import * as recruitContent from './recruitContent.js'
 
 
 // http request拦截器 添加一个请求拦截器
@@ -53,5 +54,6 @@ const apis = {
   account,
   history,
   recruitList,
+  recruitContent,
 }
 export default apis

@@ -32,7 +32,7 @@
           v-for="topic in filterTopics"
           :key="topic.rid"
         >
-          <h3 @click="content">{{ topic.rtitle }}</h3>
+          <h3 @click="content(topic.rid)">{{ topic.rtitle }}</h3>
           <div class="main">
             <p class="content">
               {{ topic.description }}
@@ -242,8 +242,11 @@ export default {
     create() {
       this.$router.push({ name: "recruitEdit" });
     },
-    content() {
-      sessionStorage.setItem("rid",)
+    content(rid) {
+      sessionStorage.setItem("rid",rid);
+      this.apis.recruitList.watchRecruit(sessionStorage.getItem("username"),sessionStorage.getItem("rid")).then((res) => {
+        // console.log(res);
+      })
       this.$router.push({ name: "recruitContent" });
     },
     hasTag(topic) {
