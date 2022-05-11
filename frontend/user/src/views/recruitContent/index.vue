@@ -44,21 +44,17 @@
       <div class="footer">
         <div class="person">
           <h2>团队成员:</h2>
-          <div 
-          class="avatar"
-          v-for="(showAvatar,index) in showAvatars"
-          :key="index"
+          <div
+            class="avatar"
+            v-for="(showAvatar, index) in showAvatars"
+            :key="index"
           >
-            <img
-              :src="showAvatar"
-              alt
-            />
+            <img :src="showAvatar" alt />
           </div>
-          
-          
-          <span class="more">{{totalnum}} Teammates</span>
+
+          <span class="more">{{ totalnum }} Teammates</span>
         </div>
-        <div class="create" >
+        <div class="create">
           <strong>+&nbsp;&nbsp;加入团队</strong>
         </div>
       </div>
@@ -88,8 +84,8 @@ export default {
         var i;
         var myavatar = [];
         for (i = 0; i < result.avatorPath.length; i++) {
-          
-          let avatar = "http://192.168.43.94:8088/images" + result.avatorPath[i];
+          let avatar =
+            "http://192.168.43.94:8088/images" + result.avatorPath[i];
           myavatar[i] = avatar;
         }
 
@@ -103,7 +99,7 @@ export default {
         }
 
         this.totalnum = j;
-        console.log(this.recruitcontent);
+        // console.log(this.recruitcontent);
 
         this.recruitcontent.avatorPath = myavatar;
       });

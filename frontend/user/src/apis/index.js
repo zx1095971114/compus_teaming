@@ -11,6 +11,7 @@ import * as account from './account.js';
 import * as history from './history.js'
 import * as recruitList from './recruitList.js';
 import * as recruitContent from './recruitContent.js'
+import * as messages from './messages.js'
 
 
 // http request拦截器 添加一个请求拦截器
@@ -55,5 +56,6 @@ const apis = {
   history,
   recruitList,
   recruitContent,
+  messages,
 }
 export default apis
