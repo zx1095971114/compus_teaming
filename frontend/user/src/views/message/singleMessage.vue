@@ -40,7 +40,7 @@ export default {
       }, 300);
       this.apis.messages.setSingleMessageStatus(mid).then((res) => {
         // console.log(res);
-      })
+      });
     },
     initDate() {
       var date = this.mes.mtime;
@@ -92,6 +92,9 @@ export default {
   border-radius: 12px;
 }
 .title {
+  font-size: 18px;
+  font-family: "htymr";
+  font-weight: 700;
   width: 90%;
 }
 .state {
@@ -126,5 +129,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
+  font-size: 16px;
 }
 </style>

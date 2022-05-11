@@ -133,13 +133,13 @@ export default {
   name: "account",
   directives: {
     state: function (el, binding) {
-      if (binding.value === "学习") {
+      if (binding.value === "学习板块") {
         el.style.backgroundColor = "#f34b7d";
-      } else if (binding.value === "生活") {
+      } else if (binding.value === "生活板块") {
         el.style.backgroundColor = "#41b883";
-      } else if (binding.value === "娱乐") {
+      } else if (binding.value === "娱乐板块") {
         el.style.backgroundColor = "#f1e05a";
-      } else if (binding.value === "其他") {
+      } else if (binding.value === "其他板块") {
         el.style.backgroundColor = "#0984e3";
       }
     },

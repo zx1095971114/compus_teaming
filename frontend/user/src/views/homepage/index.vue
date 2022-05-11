@@ -150,12 +150,13 @@ export default {
     var date = new Date();
     var s = "日一二三四五六";
     const h = this.$createElement;
+    var name = this.name;
     this.$notify({
       title: "登陆成功✔️",
       message: h(
         "b",
         { style: "color: #333" },
-        "您好Langwenchong同学，欢迎登陆「北洋有约」校内组队系统，现在是北京时间" +
+        "您好!欢迎登陆「北洋有约」校内组队系统，现在是北京时间" +
           date.getHours() +
           ":" +
           date.getMinutes() +

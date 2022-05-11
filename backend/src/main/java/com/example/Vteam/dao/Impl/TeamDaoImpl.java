@@ -40,7 +40,7 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public VteamInfo createTeamInfo() {
         String tid = UUID.randomUUID().toString().replaceAll("-", "");
-        return new VteamInfo(tid, 0, 0, "", MyFunction.getTime(), 0);
+        return new VteamInfo(tid, 0, 1, "", MyFunction.getTime(), 0);
     }
 
     @Override

@@ -1,29 +1,16 @@
 <template>
   <div id="item" class="animate__animated animate__flipInX">
     <h2>
-      <div class="point" v-state="el.type"></div>
-      {{ el.title }}
+      <div class="point" v-state="el.rclass"></div>
+      {{ el.rtitle }}
     </h2>
-    <p>加入时间：{{ el.time }}</p>
-    <div class="tags">
-      <div class="tag" v-for="(topicTag, k) in el.tags" :key="k">
-        <img
-          src="../../../static/images/teams/tag.png"
-          height="16px"
-          alt="tag"
-        />{{ topicTag }}
-      </div>
-    </div>
+    <p>组队成功时间：{{ el.successTime }}</p>
+
     <div class="person">
-      <div
-        class="avatar"
-        v-for="(avatar, i) in el.avatars"
-        :key="i"
-        v-if="i < 5"
-      >
+      <div class="avatar" v-for="(avatar, i) in avatars" :key="i" v-if="i < 5">
         <img :src="avatar" alt />
       </div>
-      <span class="more">+63 Teammates</span>
+      <span class="more">{{ el.maxMates }} Teammates</span>
     </div>
     <strong @click="toZone">前往团队空间</strong>
   </div>
@@ -35,17 +22,35 @@ export default {
   props: {
     el: Object,
   },
+  data() {
+    return {
+      avatars: [],
+    };
+  },
+  created() {
+    for (let i = 0; i < this.el.avatars.length; i++) {
+      var temp = this.el.avatars[i];
+      var avatarPath = "http://192.168.43.94:8088/images" + temp;
+      console.log(avatarPath);
+      this.avatars.push(avatarPath);
+    }
+  },
   methods: {
     toZone() {
+      sessionStorage.setItem("tid", this.el.tid);
       this.$router.push({ name: "teamZone" });
     },
   },
   directives: {
     state: function (el, binding) {
-      if (binding.value === "我创建的") {
+      if (binding.value === "学习板块") {
         el.style.backgroundColor = "#f34b7d";
-      } else if (binding.value === "我参与的") {
+      } else if (binding.value === "生活板块") {
         el.style.backgroundColor = "#41b883";
+      } else if (binding.value === "娱乐板块") {
+        el.style.backgroundColor = "#f1e05a";
+      } else if (binding.value === "其他板块") {
+        el.style.backgroundColor = "#0984e3";
       }
     },
   },
