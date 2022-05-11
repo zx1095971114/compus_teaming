@@ -3,7 +3,7 @@
     <div id="head">
       <div class="main">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ name: 'exam' }"
+          <el-breadcrumb-item :to="{ name: 'recruitList' }"
             >招募列表</el-breadcrumb-item
           >
           <el-breadcrumb-item>学习板块</el-breadcrumb-item>
@@ -11,8 +11,11 @@
         <h2>
           期末大作业组队<span class="match-status $statusSmCls">招募中</span>
         </h2>
-        <p class="item">招募时间范围： 2022-04-05 至 2022-06-07</p>
-        <p class="item">招募发起人：郎文翀</p>
+        <p class="item">
+          招募时间范围： {{ recruitcontent.startTime }} 至
+          {{ recruitcontent.endTime }}
+        </p>
+        <p class="item">招募发起人：{{ recruitcontent.creator }}</p>
         <p class="item"></p>
       </div>
       <h2>欢迎加入团队，与我们一同合作完成任务！</h2>
@@ -29,51 +32,33 @@
         </h2>
         <div id="clock">
           <h2>距离停止招募还有:</h2>
-          <flip-countdown deadline="2023-12-25 00:00:00"></flip-countdown>
+          <flip-countdown :deadline="recruitcontent.endTime"></flip-countdown>
         </div>
       </div>
       <div class="tips">
         <h2>●招募内容：</h2>
         <div class="ql-container ql-snow">
-          <div class="content ql-editor" v-html="content" />
+          <div class="content ql-editor" v-html="recruitcontent.content" />
         </div>
       </div>
       <div class="footer">
         <div class="person">
           <h2>团队成员:</h2>
-          <div class="avatar">
+          <div 
+          class="avatar"
+          v-for="(showAvatar,index) in showAvatars"
+          :key="index"
+          >
             <img
-              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
+              :src="showAvatar"
               alt
             />
           </div>
-          <div class="avatar">
-            <img
-              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
-              alt
-            />
-          </div>
-          <div class="avatar">
-            <img
-              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
-              alt
-            />
-          </div>
-          <div class="avatar">
-            <img
-              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
-              alt
-            />
-          </div>
-          <div class="avatar">
-            <img
-              src="https://tse1-mm.cn.bing.net/th/id/OIP-C.StJ-mvGD2FVWW9WaleP5SQHaHZ?w=224&h=220&c=7&r=0&o=5&dpr=1.25&pid=1.7"
-              alt
-            />
-          </div>
-          <span class="more">+63 Teammates</span>
+          
+          
+          <span class="more">{{totalnum}} Teammates</span>
         </div>
-        <div class="create" @click="create">
+        <div class="create" >
           <strong>+&nbsp;&nbsp;加入团队</strong>
         </div>
       </div>
@@ -90,6 +75,39 @@ import "quill/dist/quill.bubble.css";
 export default {
   name: "recruitContent",
   components: { FlipCountdown },
+  created() {
+    this.apis.recruitContent
+      .getRecruitInfo(
+        sessionStorage.getItem("username"),
+        sessionStorage.getItem("rid")
+      )
+      .then((res) => {
+        // console.log(res.data.result);
+        var result = res.data.result;
+        this.recruitcontent = result;
+        var i;
+        var myavatar = [];
+        for (i = 0; i < result.avatorPath.length; i++) {
+          
+          let avatar = "http://192.168.43.94:8088/images" + result.avatorPath[i];
+          myavatar[i] = avatar;
+        }
+
+        var j = myavatar.length;
+        if (j <= 5) {
+          this.showAvatars = myavatar;
+        } else {
+          for (var k = 0; k < 5; k++) {
+            this.showAvatars[k] = myavatar[k];
+          }
+        }
+
+        this.totalnum = j;
+        console.log(this.recruitcontent);
+
+        this.recruitcontent.avatorPath = myavatar;
+      });
+  },
   methods: {
     backup() {
       this.$router.push({ name: "recruitList" });
@@ -97,11 +115,19 @@ export default {
   },
   data() {
     return {
-      content: `
-          <h1 class="ql-align-center"><span class="ql-font-serif" style="background-color: rgb(240, 102, 102); color: rgb(255, 255, 255);"> I am snow example! </span></h1><p><br></p><p><span class="ql-font-serif">W Can a man still be brave if he's afraid? That is the only time a man can be brave. </span></p><p><br></p><p><strong class="ql-font-serif ql-size-large">Courage and folly is </strong><strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0, 0);">always</strong><strong class="ql-font-serif ql-size-large"> just a fine line.</strong></p><p><br></p><p><u class="ql-font-serif">There is only one God, and his name is Death. And there is only one thing we say to Death: "Not today."</u></p><p><br></p><p><em class="ql-font-serif">Fear cuts deeper than swords.</em></p><p><br></p><pre class="ql-syntax" spellcheck="false"><span class="hljs-keyword">const</span> a = <span class="hljs-number">10</span>;
-         
-        `,
-      
+      recruitcontent: {
+        avatorPath: [],
+        content: "",
+        creator: "",
+        endTime: "",
+        flag: 0,
+        rclass: "",
+        rtitle: "",
+        startTime: "",
+      },
+
+      showAvatars: [],
+      totalnum: 0,
     };
   },
 };
