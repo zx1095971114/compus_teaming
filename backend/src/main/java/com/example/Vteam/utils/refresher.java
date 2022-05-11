@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,6 +63,12 @@ public class refresher {
             }
         }
 
+    }
+
+    //    刷新token
+    @Scheduled(cron = "0 0 5 * * ?") // 每天早上5点
+    public void tokenMapRefresh() {
+        Token.tokenMap = new HashMap<>();
     }
 
 }

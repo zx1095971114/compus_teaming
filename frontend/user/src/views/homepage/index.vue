@@ -49,7 +49,7 @@
         </li>
         <li @click="transmit(4)">
           <a href="#">
-            <i class='bx bx-group'></i>
+            <i class="bx bx-group"></i>
             <span class="links_name">团队管理</span>
           </a>
           <span class="tooltip">团队</span>
@@ -86,13 +86,10 @@
       <div class="profile_content">
         <div class="profile">
           <div class="profile_details">
-            <img
-              src="https://s3.bmp.ovh/imgs/2022/01/a714525bf61d4a6a.png"
-              alt
-            />
+            <img :src="avatarPath" alt />
             <div class="name_job">
-              <div class="name">Langwenchong</div>
-              <div class="job">Student</div>
+              <div class="name">{{ name }}</div>
+              <div class="job">{{ username }}</div>
             </div>
           </div>
           <i
@@ -114,8 +111,23 @@ export default {
   name: "homepage",
   data() {
     return {
+      name: "",
+      avatarPath: "",
+      username: "",
       centerDialogVisible: false,
     };
+  },
+  created() {
+    this.username = sessionStorage.getItem("username");
+    this.apis.account
+      .getuserinfo(sessionStorage.getItem("username"))
+      .then((res) => {
+        var result = res.data.result;
+        // console.log(result);
+        this.name = result.name;
+        this.avatarPath =
+          "http://192.168.43.94:8088/images" + result.avatarPath;
+      });
   },
   mounted() {
     let btn = document.querySelector("#btn");

@@ -79,10 +79,10 @@
         </el-input>
       </div>
       <div class="box">
-        <strong>招募人数(必填)</strong>
+        <strong>团队人数(包括自己,必填)</strong>
         <el-input-number
           v-model="recruitInfo.num"
-          :min="1"
+          :min="2"
           :max="10"
           label="描述文字"
         ></el-input-number>
@@ -283,17 +283,17 @@ export default {
         return;
       } else {
         this.$refs.coverImageUpload.submit();
-        console.log(
-          sessionStorage.getItem("username"),
-          this.recruitInfo.title,
-          this.recruitInfo.description,
-          this.recruitInfo.num,
-          this.recruitInfo.endTime,
-          this.recruitInfo.rclass,
-          this.recruitInfo.content,
-          this.coverImage,
-          this.recruitInfo.rtags
-        );
+        // console.log(
+        //   sessionStorage.getItem("username"),
+        //   this.recruitInfo.title,
+        //   this.recruitInfo.description,
+        //   this.recruitInfo.num,
+        //   this.recruitInfo.endTime,
+        //   this.recruitInfo.rclass,
+        //   this.recruitInfo.content,
+        //   this.coverImage,
+        //   this.recruitInfo.rtags
+        // );
         if (this.coverImage !== null) {
           this.apis.recruitEdit
             .createRecruitWithImg(

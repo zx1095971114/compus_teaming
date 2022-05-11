@@ -41,7 +41,9 @@
           </div>
           <div id="tool">
             <div id="subscribe">
-              <i class="fas fa-users"></i>&nbsp;&nbsp;人员&nbsp;{{topic.currentMates}}/ {{topic.maxMates}}
+              <i class="fas fa-users"></i>&nbsp;&nbsp;人员&nbsp;{{
+                topic.currentMates
+              }}/ {{ topic.maxMates }}
             </div>
             <div class="box">
               <i class="fad fa-question-circle"></i>&nbsp;招募发起人：<img
@@ -243,10 +245,15 @@ export default {
       this.$router.push({ name: "recruitEdit" });
     },
     content(rid) {
-      sessionStorage.setItem("rid",rid);
-      this.apis.recruitList.watchRecruit(sessionStorage.getItem("username"),sessionStorage.getItem("rid")).then((res) => {
-        // console.log(res);
-      })
+      sessionStorage.setItem("rid", rid);
+      this.apis.recruitList
+        .watchRecruit(
+          sessionStorage.getItem("username"),
+          sessionStorage.getItem("rid")
+        )
+        .then((res) => {
+          // console.log(res);
+        });
       this.$router.push({ name: "recruitContent" });
     },
     hasTag(topic) {
@@ -267,31 +274,28 @@ export default {
       this.tags = result.tags;
       this.mytags = this.tags;
       this.options = result.options;
-
-    })
+    });
 
     this.apis.recruitList.getScreenRecruitInfo().then((res) => {
       var result = res.data.result;
       var topics = [];
       var topic = {};
-      for(var i=0;i<result.length;i++){
+      for (var i = 0; i < result.length; i++) {
         topic = result[i];
-        var myrtags = result[i].rtags.split('-');
+        var myrtags = result[i].rtags.split("-");
         topic.rtags = myrtags;
-        if(topic.img != ""){
+        if (topic.img != "") {
           topic.img = "http://192.168.43.94:8088/images" + topic.img;
         }
-        
+
         topic.avatar = "http://192.168.43.94:8088/images" + topic.avatorPath;
         // console.log(topic);
         topics.unshift(topic);
-       
       }
       this.topics = topics;
-    })
+    });
   },
 
-  
   computed: {
     filterTopics() {
       var data = this.topics;
@@ -333,7 +337,8 @@ export default {
         //优先显示老师回复
         ans.sort(function (next, current) {
           if (next.byTeacher === true && current.byTeacher === false) return -1;
-          else if (next.byTeacher === true && current.byTeacher === true) return 0;
+          else if (next.byTeacher === true && current.byTeacher === true)
+            return 0;
           else return 1;
         });
       }

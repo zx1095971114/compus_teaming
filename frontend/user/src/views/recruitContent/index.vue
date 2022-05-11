@@ -1,15 +1,22 @@
 <template>
   <div id="recruitContent" class="animate__animated animate__fadeIn">
+    <Vcode
+      sliderText="拖动滑块完成试卷提交"
+      :show="isShow"
+      @success="success"
+      @close="close"
+    ></Vcode>
     <div id="head">
       <div class="main">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ name: 'recruitList' }"
             >招募列表</el-breadcrumb-item
           >
-          <el-breadcrumb-item>学习板块</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ recruitcontent.rclass }}</el-breadcrumb-item>
         </el-breadcrumb>
         <h2>
-          期末大作业组队<span class="match-status $statusSmCls">招募中</span>
+          {{ recruitcontent.rtitle }}
+          <span class="match-status $statusSmCls">招募中</span>
         </h2>
         <p class="item">
           招募时间范围： {{ recruitcontent.startTime }} 至
@@ -44,21 +51,17 @@
       <div class="footer">
         <div class="person">
           <h2>团队成员:</h2>
-          <div 
-          class="avatar"
-          v-for="(showAvatar,index) in showAvatars"
-          :key="index"
+          <div
+            class="avatar"
+            v-for="(showAvatar, index) in showAvatars"
+            :key="index"
           >
-            <img
-              :src="showAvatar"
-              alt
-            />
+            <img :src="showAvatar" alt />
           </div>
-          
-          
-          <span class="more">{{totalnum}} Teammates</span>
+
+          <span class="more">{{ totalnum }} Teammates</span>
         </div>
-        <div class="create" >
+        <div v-if="!recruitcontent.flag" class="create" @click="isShow = true">
           <strong>+&nbsp;&nbsp;加入团队</strong>
         </div>
       </div>
@@ -72,9 +75,10 @@ import FlipCountdown from "vue2-flip-countdown";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+import Vcode from "vue-puzzle-vcode";
 export default {
   name: "recruitContent",
-  components: { FlipCountdown },
+  components: { FlipCountdown, Vcode },
   created() {
     this.apis.recruitContent
       .getRecruitInfo(
@@ -88,8 +92,8 @@ export default {
         var i;
         var myavatar = [];
         for (i = 0; i < result.avatorPath.length; i++) {
-          
-          let avatar = "http://192.168.43.94:8088/images" + result.avatorPath[i];
+          let avatar =
+            "http://192.168.43.94:8088/images" + result.avatorPath[i];
           myavatar[i] = avatar;
         }
 
@@ -103,23 +107,52 @@ export default {
         }
 
         this.totalnum = j;
-        console.log(this.recruitcontent);
+        // console.log(this.recruitcontent);
 
         this.recruitcontent.avatorPath = myavatar;
       });
   },
   methods: {
+    close() {
+      this.isShow = false;
+    },
+    success(msg) {
+      this.isShow = false;
+      this.apis.recruitContent
+        .joinRecruit(
+          sessionStorage.getItem("username"),
+          sessionStorage.getItem("rid")
+        )
+        .then((res) => {
+          // console.log(res);
+          if (res.data.status == 200) {
+            this.recruitcontent.flag = 1;
+            this.$notify({
+              title: "成功",
+              message: "您已成功加入该招募团队！",
+              type: "success",
+            });
+          } else {
+            this.$notify({
+              title: "失败",
+              message: "加入失败，该招募已过期或者您已在该招募团队中！",
+              type: "warning",
+            });
+          }
+        });
+    },
     backup() {
       this.$router.push({ name: "recruitList" });
     },
   },
   data() {
     return {
+      isShow: false,
       recruitcontent: {
         avatorPath: [],
         content: "",
         creator: "",
-        endTime: "",
+        endTime: "2022-01-01 00:00:00",
         flag: 0,
         rclass: "",
         rtitle: "",

@@ -149,7 +149,7 @@ export default {
       .getuserinfo(sessionStorage.getItem("username"))
       .then((res) => {
         var result = res.data.result;
-        console.log(result);
+        // console.log(result);
         result.avatarPath =
           "http://192.168.43.94:8088/images" + result.avatarPath;
         this.myInfo = result;

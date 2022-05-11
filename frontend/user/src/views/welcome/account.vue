@@ -142,7 +142,7 @@ export default {
           let username = this.$route.params.username;
           let email = this.$route.params.email;
           let password = this.$route.params.password;
-          console.log(username, email, password);
+          // console.log(username, email, password);
           this.$refs.uploader.submit();
           this.apis.welcome
             .register(this.ruleForm, this.avatar, username, email, password)
