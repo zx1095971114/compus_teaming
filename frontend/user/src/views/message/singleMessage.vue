@@ -1,18 +1,18 @@
 <template>
   <div id="singleMessage" class="animate__animated animate__fadeInUp">
     <el-collapse accordion>
-      <el-collapse-item @click.native="readed()">
+      <el-collapse-item @click.native="readed(mes.mid)">
         <template slot="title">
           <div class="title">
-            {{ mes.title }}
+            {{ mes.mtitle }}
           </div>
-          <div :class="[mes.state === 1 ? 'state green' : 'state red']">
-            {{ mes.state === 1 ? "已读" : "未读" }}
+          <div :class="[mes.status === 1 ? 'state green' : 'state red']">
+            {{ mes.status === 1 ? "已读" : "未读" }}
           </div>
-          <div class="date">{{ mes.date }}</div>
+          <div class="date">{{ mes.mtime }}</div>
         </template>
         <div class="content">
-          <div>{{ mes.msg }}</div>
+          <div>{{ mes.message }}</div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -33,14 +33,17 @@ export default {
     this.initDate();
   },
   methods: {
-    readed() {
+    readed(mid) {
       var that = this;
       setTimeout(() => {
-        that.mes.state = 1;
+        that.mes.status = 1;
       }, 300);
+      this.apis.messages.setSingleMessageStatus(mid).then((res) => {
+        // console.log(res);
+      })
     },
     initDate() {
-      var date = this.mes.date;
+      var date = this.mes.mtime;
       date = date.replace(new RegExp("-", "gm"), "/");
       var dateTimeStamp = new Date(date).getTime();
       let minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
@@ -76,7 +79,7 @@ export default {
       } else {
         result = " Just Now";
       }
-      this.mes.date = result;
+      this.mes.mtime = result;
     },
   },
 };
