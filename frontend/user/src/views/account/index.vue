@@ -83,15 +83,15 @@
       <div id="info">
         <div id="me">
           <h2>{{ myInfo.name }}</h2>
-          <p id="subtitle">「 {{ myInfo.subtitle }} 」</p>
+          <p id="subtitle">「保持热爱，奔赴山海 」</p>
           <div id="friends">
             <span class="tag">
               <i class="bx bx-group"></i>
-              <b>{{ myInfo.followers }}</b> followers
+              <b>45.7k</b> followers
             </span>
             <span class="tag">
               <i class="bx bx-group"></i>
-              <b>{{ myInfo.following }}</b> following
+              <b>20.8k</b> following
             </span>
           </div>
           <div id="other-info">
@@ -144,13 +144,16 @@ export default {
       }
     },
   },
-  created(){
-    this.apis.account.getuserinfo(sessionStorage.getItem("username")).then((res) => {
-      var result = res.data.result;
-      console.log(result);
-      result.avatarPath = "http://192.168.43.94:8088/images"+result.avatarPath;
-      this.myInfo = result;
-    })
+  created() {
+    this.apis.account
+      .getuserinfo(sessionStorage.getItem("username"))
+      .then((res) => {
+        var result = res.data.result;
+        console.log(result);
+        result.avatarPath =
+          "http://192.168.43.94:8088/images" + result.avatarPath;
+        this.myInfo = result;
+      });
   },
   mounted() {
     setTimeout(function () {

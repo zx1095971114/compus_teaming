@@ -95,7 +95,7 @@ public class UserControllerImpl implements UserController {
 
     }
 
-
+    @Override
     @RequestMapping(value = "/editUserInfo")
     public MyJson editUserInfo(HttpServletRequest request, String username, String name, String sex, String email, String school) {
         MyJson myjson = isLoggedIn(request);

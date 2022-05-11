@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface MessageRepository extends JpaRepository<Message,String> {
-    @Query("select m from Message m where m.username=?1")
+public interface MessageRepository extends JpaRepository<Message, String> {
+    @Query("select m from Message m where m.username=?1 order by  m.mtime asc")
     List<Message> findAllMessageByUsername(String username);
 
 

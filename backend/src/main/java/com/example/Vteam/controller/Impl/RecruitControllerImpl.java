@@ -63,7 +63,7 @@ public class RecruitControllerImpl implements RecruitController {
     }
 
     @Override
-    @RequestMapping(value="createWithoutImg")
+    @RequestMapping(value = "createWithoutImg")
     public MyJson createRecruitWithoutImg(HttpServletRequest request, String username, String rtitle, String description, int maxMates, String endTime, String rclass, String content, String rtags) {
         MyJson myJson = isLoggedIn(request);
         if (myJson.getStatus() == 403) return myJson;
@@ -79,6 +79,7 @@ public class RecruitControllerImpl implements RecruitController {
     }
 
     @Override
+    @RequestMapping(value = "joinRecruit")
     public MyJson joinRecruit(HttpServletRequest request,
                               @RequestParam("rid") String rid,
                               @RequestParam("username") String username) {
@@ -140,7 +141,7 @@ public class RecruitControllerImpl implements RecruitController {
         return myjson;
     }
 
-
+    @RequestMapping(value = "/getRecruitInfo")
     public MyJson getRecruitInfo(HttpServletRequest request, String username, String rid) {
         MyJson myjson = isLoggedIn(request);
         if (myjson.getStatus() == 403) return myjson;
@@ -151,6 +152,7 @@ public class RecruitControllerImpl implements RecruitController {
         }
     }
 
+    @RequestMapping(value = "getScreenRecruitInfo")
     public MyJson getScreenRecruitInfo(HttpServletRequest request) {
         MyJson myJson = MyFunction.isLoggedIn(request);
         if (myJson.getStatus() == 403) {

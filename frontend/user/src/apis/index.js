@@ -2,12 +2,13 @@ import axios from 'axios'
 
 import ElementUI from 'element-ui';
 
-axios.defaults.baseURL = 'http://172.23.153.119:8088';
+axios.defaults.baseURL = 'http://192.168.43.94:8088';
 // 读取api.js内部定义的请求方法
 import * as welcome from './welcome.js';
 import * as recruitEdit from './recruitEdit.js';
 import * as settings from './settings.js';
 import * as account from './account.js';
+import * as history from './history.js'
 
 
 // http request拦截器 添加一个请求拦截器
@@ -49,5 +50,6 @@ const apis = {
   recruitEdit,
   settings,
   account,
+  history,
 }
 export default apis

@@ -1,9 +1,6 @@
 package com.example.Vteam.service.Impl;
 
-import com.example.Vteam.dao.Interface.HistoryDao;
-import com.example.Vteam.dao.Interface.RecruitDao;
-import com.example.Vteam.dao.Interface.TeamDao;
-import com.example.Vteam.dao.Interface.UserDao;
+import com.example.Vteam.dao.Interface.*;
 import com.example.Vteam.entity.*;
 import com.example.Vteam.service.Interface.RecruitService;
 import com.example.Vteam.utils.MyFunction;
@@ -39,6 +36,9 @@ public class RecruitServiceImpl implements RecruitService {
 
     @Autowired
     HistoryDao historyDao;
+
+    @Autowired
+    MessageDao messageDao;
     @Value("${root}")
     private String root;
 
@@ -84,6 +84,10 @@ public class RecruitServiceImpl implements RecruitService {
         }
         String hid = UUID.randomUUID().toString().replaceAll("-", "");
         History history = new History(hid, username, "创建招募", "你创建了招募：" + rtitle, MyFunction.getTime());
+//        消息提示
+        String mid = UUID.randomUUID().toString().replaceAll("-", "");
+        Message message = new Message(mid, 0, username, "招募发布成功", "您创建的招募：" + rtitle + "已经创建成功并发布，您可以前往个人空间查看！", MyFunction.getTime());
+        messageDao.insertMessage(message);
         int suc3 = historyDao.insertHistory(history);
         int suc1 = teamDao.insertTeamInfo(vteamInfo);
         int suc2 = recruitDao.insertRecruitInfo(recruitInfo);
@@ -121,6 +125,9 @@ public class RecruitServiceImpl implements RecruitService {
         recruitInfo.setTid(vteamInfo.getTid());
         String hid = UUID.randomUUID().toString().replaceAll("-", "");
         History history = new History(hid, username, "创建招募", "你创建了招募：" + rtitle, MyFunction.getTime());
+        String mid = UUID.randomUUID().toString().replaceAll("-", "");
+        Message message = new Message(mid, 0, username, "招募发布成功", "您创建的招募：" + rtitle + "已经创建成功并发布，您可以前往个人空间查看！", MyFunction.getTime());
+        messageDao.insertMessage(message);
         int suc3 = historyDao.insertHistory(history);
         int suc1 = teamDao.insertTeamInfo(vteamInfo);
         int suc2 = recruitDao.insertRecruitInfo(recruitInfo);
@@ -155,12 +162,23 @@ public class RecruitServiceImpl implements RecruitService {
             vteaminfo.setSuccessTime(MyFunction.getTime());
             vteaminfo.setIsSuccess(1);
             recruitInfo.setIsDestroy(1);
+//            给每一个人发送一个消息
+            String teamMates = vteaminfo.getTeamMates();
+            String[] members = teamMates.split("-");
+            for (String member : members) {
+                String mid = UUID.randomUUID().toString().replaceAll("-", "");
+                Message message = new Message(mid, 0, member, "组队成功", "您的关于招募：" + recruitInfo.getRtitle() + "的团队已组队成功，赶快前往团队空间和小伙伴们相互联系吧！", MyFunction.getTime());
+                messageDao.insertMessage(message);
+            }
         }
 
         int suc1 = recruitDao.updateRecruitInfo(recruitInfo);
         int suc2 = teamDao.updateVteamInfo(vteaminfo);
         String hid = UUID.randomUUID().toString().replaceAll("-", "");
         History history = new History(hid, username, "加入招募", "你加入了招募：" + recruitInfo.getRtitle(), MyFunction.getTime());
+        String mid = UUID.randomUUID().toString().replaceAll("-", "");
+        Message message = new Message(mid, 0, username, "招募参与成功", "您已参与招募：" + recruitInfo.getRtitle() + ",但是此招募仍在进行招募中，您可以前往个人空间查看具体情况！", MyFunction.getTime());
+        messageDao.insertMessage(message);
         int suc3 = historyDao.insertHistory(history);
         if (suc1 == 1 && suc2 == 1 && suc3 == 1) {
             return 1;
@@ -193,6 +211,7 @@ public class RecruitServiceImpl implements RecruitService {
             RecruitInfo recruitInfo = iterator.next();
             Map<String, Object> usefulRecruitInfo = new HashMap<>();
 
+            usefulRecruitInfo.put("rid", recruitInfo.getRid());
             usefulRecruitInfo.put("rtitle", recruitInfo.getRtitle());
             usefulRecruitInfo.put("description", recruitInfo.getDescription());
             usefulRecruitInfo.put("subscribe", recruitInfo.getSubscribe());
@@ -205,7 +224,7 @@ public class RecruitServiceImpl implements RecruitService {
             //获取avatorPath，name
             String username = recruitInfo.getCreator();
             UserInfo userInfo = recruitDao.getUserInfoByUsername(username);
-            String avatorPath = userInfo.getUsername();
+            String avatorPath = userInfo.getAvatarPath();
             String name = userInfo.getName();
 
             usefulRecruitInfo.put("avatorPath", avatorPath);

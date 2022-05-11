@@ -209,32 +209,32 @@ export default {
       });
     },
 
-    // submitPwdForm(formName) {
-    //   this.$refs[formName].validate((valid) => {
-    //     if (valid) {
-    //       this.apis.myinfo
-    //         .editPwd(
-    //           sessionStorage.getItem("username"),
-    //           this.passwordForm.oldPwd,
-    //           this.passwordForm.newPwd
-    //         )
-    //         .then((res) => {
-    //           // console.log(res);
-    //           if (res.data.status === 200) {
-    //             this.$message({
-    //               message: "修改密码成功",
-    //               type: "success",
-    //             });
-    //           } else if (res.data.status === 403) {
-    //             this.$notify.error({
-    //               title: "错误",
-    //               message: "旧密码错误，认证失败！",
-    //             });
-    //           }
-    //         });
-    //     }
-    //   });
-    // },
+    submitPwdForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.apis.account
+            .editpwd(
+              sessionStorage.getItem("username"),
+              this.passwordForm.oldPwd,
+              this.passwordForm.newPwd
+            )
+            .then((res) => {
+              // console.log(res);
+              if (res.data.status === 200) {
+                this.$message({
+                  message: "修改密码成功",
+                  type: "success",
+                });
+              } else if (res.data.status === 403) {
+                this.$notify.error({
+                  title: "错误",
+                  message: "旧密码错误，认证失败！",
+                });
+              }
+            });
+        }
+      });
+    },
 
     resetForm(formName) {
       this.$refs[formName].resetFields();

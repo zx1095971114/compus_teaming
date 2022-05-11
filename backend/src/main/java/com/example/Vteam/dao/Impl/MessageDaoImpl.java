@@ -36,4 +36,9 @@ public class MessageDaoImpl implements MessageDao {
         }
         return 1;
     }
+
+    @Override
+    public void insertMessage(Message message) {
+        messageRepository.save(message);
+    }
 }
