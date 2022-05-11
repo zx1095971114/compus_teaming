@@ -16,3 +16,15 @@ export const joinRecruit = (username, rid) => {
   fd.append("rid", rid);
   return axios.post("/recruit/api/joinRecruit", fd);
 }
+
+export const getMyCreatedRecruit = (username) => {
+  let fd = new FormData();
+  fd.append("username",username);
+  return axios.post("/recruit/api/getMyCreatedRecruit",fd);
+}
+
+export const getMyAttendedRecruit = (username) => {
+  let fd = new FormData();
+  fd.append("username",username);
+  return axios.post("/recruit/api/getMyAttendedRecruit",fd);
+}

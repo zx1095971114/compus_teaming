@@ -28,20 +28,20 @@
           <div
             class="pin-box animate__animated animate__flipInX"
             v-for="box in arr1"
-            :key="box.id"
+            :key="box.rid"
           >
             <div class="title">
               <span>
-                <i class="bx bxs-book-bookmark"></i><b>{{ box.title }}</b>
+                <i class="bx bxs-book-bookmark"></i><b>{{ box.rtitle }}</b>
               </span>
               <i class="bx bx-dialpad"></i>
             </div>
             <p class="info">
-              {{ box.subtitle }}
+              {{ box.description }}
             </p>
             <div id="status-top">
-              <div class="point" v-state="box.class"></div>
-              <span>{{ box.class }}</span>
+              <div class="point" v-state="box.rclass"></div>
+              <span>{{ box.rclass }}</span>
             </div>
           </div>
         </div>
@@ -52,20 +52,20 @@
           <div
             class="pin-box animate__animated animate__flipInX"
             v-for="box in arr2"
-            :key="box.id"
+            :key="box.rid"
           >
             <div class="title">
               <span>
-                <i class="bx bxs-book-bookmark"></i><b>{{ box.title }}</b>
+                <i class="bx bxs-book-bookmark"></i><b>{{ box.rtitle }}</b>
               </span>
               <i class="bx bx-dialpad"></i>
             </div>
             <p class="info">
-              {{ box.subtitle }}
+              {{ box.description }}
             </p>
             <div id="status-bottom">
-              <div class="point" v-state="box.class"></div>
-              <span>{{ box.class }}</span>
+              <div class="point" v-state="box.rclass"></div>
+              <span>{{ box.rclass }}</span>
             </div>
           </div>
         </div>
@@ -133,13 +133,13 @@ export default {
   name: "account",
   directives: {
     state: function (el, binding) {
-      if (binding.value === "学习") {
+      if (binding.value === "学习板块") {
         el.style.backgroundColor = "#f34b7d";
-      } else if (binding.value === "生活") {
+      } else if (binding.value === "生活板块") {
         el.style.backgroundColor = "#41b883";
-      } else if (binding.value === "娱乐") {
+      } else if (binding.value === "娱乐板块") {
         el.style.backgroundColor = "#f1e05a";
-      } else if (binding.value === "其他") {
+      } else if (binding.value === "其他板块") {
         el.style.backgroundColor = "#0984e3";
       }
     },
@@ -154,6 +154,17 @@ export default {
           "http://192.168.43.94:8088/images" + result.avatarPath;
         this.myInfo = result;
       });
+    
+    this.apis.recruitContent.getMyCreatedRecruit(sessionStorage.getItem("username")).then((res) => {
+      var result = res.data.result;
+      this.arr1 = result;
+    })
+
+    this.apis.recruitContent.getMyAttendedRecruit(sessionStorage.getItem("username")).then((res) => {
+      var result = res.data.result;
+      // console.log(result);
+      this.arr2 = result;
+    })
   },
   mounted() {
     setTimeout(function () {
@@ -621,150 +632,8 @@ export default {
     return {
       myInfo: {},
 
-      arr1: [
-        {
-          id: "1",
-          class: "学习",
-          title: "大学GPA平均调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "2",
-          class: "学习",
-          title: "大学平均月消费水平调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "3",
-          class: "生活",
-          title: "天际单靴宿舍是否引入空调",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "4",
-          class: "娱乐",
-          title: "形势与政策答题",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "5",
-          class: "学习",
-          title: "大学自我颜值评价调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "6",
-          class: "娱乐",
-          title: "心理健康测试",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "7",
-          class: "生活",
-          title: "校园食堂菜价是够过高",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "8",
-          class: "学习",
-          title: "大学学习状况自我评价调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "9",
-          class: "娱乐",
-          title: "《青年大学习》课后题",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "10",
-          class: "生活",
-          title: "军训服装样式选定",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-      ],
-      arr2: [
-        {
-          id: "1",
-          class: "学习",
-          title: "大学GPA平均调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "2",
-          class: "学习",
-          title: "大学平均月消费水平调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "3",
-          class: "生活",
-          title: "天际单靴宿舍是否引入空调",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "4",
-          class: "娱乐",
-          title: "形势与政策答题",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "5",
-          class: "学习",
-          title: "大学自我颜值评价调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "6",
-          class: "娱乐",
-          title: "心理健康测试",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "7",
-          class: "生活",
-          title: "校园食堂菜价是够过高",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "8",
-          class: "学习",
-          title: "大学学习状况自我评价调查",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "9",
-          class: "娱乐",
-          title: "《青年大学习》课后题",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-        {
-          id: "10",
-          class: "生活",
-          title: "军训服装样式选定",
-          subtitle:
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum laboriosam voluptas distinctio, veniam quia aspernatur.",
-        },
-      ],
+      arr1: [],
+      arr2: [],
       achs: [
         "../../../static/images/account/ach1.png",
         "../../../static/images/account/ach2.png",

@@ -48,55 +48,18 @@
 <script>
 export default {
   name: "teamZone",
+  created() {
+    this.apis.team.getTeamInfo(sessionStorage.getItem("tid")).then((res) => {
+      var result = res.data.result;
+      this.arr = result;
+      for(var i=0;i<this.arr.length;i++){
+        this.arr[i].avatar = "http://192.168.43.94:8088/images" + this.arr[i].avatar;
+      }
+    })
+  },
   data() {
     return {
-      arr: [
-        {
-          avatar: "../../../static/images/teams/avatar1.png",
-          name: "Langwenchong",
-          sex: "男",
-          phone: "15902256523",
-          grade: "本科生三年级",
-          addr: "天津大学北洋园校区",
-          email: "1422257646@qq.com",
-        },
-        {
-          avatar: "../../../static/images/teams/avatar2.jpg",
-          name: "Langwenchong",
-          sex: "男",
-          phone: "15902256523",
-          grade: "本科生三年级",
-          addr: "天津大学北洋园校区",
-          email: "1422257646@qq.com",
-        },
-        {
-          avatar: "../../../static/images/teams/avatar3.jpg",
-          name: "Langwenchong",
-          sex: "男",
-          phone: "15902256523",
-          grade: "本科生三年级",
-          addr: "天津大学北洋园校区",
-          email: "1422257646@qq.com",
-        },
-        {
-          avatar: "../../../static/images/teams/avatar4.png",
-          name: "Langwenchong",
-          sex: "男",
-          phone: "15902256523",
-          grade: "本科生三年级",
-          addr: "天津大学北洋园校区",
-          email: "1422257646@qq.com",
-        },
-        {
-          avatar: "../../../static/images/teams/avatar1.png",
-          name: "Langwenchong",
-          sex: "男",
-          phone: "15902256523",
-          grade: "本科生三年级",
-          addr: "天津大学北洋园校区",
-          email: "1422257646@qq.com",
-        },
-      ],
+      arr: [],
     };
   },
 };
