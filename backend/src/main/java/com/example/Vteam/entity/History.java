@@ -76,4 +76,15 @@ public class History {
     public void setHtime(String htime) {
         this.htime = htime;
     }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "hid='" + hid + '\'' +
+                ", username='" + username + '\'' +
+                ", htitle='" + htitle + '\'' +
+                ", history='" + history + '\'' +
+                ", htime='" + htime + '\'' +
+                '}';
+    }
 }

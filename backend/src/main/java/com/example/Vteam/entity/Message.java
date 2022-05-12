@@ -91,4 +91,16 @@ public class Message {
     public void setMtime(String mtime) {
         this.mtime = mtime;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "mid='" + mid + '\'' +
+                ", status=" + status +
+                ", username='" + username + '\'' +
+                ", mtitle='" + mtitle + '\'' +
+                ", message='" + message + '\'' +
+                ", mtime='" + mtime + '\'' +
+                '}';
+    }
 }

@@ -32,4 +32,11 @@ public class Settings {
     public void setId(SettingsKey id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Settings{" +
+                "id=" + id +
+                '}';
+    }
 }

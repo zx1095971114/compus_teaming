@@ -98,4 +98,16 @@ public class VteamInfo {
     public void setIsSuccess(int isSuccess) {
         this.isSuccess = isSuccess;
     }
+
+    @Override
+    public String toString() {
+        return "VteamInfo{" +
+                "tid='" + tid + '\'' +
+                ", maxMates=" + maxMates +
+                ", currentMates=" + currentMates +
+                ", teamMates='" + teamMates + '\'' +
+                ", successTime='" + successTime + '\'' +
+                ", isSuccess=" + isSuccess +
+                '}';
+    }
 }

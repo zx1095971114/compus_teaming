@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_info")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class UserInfo {
     @Id
     @Column(name = "username")
@@ -129,5 +129,20 @@ public class UserInfo {
 
     public void setRegisterTime(String registerTime) {
         this.registerTime = registerTime;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", school='" + school + '\'' +
+                ", grade='" + grade + '\'' +
+                ", sex='" + sex + '\'' +
+                ", avatarPath='" + avatarPath + '\'' +
+                ", registerTime='" + registerTime + '\'' +
+                '}';
     }
 }

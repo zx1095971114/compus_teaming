@@ -187,4 +187,24 @@ public class RecruitInfo {
     public void setIsDestroy(int isDestroy) {
         this.isDestroy = isDestroy;
     }
+
+    @Override
+    public String toString() {
+        return "RecruitInfo{" +
+                "rid='" + rid + '\'' +
+                ", rtitle='" + rtitle + '\'' +
+                ", description='" + description + '\'' +
+                ", subscribe=" + subscribe +
+                ", rclass='" + rclass + '\'' +
+                ", rtags='" + rtags + '\'' +
+                ", content='" + content + '\'' +
+                ", creator='" + creator + '\'' +
+                ", img='" + img + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", tid='" + tid + '\'' +
+                ", byTeacher=" + byTeacher +
+                ", isDestroy=" + isDestroy +
+                '}';
+    }
 }

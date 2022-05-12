@@ -37,4 +37,12 @@ public class SettingsKey implements Serializable {
     public void setTags(String tags) {
         this.tags = tags;
     }
+
+    @Override
+    public String toString() {
+        return "SettingsKey{" +
+                "classes='" + classes + '\'' +
+                ", tags='" + tags + '\'' +
+                '}';
+    }
 }

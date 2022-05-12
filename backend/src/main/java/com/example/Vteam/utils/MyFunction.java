@@ -44,4 +44,8 @@ public class MyFunction {
         return date;
     }
 
+    public static void colorfulPrint(String info) {
+        System.out.println("\033[32;4m" + info + "\033[0m");
+    }
+
 }
