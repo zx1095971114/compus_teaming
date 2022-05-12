@@ -54,7 +54,7 @@ export default {
       this.arr = result;
       // console.log(result);
       for(var i=0;i<this.arr.length;i++){
-        this.arr[i].avatarPath = "http://192.168.43.94:8088/images" + this.arr[i].avatarPath;
+        this.arr[i].avatarPath = "https://vteamresources.coolchong.cn/" + this.arr[i].avatarPath;
       }
     })
   },

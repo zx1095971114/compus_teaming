@@ -7,7 +7,12 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      redirect: '/welcome/sign'
+      redirect: '/introduction'
+    },
+    {
+      path: '/introduction',
+      name: 'introduction',
+      component: () => import("@/views/introduction/index.vue")
     },
     {
       path: '/welcome',
@@ -65,11 +70,11 @@ export default new Router({
           path: 'settings',
           name: 'settings',
           component: () => import("@/views/settings/index.vue")
-        },{
+        }, {
           path: 'teams',
           name: 'teams',
           component: () => import("@/views/teams/index.vue")
-        },{
+        }, {
           path: 'teamZone',
           name: 'teamZone',
           component: () => import("@/views/teamZone/index.vue")

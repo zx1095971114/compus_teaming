@@ -369,7 +369,7 @@ export default {
             quill.insertEmbed(
               length,
               "image",
-              "http://192.168.43.94:8088/images" + res.data.result.imgPath
+              "https://vteamresources.coolchong.cn/" + res.data.result.imgPath
             );
             //移动光标到图片后
             quill.setSelection(length + 1);

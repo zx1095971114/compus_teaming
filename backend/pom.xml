@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SuperExam</artifactId>
+    <artifactId>Vteam</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SuperExam</name>
     <description>SuperExam</description>
@@ -49,7 +49,7 @@
     </dependencies>
 
     <build>
-        <finalName>SExam</finalName>
+        <finalName>Vteam</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

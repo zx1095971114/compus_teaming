@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import ElementUI from 'element-ui';
 
-axios.defaults.baseURL = 'http://192.168.43.94:8088';
+axios.defaults.baseURL = 'https://vteamapi.coolchong.cn';
 // 读取api.js内部定义的请求方法
 import * as welcome from './welcome.js';
 import * as recruitEdit from './recruitEdit.js';

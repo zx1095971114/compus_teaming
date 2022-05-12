@@ -151,20 +151,24 @@ export default {
         var result = res.data.result;
         // console.log(result);
         result.avatarPath =
-          "http://192.168.43.94:8088/images" + result.avatarPath;
+          "https://vteamresources.coolchong.cn/" + result.avatarPath;
         this.myInfo = result;
       });
-    
-    this.apis.recruitContent.getMyCreatedRecruit(sessionStorage.getItem("username")).then((res) => {
-      var result = res.data.result;
-      this.arr1 = result;
-    })
 
-    this.apis.recruitContent.getMyAttendedRecruit(sessionStorage.getItem("username")).then((res) => {
-      var result = res.data.result;
-      // console.log(result);
-      this.arr2 = result;
-    })
+    this.apis.recruitContent
+      .getMyCreatedRecruit(sessionStorage.getItem("username"))
+      .then((res) => {
+        var result = res.data.result;
+        this.arr1 = result;
+      });
+
+    this.apis.recruitContent
+      .getMyAttendedRecruit(sessionStorage.getItem("username"))
+      .then((res) => {
+        var result = res.data.result;
+        // console.log(result);
+        this.arr2 = result;
+      });
   },
   mounted() {
     setTimeout(function () {
@@ -766,12 +770,24 @@ export default {
   margin-top: 8px;
   font-size: 12px;
   margin-bottom: 5px;
+  /* overflow: hidden; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  height: 50px;
 }
 #l-main #pin-container-bottom .pin-box .info {
   color: #586069;
   margin-top: 8px;
   font-size: 12px;
   margin-bottom: 5px;
+  /* overflow: hidden; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  height: 50px;
 }
 #l-main #pin-container-top .pin-box .point span {
   font-size: 10px;

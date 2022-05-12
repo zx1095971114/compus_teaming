@@ -89,18 +89,20 @@ export default {
   methods: {
     submitLogin() {
       this.apis.welcome.login(this.username, this.password).then((res) => {
+        // console.log(res);
         if (res.data.status === 200) {
           if (this.rememberme) {
             localStorage.setItem("username", this.username);
             localStorage.setItem("password", this.password);
-            // 存储token值
-            // console.log(res.data);
-            sessionStorage.setItem("username", this.username);
-            this.$router.push({ name: "homepage" });
           } else {
             localStorage.removeItem("username");
             localStorage.removeItem("password");
           }
+          // 存储token值
+          sessionStorage.setItem("token", res.data.result.token);
+          // console.log(res.data);
+          sessionStorage.setItem("username", this.username);
+          this.$router.push({ name: "homepage" });
         } else if (res.data.status == 500) {
           this.$notify.error({
             title: "登录失败",

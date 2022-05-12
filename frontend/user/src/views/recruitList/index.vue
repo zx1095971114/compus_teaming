@@ -62,7 +62,7 @@
                 <i class="fad fa-tag"></i>&nbsp;{{ topicTag }}
               </div>
             </div>
-            <div class="box reply" v-if="topic.byTeacher === true">
+            <div class="box reply" v-if="topic.byTeacher === 1">
               <svg
                 t="1638775000906"
                 class="icon"
@@ -186,7 +186,7 @@
           </el-input>
         </div>
         <el-switch
-          v-model="teacherRepply"
+          v-model="byTeacher"
           active-text="优先显示教师创建的招募"
           inactive-text="默认排序"
         >
@@ -277,6 +277,7 @@ export default {
     });
 
     this.apis.recruitList.getScreenRecruitInfo().then((res) => {
+      // console.log(res);
       var result = res.data.result;
       var topics = [];
       var topic = {};
@@ -285,10 +286,10 @@ export default {
         var myrtags = result[i].rtags.split("-");
         topic.rtags = myrtags;
         if (topic.img != "") {
-          topic.img = "http://192.168.43.94:8088/images" + topic.img;
+          topic.img = "https://vteamresources.coolchong.cn/" + topic.img;
         }
 
-        topic.avatar = "http://192.168.43.94:8088/images" + topic.avatorPath;
+        topic.avatar = "https://vteamresources.coolchong.cn/" + topic.avatorPath;
         // console.log(topic);
         topics.unshift(topic);
       }
@@ -333,11 +334,11 @@ export default {
           else return -1;
         });
       }
-      if (this.teacherRepply === true) {
+      if (this.byTeacher == 1) {
         //优先显示老师回复
         ans.sort(function (next, current) {
-          if (next.byTeacher === true && current.byTeacher === false) return -1;
-          else if (next.byTeacher === true && current.byTeacher === true)
+          if (next.byTeacher === 1 && current.byTeacher === 0) return -1;
+          else if (next.byTeacher === 1 && current.byTeacher === 0)
             return 0;
           else return 1;
         });
@@ -354,7 +355,7 @@ export default {
       options: [],
       value: "全部板块",
       searchTxt: ``,
-      teacherRepply: false,
+      byTeacher: false,
       topics: [
         // {
         //   title: `一年内的前端看不懂前端框架源码怎么办？`,

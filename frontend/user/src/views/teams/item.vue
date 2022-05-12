@@ -30,7 +30,7 @@ export default {
   created() {
     for (let i = 0; i < this.el.avatars.length; i++) {
       var temp = this.el.avatars[i];
-      var avatarPath = "http://192.168.43.94:8088/images" + temp;
+      var avatarPath = "https://vteamresources.coolchong.cn/" + temp;
       console.log(avatarPath);
       this.avatars.push(avatarPath);
     }

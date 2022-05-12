@@ -126,7 +126,7 @@ export default {
         // console.log(result);
         this.name = result.name;
         this.avatarPath =
-          "http://192.168.43.94:8088/images" + result.avatarPath;
+          "https://vteamresources.coolchong.cn/" + result.avatarPath;
       });
   },
   mounted() {
