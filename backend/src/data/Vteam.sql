@@ -24,8 +24,8 @@ create table user_info
 
 create table settings
 (
-    primary key (class, tags),
-    class varchar(20),
+    primary key (classes, tags),
+    classes varchar(20),
     tags  varchar(20)
 );
 

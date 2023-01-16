@@ -286,10 +286,10 @@ export default {
         var myrtags = result[i].rtags.split("-");
         topic.rtags = myrtags;
         if (topic.img != "") {
-          topic.img = "https://vteamresources.coolchong.cn/" + topic.img;
+          topic.img = "http://localhost:8088/images/" + topic.img;
         }
 
-        topic.avatar = "https://vteamresources.coolchong.cn/" + topic.avatorPath;
+        topic.avatar = "http://localhost:8088/images/" + topic.avatorPath;
         // console.log(topic);
         topics.unshift(topic);
       }

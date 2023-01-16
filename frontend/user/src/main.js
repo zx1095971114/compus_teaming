@@ -10,7 +10,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 // animate.css
 import 'animate.css';
 Vue.use(ElementUI);
-
 // axios
 // 引入axios
 import axios from 'axios';

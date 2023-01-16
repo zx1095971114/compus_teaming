@@ -151,7 +151,7 @@ export default {
         var result = res.data.result;
         // console.log(result);
         result.avatarPath =
-          "https://vteamresources.coolchong.cn/" + result.avatarPath;
+          "http://localhost:8088/images/" + result.avatarPath;
         this.myInfo = result;
       });
 

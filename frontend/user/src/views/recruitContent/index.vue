@@ -93,7 +93,7 @@ export default {
         var myavatar = [];
         for (i = 0; i < result.avatorPath.length; i++) {
           let avatar =
-            "https://vteamresources.coolchong.cn/" + result.avatorPath[i];
+            "http://localhost:8088/images/" + result.avatorPath[i];
           myavatar[i] = avatar;
         }
 

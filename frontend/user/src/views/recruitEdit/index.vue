@@ -369,8 +369,9 @@ export default {
             quill.insertEmbed(
               length,
               "image",
-              "https://vteamresources.coolchong.cn/" + res.data.result.imgPath
+              "http://localhost:8088/images/" + res.data.result.imgPath
             );
+            console.log("http://localhost:8088/images/" + res.data.result.imgPath)
             //移动光标到图片后
             quill.setSelection(length + 1);
           } else {
